@@ -1,0 +1,32 @@
+﻿file,Path,ClassId,class_name,label_en,label_vi
+00000.png,Test/00000.png,16,vehicles_over_3_5_tons_prohibited,Vehicles over 3.5 metric tons prohibited,Cấm xe trên 3.5 tấn
+00001.png,Test/00001.png,1,speed_limit_30,Speed limit 30 km/h,Giới hạn tốc độ 30 km/h
+00002.png,Test/00002.png,38,keep_right,Keep right,Đi bên phải
+00003.png,Test/00003.png,33,turn_right_ahead,Turn right ahead,Rẽ phải phía trước
+00004.png,Test/00004.png,11,right_of_way_at_intersection,Right-of-way at the next intersection,Quyền ưu tiên tại giao lộ tiếp theo
+00005.png,Test/00005.png,38,keep_right,Keep right,Đi bên phải
+00006.png,Test/00006.png,18,general_caution,General caution,Cảnh báo chung
+00007.png,Test/00007.png,12,priority_road,Priority road,Đường ưu tiên
+00008.png,Test/00008.png,25,road_work,Road work,Công trường
+00009.png,Test/00009.png,35,ahead_only,Ahead only,Chỉ được đi thẳng
+00010.png,Test/00010.png,12,priority_road,Priority road,Đường ưu tiên
+00011.png,Test/00011.png,7,speed_limit_100,Speed limit 100 km/h,Giới hạn tốc độ 100 km/h
+00012.png,Test/00012.png,23,slippery_road,Slippery road,Đường trơn trượt
+00013.png,Test/00013.png,7,speed_limit_100,Speed limit 100 km/h,Giới hạn tốc độ 100 km/h
+00014.png,Test/00014.png,4,speed_limit_70,Speed limit 70 km/h,Giới hạn tốc độ 70 km/h
+00015.png,Test/00015.png,9,no_passing,No passing,Cấm vượt
+00016.png,Test/00016.png,21,double_curve,Double curve,Đường cong kép
+00017.png,Test/00017.png,20,dangerous_curve_right,Dangerous curve to the right,Đường cong nguy hiểm bên phải
+00018.png,Test/00018.png,27,pedestrians,Pedestrians,Người đi bộ
+00019.png,Test/00019.png,38,keep_right,Keep right,Đi bên phải
+00020.png,Test/00020.png,4,speed_limit_70,Speed limit 70 km/h,Giới hạn tốc độ 70 km/h
+00021.png,Test/00021.png,33,turn_right_ahead,Turn right ahead,Rẽ phải phía trước
+00022.png,Test/00022.png,9,no_passing,No passing,Cấm vượt
+00023.png,Test/00023.png,3,speed_limit_60,Speed limit 60 km/h,Giới hạn tốc độ 60 km/h
+00024.png,Test/00024.png,1,speed_limit_30,Speed limit 30 km/h,Giới hạn tốc độ 30 km/h
+00025.png,Test/00025.png,11,right_of_way_at_intersection,Right-of-way at the next intersection,Quyền ưu tiên tại giao lộ tiếp theo
+00026.png,Test/00026.png,13,yield,Yield,Nhường đường
+00027.png,Test/00027.png,10,no_passing_vehicles_over_3_5_tons,No passing for vehicles over 3.5 metric tons,Cấm xe trên 3.5 tấn vượt
+00028.png,Test/00028.png,9,no_passing,No passing,Cấm vượt
+00029.png,Test/00029.png,11,right_of_way_at_intersection,Right-of-way at the next intersection,Quyền ưu tiên tại giao lộ tiếp theo
+00030.png,Test/00030.png,5,speed_limit_80,Speed limit 80 km/h,Giới hạn tốc độ 80 km/h

@@ -1,0 +1,32 @@
+﻿file,Path,ClassId,class_name,label_en,label_vi
+01000.png,Test/01000.png,17,no_entry,No entry,Cấm vào
+01001.png,Test/01001.png,1,speed_limit_30,Speed limit 30 km/h,Giới hạn tốc độ 30 km/h
+01002.png,Test/01002.png,12,priority_road,Priority road,Đường ưu tiên
+01003.png,Test/01003.png,12,priority_road,Priority road,Đường ưu tiên
+01004.png,Test/01004.png,10,no_passing_vehicles_over_3_5_tons,No passing for vehicles over 3.5 metric tons,Cấm xe trên 3.5 tấn vượt
+01005.png,Test/01005.png,5,speed_limit_80,Speed limit 80 km/h,Giới hạn tốc độ 80 km/h
+01006.png,Test/01006.png,38,keep_right,Keep right,Đi bên phải
+01007.png,Test/01007.png,3,speed_limit_60,Speed limit 60 km/h,Giới hạn tốc độ 60 km/h
+01008.png,Test/01008.png,12,priority_road,Priority road,Đường ưu tiên
+01009.png,Test/01009.png,12,priority_road,Priority road,Đường ưu tiên
+01010.png,Test/01010.png,8,speed_limit_120,Speed limit 120 km/h,Giới hạn tốc độ 120 km/h
+01011.png,Test/01011.png,10,no_passing_vehicles_over_3_5_tons,No passing for vehicles over 3.5 metric tons,Cấm xe trên 3.5 tấn vượt
+01012.png,Test/01012.png,2,speed_limit_50,Speed limit 50 km/h,Giới hạn tốc độ 50 km/h
+01013.png,Test/01013.png,10,no_passing_vehicles_over_3_5_tons,No passing for vehicles over 3.5 metric tons,Cấm xe trên 3.5 tấn vượt
+01014.png,Test/01014.png,12,priority_road,Priority road,Đường ưu tiên
+01015.png,Test/01015.png,35,ahead_only,Ahead only,Chỉ được đi thẳng
+01016.png,Test/01016.png,15,no_vehicles,No vehicles,Cấm xe
+01017.png,Test/01017.png,4,speed_limit_70,Speed limit 70 km/h,Giới hạn tốc độ 70 km/h
+01018.png,Test/01018.png,35,ahead_only,Ahead only,Chỉ được đi thẳng
+01019.png,Test/01019.png,5,speed_limit_80,Speed limit 80 km/h,Giới hạn tốc độ 80 km/h
+01020.png,Test/01020.png,14,stop,Stop,Dừng lại
+01021.png,Test/01021.png,1,speed_limit_30,Speed limit 30 km/h,Giới hạn tốc độ 30 km/h
+01022.png,Test/01022.png,11,right_of_way_at_intersection,Right-of-way at the next intersection,Quyền ưu tiên tại giao lộ tiếp theo
+01023.png,Test/01023.png,35,ahead_only,Ahead only,Chỉ được đi thẳng
+01024.png,Test/01024.png,38,keep_right,Keep right,Đi bên phải
+01025.png,Test/01025.png,30,beware_ice_snow,Beware of ice/snow,Cẩn thận băng/tuyết
+01026.png,Test/01026.png,11,right_of_way_at_intersection,Right-of-way at the next intersection,Quyền ưu tiên tại giao lộ tiếp theo
+01027.png,Test/01027.png,4,speed_limit_70,Speed limit 70 km/h,Giới hạn tốc độ 70 km/h
+01028.png,Test/01028.png,12,priority_road,Priority road,Đường ưu tiên
+01029.png,Test/01029.png,1,speed_limit_30,Speed limit 30 km/h,Giới hạn tốc độ 30 km/h
+01030.png,Test/01030.png,18,general_caution,General caution,Cảnh báo chung

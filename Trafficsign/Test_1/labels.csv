@@ -1,0 +1,28 @@
+﻿file,Path,ClassId,class_name,label_en,label_vi
+08184.png,Test/08184.png,19,dangerous_curve_left,Dangerous curve to the left,Đường cong nguy hiểm bên trái
+08185.png,Test/08185.png,12,priority_road,Priority road,Đường ưu tiên
+08186.png,Test/08186.png,38,keep_right,Keep right,Đi bên phải
+08187.png,Test/08187.png,26,traffic_signals,Traffic signals,Đèn giao thông
+08188.png,Test/08188.png,38,keep_right,Keep right,Đi bên phải
+08189.png,Test/08189.png,6,end_speed_limit_80,End of speed limit 80 km/h,Hết giới hạn tốc độ 80 km/h
+08190.png,Test/08190.png,5,speed_limit_80,Speed limit 80 km/h,Giới hạn tốc độ 80 km/h
+08191.png,Test/08191.png,5,speed_limit_80,Speed limit 80 km/h,Giới hạn tốc độ 80 km/h
+08192.png,Test/08192.png,9,no_passing,No passing,Cấm vượt
+08193.png,Test/08193.png,34,turn_left_ahead,Turn left ahead,Rẽ trái phía trước
+08194.png,Test/08194.png,29,bicycles_crossing,Bicycles crossing,Xe đạp cắt ngang
+08195.png,Test/08195.png,13,yield,Yield,Nhường đường
+08196.png,Test/08196.png,3,speed_limit_60,Speed limit 60 km/h,Giới hạn tốc độ 60 km/h
+08197.png,Test/08197.png,10,no_passing_vehicles_over_3_5_tons,No passing for vehicles over 3.5 metric tons,Cấm xe trên 3.5 tấn vượt
+08198.png,Test/08198.png,3,speed_limit_60,Speed limit 60 km/h,Giới hạn tốc độ 60 km/h
+08199.png,Test/08199.png,40,roundabout_mandatory,Roundabout mandatory,Vòng xuyến bắt buộc
+08200.png,Test/08200.png,4,speed_limit_70,Speed limit 70 km/h,Giới hạn tốc độ 70 km/h
+08201.png,Test/08201.png,5,speed_limit_80,Speed limit 80 km/h,Giới hạn tốc độ 80 km/h
+08202.png,Test/08202.png,13,yield,Yield,Nhường đường
+08203.png,Test/08203.png,29,bicycles_crossing,Bicycles crossing,Xe đạp cắt ngang
+08204.png,Test/08204.png,12,priority_road,Priority road,Đường ưu tiên
+08205.png,Test/08205.png,42,end_no_passing_vehicles_over_3_5_tons,End of no passing by vehicles over 3.5 metric tons,Hết cấm xe trên 3.5 tấn vượt
+08206.png,Test/08206.png,1,speed_limit_30,Speed limit 30 km/h,Giới hạn tốc độ 30 km/h
+08207.png,Test/08207.png,7,speed_limit_100,Speed limit 100 km/h,Giới hạn tốc độ 100 km/h
+08208.png,Test/08208.png,6,end_speed_limit_80,End of speed limit 80 km/h,Hết giới hạn tốc độ 80 km/h
+08209.png,Test/08209.png,3,speed_limit_60,Speed limit 60 km/h,Giới hạn tốc độ 60 km/h
+08210.png,Test/08210.png,19,dangerous_curve_left,Dangerous curve to the left,Đường cong nguy hiểm bên trái
