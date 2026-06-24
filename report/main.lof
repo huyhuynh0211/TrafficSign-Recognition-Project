@@ -1,0 +1,25 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Biểu đồ phân phối số lượng ảnh trên 43 lớp của GTSRB. Đường đỏ thể hiện mức trung bình 619 ảnh/lớp. Các lớp 0, 19, 37--42 có ít hơn 200 ảnh, trong khi lớp 1 có đến 1500 ảnh.}}{7}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Sơ đồ kiến trúc mô hình CNN hiển thị qua \texttt {model.summary()} và \texttt {tf.keras.utils.plot\_model()}. Các tầng Conv2D, MaxPooling2D, Dropout, Flatten, Dense được hiển thị với kích thước đầu ra và số tham số.}}{12}{figure.caption.6}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Quy trình hoạt động đầy đủ của \texttt {trafficsign\_new.py}.}}{21}{figure.caption.7}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Quá trình training của Model A -- Phần 1 (Accuracy và Loss).}}{25}{figure.caption.10}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Quá trình training của Model A -- Phần 2 (chi tiết validation).}}{25}{figure.caption.11}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Quá trình training của Model B -- Phần 1.}}{27}{figure.caption.13}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Quá trình training của Model B -- Phần 2.}}{27}{figure.caption.14}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Quá trình training của Model C -- Phần 1.}}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Quá trình training của Model C -- Phần 2.}}{30}{figure.caption.17}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Quá trình training của Model D -- Phần 1.}}{31}{figure.caption.19}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Quá trình training của Model D -- Phần 2.}}{31}{figure.caption.20}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Biểu đồ so sánh training curves 4 mô hình.}}{31}{figure.caption.21}%
+\contentsline {figure}{\numberline {13}{\ignorespaces So sánh kết quả 4 mô hình, chọn Model C là tốt nhất.}}{32}{figure.caption.23}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Biểu đồ so sánh kết quả 4 mô hình.}}{32}{figure.caption.24}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Classification Report của Model A.}}{35}{figure.caption.26}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Classification Report của Model B.}}{37}{figure.caption.28}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Classification Report của Model C.}}{39}{figure.caption.30}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Classification Report của Model D.}}{41}{figure.caption.32}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Kết quả dự đoán trên thư mục Test\_1.}}{42}{figure.caption.33}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Kết quả dự đoán trên thư mục Test\_2.}}{43}{figure.caption.34}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Kết quả dự đoán trên thư mục Test\_3.}}{43}{figure.caption.35}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Kết quả dự đoán trên thư mục Test\_4.}}{44}{figure.caption.36}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 1.}}{44}{figure.caption.39}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 2.}}{45}{figure.caption.40}%

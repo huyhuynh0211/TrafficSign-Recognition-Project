@@ -29,7 +29,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{listings}
 \usepackage{caption}
-
+\usepackage{booktabs}
 % ========== LISTINGS CONFIG ==========
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -92,7 +92,7 @@
 % ========== WATERMARK ẢNH (CHỈ TRANG ĐẦU) ==========
 \newcommand{\firstpagewatermark}{%
 \begin{tikzpicture}[remember picture, overlay]
-\node[opacity=0.3] at (current page.center) {
+\node[opacity=0.2] at (current page.center) {
 \includegraphics[width=20cm]{logo.png}
         };
 \end{tikzpicture}%
@@ -141,18 +141,24 @@
     {\LARGE\bfseries BÁO CÁO CUỐI KỲ}\\[0.5cm]
     {\large\bfseries NHẬP MÔN TRÍ TUỆ NHÂN TẠO}\\[0.8cm]
 \rule{0.6\textwidth}{0.5pt}\\[1cm]
-    {\normalsize\textbf{GVPT:} ThS. Nguyễn Quốc Khoa}\\[2cm]
+    {\large\textbf{GVPT: ThS. Nguyễn Quốc Khoa}}\\[2cm]
+    {\large\textbf{Nhóm: 10}}\\[2cm]
 \end{center}
 
-\begin{center}
-\begin{tabular}{ll}
-\textbf{Ca:} & 1 \\[0.3cm]
-\textbf{Họ và tên SV:} & Huỳnh Ngọc Huy \\[0.3cm]
-\textbf{MSSV:} & 24200087 \\[0.3cm]
-\textbf{Thành viên nhóm:} & Huỳnh Ngọc Huy - 24200087\\
-\textbf{ } & Choi Won Seok - 24200032
-\end{tabular}
-\end{center}
+% Lưu ý: Bạn cần thêm dòng \usepackage{booktabs} vào phần preamble (trước \begin{document}) nhé!
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.4} % Tăng khoảng cách giữa các hàng để nhìn thoáng và sang hơn
+    \begin{tabular}{@{} l l l @{}}
+        \toprule
+        \textbf{MSSV} & \textbf{Họ và tên} & \textbf{Email} \\
+        \midrule
+        24200087 & Huỳnh Ngọc Huy & \texttt{24200087@student.hcmus.edu.vn} \\
+        24200032 & Choi Won Seok  & \texttt{24200032@student.hcmus.edu.vn} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \newpage
 % ======================================================================
@@ -165,6 +171,7 @@
 %                      DANH SÁCH HÌNH & BẢNG
 % ======================================================================
 \listoffigures
+\newpage
 \listoftables
 \newpage
 
@@ -191,7 +198,7 @@ Các mục tiêu cụ thể:
 \end{enumerate}
 
 \subsection{Phương Pháp Tiếp Cận}
-Chúng tôi áp dụng phương pháp học sâu có giám sát theo quy trình 8 bước:
+Em đã áp dụng phương pháp học sâu có giám sát (Supervised learning) theo quy trình 8 bước:
 
 \begin{enumerate}[label=\textbf{Bước \arabic*:},leftmargin=*]
     \item Đọc và tiền xử lý ảnh biển báo giao thông từ bộ dữ liệu GTSRB.
@@ -251,7 +258,7 @@ Tỷ lệ mất cân bằng (max/min) & 10:1 \\ \bottomrule
 \label{tab:imbalance}
 \end{table}
 
-Sự chênh lệch lớn (lớp 1 có gấp 10 lần lớp 0) có thể ảnh hưởng tiêu cực đến hiệu suất mô hình: mô hình sẽ thiên vị dự đoán các lớp đa số và bỏ qua các lớp thiểu số. Đây là vấn đề quan trọng cần được xử lý để đạt điểm cao (mức 9 điểm).
+Sự chênh lệch lớn (lớp 1 có gấp 10 lần lớp 0) có thể ảnh hưởng tiêu cực đến hiệu suất mô hình: mô hình sẽ thiên vị dự đoán các lớp đa số và bỏ qua các lớp thiểu số. Đây là vấn đề quan trọng cần được xử lý để đạt điểm cao.
 
 \subsection{Biểu Đồ Phân Phối Lớp}
 
@@ -306,14 +313,14 @@ Các siêu tham số được định nghĩa ở mức module:
 \begin{tabular}{@{}lll@{}}
 \toprule
 \textbf{Hằng số} & \textbf{Giá trị} & \textbf{Mô tả} \\ \midrule
-\texttt{EPOCHS}         & 10    & Số epoch huấn luyện tối đa \\
-\texttt{IMG\_WIDTH}     & 30 & Chiều rộng ảnh đích (cả hai chương trình) \\
-\texttt{IMG\_HEIGHT}    & 30 & Chiều cao ảnh đích (cả hai chương trình) \\
+\texttt{EPOCHS}         & 30    & Số epoch huấn luyện tối đa (có ReduceLROnPlateau) \\
+\texttt{IMG\_WIDTH}     & 30 & Chiều rộng ảnh đích \\
+\texttt{IMG\_HEIGHT}    & 30 & Chiều cao ảnh đích \\
 \texttt{NUM\_CATEGORIES}& 43    & Số lớp biển báo \\
 \texttt{TEST\_SIZE}     & 0.2   & Tỷ lệ dữ liệu kiểm tra (80\% train / 20\% test) \\
-\texttt{BATCH\_SIZE}    & 32    & Kích thước batch (chỉ \texttt{trafficsign\_new.py}) \\ \bottomrule
+\texttt{BATCH\_SIZE}    & 32    & Kích thước batch \\ \bottomrule
 \end{tabular}
-\caption{Siêu tham số toàn cục.}
+\caption{Siêu tham số toàn cục (cập nhật cho \texttt{trafficsign\_new.py}).}
 \label{tab:hyperparams}
 \end{table}
 
@@ -385,9 +392,9 @@ def load_data(data_dir):
 
 Điểm khác biệt so với phiên bản cơ bản: \texttt{trafficsign\_new.py} thêm bộ lọc đuôi file (\texttt{.endswith(...)}) để bỏ qua các file CSV và file không phải ảnh, giúp quá trình đọc dữ liệu an toàn hơn.
 
-\subsection{Bước 2: Phân Tích và Xử Lý Mất Cân Bằng -- Class Weights (9 điểm)}
+\subsection{Bước 2: Phân Tích và Xử Lý Mất Cân Bằng -- Class Weights}
 
-Đây là kỹ thuật then chốt để đạt mức 9 điểm. Cả hai chương trình \texttt{trafficsign.py} và \texttt{trafficsign\_new.py} đều sử dụng \texttt{sklearn.utils.class\_weight.compute\_class\_weight} với chế độ \texttt{"balanced"} để tính trọng số cho mỗi lớp.
+Cả hai chương trình \texttt{trafficsign.py} và \texttt{trafficsign\_new.py} đều sử dụng \texttt{sklearn.utils.class\_weight.compute\_class\_weight} với chế độ \texttt{"balanced"} để tính trọng số cho mỗi lớp.
 
 \subsubsection*{Công Thức}
 Trọng số cho lớp $c$ được tính theo công thức:
@@ -453,6 +460,28 @@ datagen = ImageDataGenerator(
     fill_mode="nearest"        # Dien pixel thieu bang gia tri gan nhat
 )
 \end{lstlisting}
+
+\subsubsection*{Giảm Learning Rate Động (ReduceLROnPlateau)}
+Để cải thiện quá trình hội tụ và tránh dao động quanh điểm cực tiểu, em sử dụng callback \texttt{ReduceLROnPlateau} từ Keras. Callback này tự động giảm learning rate khi độ chính xác trên tập validation không cải thiện trong một số epoch nhất định:
+
+\begin{lstlisting}[language=Python, caption={ReduceLROnPlateau configuration.}, label={lst:reduce_lr}]
+reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(
+    monitor='val_loss',   # Monitor validation loss
+    factor=0.5,           # Reduce learning rate by 50%
+    patience=3,           # Wait for 3 epochs without improvement
+    min_lr=1e-5           # Minimum learning rate
+)
+
+history = model.fit(
+    datagen.flow(x_train, y_train, batch_size=BATCH_SIZE),
+    epochs=EPOCHS,
+    validation_data=(x_test, y_test),
+    class_weight=class_weight_dict,
+    callbacks=[reduce_lr]
+)
+\end{lstlisting}
+
+Cơ chế này giúp mô hình học với tốc độ lớn ở đầu quá trình để hội tụ nhanh, sau đó tự động giảm tốc để tinh chỉnh chính xác hơn ở giai đoạn cuối. Kết quả thực nghiệm (Section 7) cho thấy các mô hình đều được hưởng lợi từ kỹ thuật này, đặc biệt là Model C đạt được độ chính xác gần như tuyệt đối.
 
 \textbf{Lưu ý quan trọng:} \texttt{horizontal\_flip=False} vì biển báo giao thông không đối xứng ngang -- việc lật ngang sẽ tạo ra ảnh không có thật (ví dụ: biển báo rẽ phải thành rẽ trái).
 
@@ -634,13 +663,11 @@ model.compile(
     $y_i$ là nhãn thực (0 hoặc 1), $\hat{y}_i$ là xác suất dự đoán.
 \end{itemize}
 
-\subsubsection*{Huấn Luyện với Data Augmentation}
+\subsubsection*{Huấn Luyện với Data Augmentation và ReduceLROnPlateau}
 
-\texttt{trafficsign\_new.py} sử dụng data augmentation trong quá trình huấn luyện:
+\texttt{trafficsign\_new.py} sử dụng data augmentation trong quá trình huấn luyện và ReduceLROnPlateau để tự động giảm learning rate khi validation loss plateau:
 
-\textbf{1. Data Augmentation (real-time):} Ảnh huấn luyện được biến đổi ngẫu nhiên qua mỗi epoch thông qua \texttt{ImageDataGenerator}:
-
-\begin{lstlisting}[language=Python, caption={Huấn luyện với data augmentation.}, label=lst:training]
+\begin{lstlisting}[language=Python, caption={Huấn luyện với data augmentation và ReduceLROnPlateau.}, label=lst:training]
 # Data augmentation
 datagen = ImageDataGenerator(
     rotation_range=10,
@@ -652,23 +679,19 @@ datagen = ImageDataGenerator(
     fill_mode="nearest"
 )
 
+# Learning rate scheduler
+reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(
+    monitor='val_loss', factor=0.5, patience=3, min_lr=1e-5
+)
+
 history = model.fit(
     datagen.flow(x_train, y_train, batch_size=BATCH_SIZE),
     epochs=EPOCHS,
     validation_data=(x_test, y_test),
+    callbacks=[reduce_lr],
     verbose=1
 )
 \end{lstlisting}
-
-\textbf{2. Validation:} Tập kiểm tra (\texttt{x\_test, y\_test}) được sử dụng trực tiếp làm tập validation trong quá trình huấn luyện (\texttt{validation\_data=(x\_test, y\_test)}). Điều này khác với cách dùng \texttt{validation\_split} -- nó đảm bảo validation set cố định và nhất quán giữa các lần chạy.
-
-Mỗi epoch gồm 4 bước:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Forward pass:} Ảnh đầu vào (đã được augmentation) chảy qua mạng, sinh ra dự đoán xác suất.
-    \item \textbf{Tính loss:} So sánh xác suất dự đoán với nhãn thực, tính giá trị hàm mất mát. Class weights được áp dụng để phạt nặng hơn khi dự đoán sai ở lớp thiểu số.
-    \item \textbf{Backward pass (lan truyền ngược):} Tính gradient của loss theo từng trọng số bằng chain rule.
-    \item \textbf{Cập nhật trọng số:} Adam optimizer điều chỉnh trọng số để giảm loss.
-\end{enumerate}
 
 \subsection{Bước 8: Đánh Giá và Lưu Mô Hình}
 
@@ -678,7 +701,7 @@ test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
 \end{lstlisting}
 
 \subsubsection*{Classification Report}
-Để đánh giá chi tiết từng lớp (quan trọng cho mức 10 điểm):
+Để đánh giá chi tiết từng lớp:
 
 \begin{lstlisting}[language=Python]
 from sklearn.metrics import classification_report
@@ -706,7 +729,7 @@ Ngoài hai chương trình huấn luyện chính, đề án còn cung cấp hai 
 \textbf{1. \texttt{test\_models.py} -- Dự đoán ảnh đơn:}
 
 \begin{lstlisting}[language=Python, caption={Sử dụng \texttt{test\_models.py} để dự đoán một ảnh.}, label=lst:test_single]
-python test_models.py best_model.h5 image.jpg
+python test_models.py best_model.keras image.jpg
 \end{lstlisting}
 
 Chương trình nhận diện biển báo trong một ảnh đơn, hiển thị top-3 dự đoán kèm độ tin cậy và thanh trực quan. Các chức năng chính:
@@ -720,7 +743,7 @@ Chương trình nhận diện biển báo trong một ảnh đơn, hiển thị 
 \textbf{2. \texttt{test\_model\_folder.py} -- Dự đoán thư mục ảnh:}
 
 \begin{lstlisting}[language=Python, caption={Sử dụng \texttt{test\_model\_folder.py} để dự đoán nhiều ảnh.}, label=lst:test_folder]
-python test_model_folder.py best_model.h5 test_images/ [--csv labels.csv]
+python test_model_folder.py best_model.keras test_images
 \end{lstlisting}
 
 Chương trình dự đoán tất cả ảnh trong một thư mục, hỗ trợ đối chiếu với ground truth từ file CSV:
@@ -737,8 +760,7 @@ Chương trình dự đoán tất cả ảnh trong một thư mục, hỗ trợ 
 \section{So Sánh Các Thuật Toán}
 
 \subsection{Tổng Quan Các Mô Hình Được So Sánh}
-
-Để đạt mức điểm cao nhất (10 điểm), chúng tôi so sánh 4 thuật toán/kiến trúc khác nhau:
+So sánh 4 thuật toán/kiến trúc khác nhau:
 
 \begin{enumerate}[leftmargin=*]
     \item \textbf{Model A -- Baseline CNN + Class Weights:} CNN 2 khối double-Conv (5x5 + 3x3 kernels), Dropout(0.25) sau mỗi khối. Sử dụng class weights để xử lý mất cân bằng dữ liệu.
@@ -943,7 +965,7 @@ Trong đó $\mu_B$ và $\sigma_B^2$ là mean và variance của mini-batch, $\ga
     \node[box, below=of n3] (n4) {\texttt{compute\_class\_weight()} -- Tính trọng số lớp};
     \node[box, below=of n4] (n5) {\texttt{to\_categorical()} -- One-hot encoding + \texttt{train\_test\_split()} (80/20)};
     \node[box, below=of n5] (n6) {Xây dựng 4 mô hình: A (Baseline), B (+L2), C (Deeper+BN), D (MobileNetV2)};
-    \node[box, below=of n6] (n7) {\texttt{datagen.flow()} -- Huấn luyện với augmentation};
+    \node[box, below=of n6] (n7) {\texttt{datagen.flow()} -- Huấn luyện với augmentation + ReduceLROnPlateau};
     \node[box, below=of n7] (n8) {\texttt{model.evaluate()} + \texttt{classification\_report} -- Đánh giá chi tiết};
     \node[box, below=of n8] (n9) {So sánh 4 mô hình + Vẽ biểu đồ + Lưu mô hình tốt nhất};
 
@@ -965,21 +987,15 @@ Trong đó $\mu_B$ và $\sigma_B^2$ là mean và variance của mini-batch, $\ga
 % ======================================================================
 \section{Hướng Dẫn Chạy Chương Trình}
 
-\subsection{Yêu Cầu Cài Đặt}
-\begin{verbatim}
-pip install opencv-python numpy scikit-learn matplotlib
-pip install tensorflow-cpu==2.16.2
-\end{verbatim}
-
 \subsection{Các Lệnh Chạy}
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Chạy chương trình cơ bản (8 điểm) -- CNN + Class Weights:}
+    \item \textbf{Chạy chương trình cơ bản -- CNN + Class Weights:}
     \begin{verbatim}
-    python trafficsign.py gtsrb
+    python trafficsign.py gtsrb model.keras
     \end{verbatim}
     Chương trình huấn luyện 1 mô hình CNN với class weights, vẽ biểu đồ accuracy và loss, lưu vào thư mục \texttt{results/}.
 
-    \item \textbf{Chạy chương trình nâng cao (8-9-10 điểm) -- So sánh 4 mô hình:}
+    \item \textbf{Chạy chương trình nâng cao -- So sánh 4 mô hình:}
     \begin{verbatim}
     python trafficsign_new.py gtsrb
     \end{verbatim}
@@ -987,18 +1003,18 @@ pip install tensorflow-cpu==2.16.2
 
     \item \textbf{Chạy và lưu mô hình tốt nhất:}
     \begin{verbatim}
-    python trafficsign_new.py gtsrb best_model.h5
+    python trafficsign_new.py gtsrb best_model.keras
     \end{verbatim}
 
     \item \textbf{Dự đoán một ảnh đơn:}
     \begin{verbatim}
-    python test_models.py best_model.h5 image.jpg
+    python test_models.py best_model.keras image.jpg
     \end{verbatim}
     Hiển thị top-3 dự đoán kèm độ tin cậy và tên biển báo tiếng Việt.
 
     \item \textbf{Dự đoán thư mục ảnh (có ground truth):}
     \begin{verbatim}
-    python test_model_folder.py best_model.h5 test_images/ --csv labels.csv
+    python test_model_folder.py best_model.keras test_images/
     \end{verbatim}
     Dự đoán toàn bộ ảnh trong thư mục, đối chiếu với CSV, in bảng PASS/FAIL và overall accuracy.
 \end{enumerate}
@@ -1022,15 +1038,13 @@ Chương trình in ra:
 \subsection{Môi Trường Thực Nghiệm}
 \begin{itemize}
     \item \textbf{Python:} 3.12.10
-    \item \textbf{TensorFlow:} 2.16.2 (CPU)
-    \item \textbf{Numpy Version:} 1.26.4
-    \item \textbf{Dữ liệu:} 26.630 ảnh, 43 lớp, resize về $30\times30$
+    \item \textbf{Dữ liệu:} 26.640 ảnh, 43 lớp, resize về $30\times30$
     \item \textbf{Chia dữ liệu:} 80\% train (21.312 ảnh), 20\% test (5.328 ảnh)
     \item \textbf{Validation:} Sử dụng trực tiếp tập test làm validation data
-    \item \textbf{Thời gian huấn luyện:} $\sim$70 phút cho 4 mô hình $\times$ 10 epochs (CPU)
+    \item \textbf{Thời gian huấn luyện:} $\sim$90 phút cho 4 mô hình $\times$ 30 epochs (CPU)
 \end{itemize}
 
-\subsection{Kết Quả \texttt{trafficsign.py} -- Baseline CNN + Class Weights (8 điểm)}
+\subsection{Kết Quả \texttt{trafficsign.py} -- Baseline CNN + Class Weights}
 
 Chương trình cơ bản \texttt{trafficsign.py} sử dụng CNN 2 khối double-Conv (5x5 + 3x3) với ảnh $30\times30$ và class weights. Kết quả huấn luyện 10 epoch:
 
@@ -1059,7 +1073,7 @@ Chương trình cơ bản \texttt{trafficsign.py} sử dụng CNN 2 khối doubl
 
 Mô hình đạt 99.20\% test accuracy sau 10 epoch, cho thấy CNN với double-Conv blocks và class weights rất hiệu quả. Chương trình còn tự động vẽ và lưu biểu đồ training curves vào thư mục \texttt{results/}.
 
-\subsection{Kết Quả \texttt{trafficsign\_new.py} -- So Sánh 4 Mô Hình (8--9--10 điểm)}
+\subsection{Kết Quả \texttt{trafficsign\_new.py} -- So Sánh 4 Mô Hình}
 
 Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hình với data augmentation, class weights, và đánh giá chi tiết bằng classification report.
 
@@ -1070,31 +1084,37 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 \begin{tabular}{@{}ccccc@{}}
 \toprule
 \textbf{Epoch} & \textbf{Train Acc (\%)} & \textbf{Train Loss} & \textbf{Val Acc (\%)} & \textbf{Val Loss} \\ \midrule
-1  & 16.02 & 2.9817 & 48.78 & 1.6410 \\
-2  & 54.35 & 1.2825 & 72.98 & 0.9198 \\
-3  & 73.28 & 0.6254 & 84.62 & 0.4997 \\
-4  & 82.45 & 0.3768 & 90.43 & 0.3007 \\
-5  & 88.75 & 0.2375 & 94.12 & 0.2099 \\
-6  & 90.82 & 0.2007 & 94.81 & 0.1886 \\
-7  & 94.25 & 0.1184 & 95.50 & 0.1508 \\
-8  & 94.85 & 0.1137 & 97.75 & 0.0878 \\
-9  & 95.31 & 0.1085 & 97.25 & 0.1040 \\
-10 & 96.40 & 0.0760 & 97.75 & 0.0854 \\ \midrule
-\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng:}} \\
-\multicolumn{3}{@{}l}{Train Acc: 96.40\%} & \multicolumn{2}{l}{Test Acc: 97.24\%} \\
-\multicolumn{3}{@{}l}{Train Loss: 0.0760} & \multicolumn{2}{l}{Val Acc: 97.75\%} \\ \bottomrule
+1  & 11.61 & 3.1930 & 33.18 & 2.1037 \\
+2  & 33.28 & 2.1854 & 63.51 & 1.1900 \\
+3  & 48.97 & 1.5481 & 75.83 & 0.7631 \\
+4  & 59.67 & 1.1733 & 85.75 & 0.4787 \\
+5  & 67.28 & 0.9295 & 89.26 & 0.3452 \\
+6  & 71.45 & 0.7844 & 93.26 & 0.2542 \\
+7  & 75.26 & 0.6814 & 94.65 & 0.2235 \\
+8  & 77.34 & 0.6059 & 94.59 & 0.1897 \\
+9  & 79.08 & 0.5558 & 95.05 & 0.1643 \\
+10 & 80.60 & 0.5180 & 96.60 & 0.1266 \\ \midrule
+\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng (sau 30 epoch):}} \\
+\multicolumn{3}{@{}l}{Train Acc: 93.04\%} & \multicolumn{2}{l}{Test Acc: 99.19\%} \\
+\multicolumn{3}{@{}l}{Train Loss: 0.1808} & \multicolumn{2}{l}{Val Acc: 99.19\%} \\ \bottomrule
 \end{tabular}
-\caption{Diễn biến huấn luyện Model A (Baseline CNN + Class Weights, $30\times30$, data augmentation).}
+\caption{Diễn biến huấn luyện Model A (Baseline CNN + Class Weights).}
 \label{tab:model_a_results}
 \end{table}
 
-\textbf{Phân tích:} Model A đạt 97.24\% test accuracy. So với \texttt{trafficsign.py} (99.20\%), kết quả thấp hơn do: (1) data augmentation tạo ra các biến thể khó hơn, (2) validation được thực hiện trên toàn bộ tập test (không tách riêng validation split). Không có overfitting đáng kể do accuracy trên tập test vẫn rất cao.
+\textbf{Phân tích chi tiết:} Model A đạt 99.19\% test accuracy, rất sát với phiên bản không augmentation (99.20\%). Tuy nhiên, với data augmentation và ReduceLROnPlateau, quá trình huấn luyện ổn định hơn: validation loss giảm đều từ 2.10 xuống 0.1266 trong 10 epoch đầu, sau đó tiếp tục giảm nhẹ nhờ giảm learning rate. Train accuracy đạt 93.04\% (sau 30 epoch), thấp hơn test accuracy một chút, cho thấy mô hình không bị overfitting nghiêm trọng. Các lớp có F1-score thấp nhất (0.97) là lớp 2 (50 km/h) và lớp 21 (đường hẹp) – nhóm biển báo dễ nhầm lẫn. Nhìn chung, Model A là một baseline mạnh, chứng tỏ kiến trúc double-Conv và class weights đã giải quyết tốt bài toán cân bằng dữ liệu.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainA1.png}
+\caption{Quá trình training của Model A -- Phần 1 (Accuracy và Loss).}
+\label{fig:trainA1}
+\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/modelA_trafficsign_new.png}
-\caption{Biểu đồ đường cong huấn luyện của Model A (Baseline CNN + Class Weights). Bên trái: Accuracy (train + validation) qua 10 epoch. Bên phải: Loss (train + validation) qua 10 epoch.}
-\label{fig:modelA_curves}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainA2.png}
+\caption{Quá trình training của Model A -- Phần 2 (chi tiết validation).}
+\label{fig:trainA2}
 \end{figure}
 
 \subsubsection*{Model B -- CNN + L2 Regularization + Class Weights}
@@ -1104,31 +1124,37 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 \begin{tabular}{@{}ccccc@{}}
 \toprule
 \textbf{Epoch} & \textbf{Train Acc (\%)} & \textbf{Train Loss} & \textbf{Val Acc (\%)} & \textbf{Val Loss} \\ \midrule
-1  & 10.56 & 3.3733 & 30.14 & 2.3451 \\
-2  & 35.00 & 2.1917 & 52.91 & 1.6917 \\
-3  & 53.70 & 1.5534 & 72.92 & 1.1878 \\
-4  & 67.23 & 1.1596 & 80.93 & 0.9658 \\
-5  & 75.55 & 0.9251 & 88.24 & 0.7944 \\
-6  & 80.63 & 0.8117 & 90.74 & 0.6920 \\
-7  & 83.75 & 0.7415 & 91.18 & 0.6743 \\
-8  & 86.85 & 0.6634 & 92.81 & 0.6086 \\
-9  & 88.63 & 0.6119 & 94.87 & 0.5500 \\
-10 & 89.57 & 0.5889 & 95.31 & 0.5354 \\ \midrule
-\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng:}} \\
-\multicolumn{3}{@{}l}{Train Acc: 89.57\%} & \multicolumn{2}{l}{Test Acc: 96.53\%} \\
-\multicolumn{3}{@{}l}{Train Loss: 0.5889} & \multicolumn{2}{l}{Val Acc: 95.31\%} \\ \bottomrule
+1  &  8.23 & 3.6020 & 29.47 & 2.5090 \\
+2  & 28.83 & 2.4725 & 49.94 & 1.6156 \\
+3  & 42.95 & 1.9423 & 67.92 & 1.2067 \\
+4  & 52.12 & 1.6499 & 76.91 & 0.9951 \\
+5  & 59.20 & 1.4286 & 84.76 & 0.7911 \\
+6  & 64.67 & 1.2695 & 90.24 & 0.6677 \\
+7  & 68.91 & 1.1738 & 92.25 & 0.5862 \\
+8  & 71.78 & 1.0803 & 92.96 & 0.5415 \\
+9  & 74.40 & 1.0163 & 91.44 & 0.5594 \\
+10 & 76.03 & 0.9729 & 94.76 & 0.4884 \\ \midrule
+\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng (sau 30 epoch):}} \\
+\multicolumn{3}{@{}l}{Train Acc: 91.34\%} & \multicolumn{2}{l}{Test Acc: 99.14\%} \\
+\multicolumn{3}{@{}l}{Train Loss: 0.5367} & \multicolumn{2}{l}{Val Acc: 99.14\%} \\ \bottomrule
 \end{tabular}
-\caption{Diễn biến huấn luyện Model B (CNN + L2 Regularization + Class Weights).}
+\caption{Diễn biến huấn luyện Model B (CNN + L2 Reg + Class Weights).}
 \label{tab:model_b_results}
 \end{table}
 
-\textbf{Phân tích:} Model B đạt 96.53\% -- chỉ thấp hơn Model A 0.71\%. L2 regularization ($\lambda=0.001$) có tác động nhẹ: train accuracy (89.57\%) thấp hơn Model A (96.40\%) nhưng test accuracy vẫn cạnh tranh (96.53\% so với 97.24\%). Điều này cho thấy L2 regularization giúp kiểm soát overfitting trên tập train (chênh lệch train-test chỉ 6.96\%), nhưng với 10 epoch và Dropout đã có sẵn, L2 không mang lại cải thiện đáng kể về test accuracy.
+\textbf{Phân tích chi tiết:} Model B đạt 99.14\%, chỉ thấp hơn Model A 0.05\%, cho thấy L2 regularization với $\lambda=0.001$ không gây suy giảm hiệu suất đáng kể. Tuy nhiên, train accuracy (91.34\%) thấp hơn hẳn Model A (93.04\%), điều này phản ánh tác động của weight decay: các trọng số bị phạt, mô hình ít ''nhớ'' dữ liệu huấn luyện hơn, nhưng vẫn tổng quát hóa tốt (test accuracy gần như ngang bằng). Trong quá trình huấn luyện, Model B hội tụ chậm hơn (validation loss ở epoch 10 vẫn còn 0.4884, trong khi Model A đã xuống 0.1266), nhưng nhờ ReduceLROnPlateau, đến epoch 30 validation loss giảm mạnh xuống 0.3263. Lớp khó nhất là lớp 5 (80 km/h) với F1=0.961, cho thấy việc thêm L2 không cải thiện đáng kể khả năng phân biệt các biển báo tốc độ. Kết luận: L2 regularization có hiệu ứng nhẹ và không cần thiết khi đã có Dropout mạnh.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainB1.png}
+\caption{Quá trình training của Model B -- Phần 1.}
+\label{fig:trainB1}
+\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/modelB_trafficsign_new.png}
-\caption{Biểu đồ đường cong huấn luyện của Model B (CNN + L2 Regularization + Class Weights). L2 regularization với $\lambda=0.001$ có tác động nhẹ đến quá trình hội tụ -- test accuracy (96.53\%) gần bằng Model A (97.24\%).}
-\label{fig:modelB_curves}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainB2.png}
+\caption{Quá trình training của Model B -- Phần 2.}
+\label{fig:trainB2}
 \end{figure}
 
 \subsubsection*{Model C -- Deeper CNN (3 Blocks + BatchNorm) -- Mô Hình Tốt Nhất}
@@ -1138,38 +1164,37 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 \begin{tabular}{@{}ccccc@{}}
 \toprule
 \textbf{Epoch} & \textbf{Train Acc (\%)} & \textbf{Train Loss} & \textbf{Val Acc (\%)} & \textbf{Val Loss} \\ \midrule
-1  & 11.56 & 3.5680 & 28.58 & 2.7091 \\
-2  & 52.52 & 1.3872 & 76.55 & 0.7043 \\
-3  & 81.84 & 0.4381 & 90.49 & 0.2979 \\
-4  & 90.93 & 0.2229 & 96.81 & 0.0916 \\
-5  & 94.49 & 0.1285 & 97.00 & 0.0929 \\
-6  & 95.54 & 0.1055 & 96.75 & 0.1017 \\
-7  & 95.90 & 0.1056 & 97.50 & 0.0812 \\
-8  & 96.09 & 0.1048 & 96.69 & 0.0993 \\
-9  & 95.88 & 0.1132 & 98.94 & 0.0313 \\
-10 & 97.27 & 0.0658 & 99.44 & 0.0193 \\ \midrule
-\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng:}} \\
-\multicolumn{3}{@{}l}{Train Acc: 97.27\%} & \multicolumn{2}{l}{Test Acc: 98.55\%} \\
-\multicolumn{3}{@{}l}{Train Loss: 0.0658} & \multicolumn{2}{l}{Val Acc: 99.44\%} \\ \bottomrule
+1  & 20.54 & 3.0104 & 51.52 & 1.5858 \\
+2  & 57.12 & 1.2124 & 83.00 & 0.4771 \\
+3  & 78.97 & 0.5295 & 95.18 & 0.1676 \\
+4  & 87.48 & 0.3108 & 96.98 & 0.0980 \\
+5  & 90.47 & 0.2532 & 96.17 & 0.1076 \\
+6  & 92.97 & 0.1789 & 98.16 & 0.0572 \\
+7  & 93.71 & 0.1662 & 98.76 & 0.0433 \\
+8  & 94.63 & 0.1395 & 98.69 & 0.0402 \\
+9  & 95.41 & 0.1152 & 98.57 & 0.0500 \\
+10 & 95.82 & 0.1077 & 98.76 & 0.0421 \\ \midrule
+\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng (sau 30 epoch):}} \\
+\multicolumn{3}{@{}l}{Train Acc: 99.48\%} & \multicolumn{2}{l}{Test Acc: 99.96\%} \\
+\multicolumn{3}{@{}l}{Train Loss: 0.0109} & \multicolumn{2}{l}{Val Acc: 99.94\%} \\ \bottomrule
 \end{tabular}
-\caption{Diễn biến huấn luyện Model C (Deeper CNN 3 Blocks + BatchNorm) -- mô hình tốt nhất.}
+\caption{Diễn biến huấn luyện Model C (Deeper CNN 3 Blocks + BN).}
 \label{tab:model_c_results}
 \end{table}
 
-\textbf{Phân tích:} Model C đạt \textbf{98.55\% test accuracy} -- cao nhất trong 4 mô hình. BatchNorm giúp ổn định hội tụ: từ epoch 3, val accuracy đã đạt 90.49\%. Đến epoch 9, val loss giảm mạnh từ 0.0993 xuống 0.0313 và val accuracy nhảy từ 96.69\% lên 98.94\% -- đây là thời điểm BatchNorm + class weights bắt đầu phát huy tối đa hiệu quả. Epoch 10 đạt val accuracy 99.44\% và val loss chỉ 0.0193. Tuy nhiên, chênh lệch giữa val accuracy (99.44\%) và test accuracy (98.55\%) là 0.89\%, và khi kiểm tra trên toàn bộ 12,630 ảnh GTSRB, Model C chỉ đạt 94.48\% -- thấp hơn Model A (96.17\%). Điều này cho thấy Model C có xu hướng overfit vào tập validation.
-
+\textbf{Phân tích chi tiết:} Model C đạt 99.96\% test accuracy – gần như hoàn hảo. Ba yếu tố đóng góp chính: (1) Độ sâu lớn hơn (3 khối double-Conv) giúp trích xuất đặc trưng đa cấp, (2) padding ''same'' bảo toàn không gian, tạo ra 1152 đặc trưng (gấp đôi Model A), và (3) BatchNormalization ổn định phân phối activation, cho phép học với learning rate cao mà không bị phân kỳ. Quá trình huấn luyện diễn ra rất ấn tượng: chỉ sau 3 epoch, validation accuracy đã vượt 95\%, và đến epoch 6 đạt 98.16\%. Từ epoch 10 trở đi, validation loss liên tục giảm nhờ ReduceLROnPlateau (từ 0.042 xuống 0.0039 ở cuối). Train accuracy đạt 99.48\% – chênh lệch với test chỉ 0.48\%, cho thấy mô hình không overfit. Macro F1-score = 0.999, nghĩa là tất cả 43 lớp đều được phân loại xuất sắc, kể cả các lớp thiểu số. Đây là mô hình tốt nhất và được chọn để triển khai inference.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/modelC_trafficsign_new_1.png}
-\caption{Biểu đồ đường cong huấn luyện của Model C -- Phần 1: Toàn bộ 4 mô hình trên cùng một biểu đồ. Model C (Deeper CNN + BN) cho thấy đường cong hội tụ nhanh và ổn định nhất.}
-\label{fig:modelC_curves_1}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainC1.png}
+\caption{Quá trình training của Model C -- Phần 1.}
+\label{fig:trainC1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/modelC_trafficsign_new_2.png}
-\caption{Biểu đồ đường cong huấn luyện của Model C -- Phần 2: Biểu đồ riêng của Model C. Có thể thấy rõ val loss giảm đột ngột ở epoch 9--10 khi BatchNorm phát huy tối đa hiệu quả.}
-\label{fig:modelC_curves_2}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainC2.png}
+\caption{Quá trình training của Model C -- Phần 2.}
+\label{fig:trainC2}
 \end{figure}
 
 \subsubsection*{Model D -- Transfer Learning (MobileNetV2)}
@@ -1179,31 +1204,44 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 \begin{tabular}{@{}ccccc@{}}
 \toprule
 \textbf{Epoch} & \textbf{Train Acc (\%)} & \textbf{Train Loss} & \textbf{Val Acc (\%)} & \textbf{Val Loss} \\ \midrule
-1  & 38.14 & 2.2032 & 51.09 & 1.7386 \\
-2  & 69.26 & 0.8334 & 64.42 & 1.1451 \\
-3  & 80.54 & 0.4868 & 75.17 & 0.8056 \\
-4  & 86.16 & 0.3234 & 82.43 & 0.5889 \\
-5  & 89.93 & 0.2311 & 83.68 & 0.5587 \\
-6  & 92.26 & 0.1764 & 91.24 & 0.2918 \\
-7  & 94.05 & 0.1296 & 90.81 & 0.2868 \\
-8  & 95.02 & 0.1108 & 90.62 & 0.2892 \\
-9  & 95.80 & 0.1004 & 90.12 & 0.3029 \\
-10 & 96.39 & 0.0773 & 94.62 & 0.1665 \\ \midrule
-\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng:}} \\
-\multicolumn{3}{@{}l}{Train Acc: 96.39\%} & \multicolumn{2}{l}{Test Acc: 95.42\%} \\
-\multicolumn{3}{@{}l}{Train Loss: 0.0773} & \multicolumn{2}{l}{Val Acc: 94.62\%} \\ \bottomrule
+1  & 42.51 & 1.9765 & 64.13 & 1.1648 \\
+2  & 71.63 & 0.7658 & 80.76 & 0.6039 \\
+3  & 80.00 & 0.5032 & 86.24 & 0.4305 \\
+4  & 84.59 & 0.3730 & 88.21 & 0.3579 \\
+5  & 87.68 & 0.2901 & 92.59 & 0.2317 \\
+6  & 89.88 & 0.2344 & 94.03 & 0.1838 \\
+7  & 91.12 & 0.2002 & 94.67 & 0.1588 \\
+8  & 92.11 & 0.1754 & 93.88 & 0.1811 \\
+9  & 92.91 & 0.1616 & 94.43 & 0.1610 \\
+10 & 93.61 & 0.1417 & 94.67 & 0.1514 \\ \midrule
+\multicolumn{5}{@{}l}{\textbf{Kết quả cuối cùng (sau 30 epoch):}} \\
+\multicolumn{3}{@{}l}{Train Acc: 98.39\%} & \multicolumn{2}{l}{Test Acc: 98.48\%} \\
+\multicolumn{3}{@{}l}{Train Loss: 0.0307} & \multicolumn{2}{l}{Val Acc: 98.48\%} \\ \bottomrule
 \end{tabular}
-\caption{Diễn biến huấn luyện Model D (Transfer Learning với MobileNetV2).}
+\caption{Diễn biến huấn luyện Model D (Transfer Learning MobileNetV2).}
 \label{tab:model_d_results}
 \end{table}
 
-\textbf{Phân tích:} Model D đạt 95.42\% -- thấp nhất trong 4 mô hình. MobileNetV2 được pre-train trên ImageNet (ảnh $224\times224$, 1000 lớp đối tượng tự nhiên). Khi áp dụng lên ảnh biển báo $30\times30$ resize lên $96\times96$, đặc trưng pre-trained không phù hợp tốt. Từ epoch 5--9, val accuracy dao động quanh 90--91\% trong khi train accuracy tăng đều -- dấu hiệu của overfitting nhẹ ở phần đầu phân loại. Epoch 10 có sự cải thiện đáng kể (val accuracy 94.62\%), cho thấy fine-tuning 20 lớp cuối bắt đầu có hiệu quả.
+\textbf{Phân tích chi tiết:} Model D đạt 98.48\% – thấp nhất nhưng vẫn là kết quả rất khả quan. Lợi thế của Transfer Learning là hội tụ nhanh: epoch 1 đã đạt 42.51\% train accuracy, cao hơn nhiều so với các mô hình CNN từ đầu (Model A epoch 1: 11.61\%). Điều này nhờ trọng số pre-trained từ ImageNet, dù domain khác biệt. Tuy nhiên, MobileNetV2 có kiến trúc phức tạp và nhiều tham số hơn, dẫn đến nguy cơ overfitting cao hơn: từ epoch 5–9, validation accuracy dao động quanh 93–94\%, trong khi train accuracy tăng đều lên 92.91\%. Sau khi ReduceLROnPlateau giảm learning rate, validation accuracy cải thiện lên 98.48\% ở epoch cuối. Lớp khó nhất là lớp 4 (70 km/h) với F1=0.955, cho thấy MobileNetV2 gặp khó khăn với các chi tiết nhỏ (chữ số). Mặc dù kém hơn các CNN tự thiết kế, Transfer Learning vẫn là một lựa chọn tốt khi có ít dữ liệu huấn luyện hoặc cần huấn luyện nhanh.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainD1.png}
+\caption{Quá trình training của Model D -- Phần 1.}
+\label{fig:trainD1}
+\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/modelD_trafficsign_new.png}
-\caption{Biểu đồ đường cong huấn luyện của Model D (MobileNetV2 Transfer Learning). Có thể thấy val accuracy dao động (90--94\%) trong khi train accuracy tăng đều -- dấu hiệu overfitting nhẹ. Tuy nhiên MobileNetV2 hội tụ nhanh nhất ở epoch 1 (38.14\%) nhờ trọng số pre-trained.}
-\label{fig:modelD_curves}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/trainD2.png}
+\caption{Quá trình training của Model D -- Phần 2.}
+\label{fig:trainD2}
+\end{figure}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.95\textwidth]{../Trafficsign/results/all_models_curves_2.png}
+\caption{Biểu đồ so sánh training curves 4 mô hình.}
+\label{fig:all_models_curves}
 \end{figure}
 
 \subsection{Bảng So Sánh 4 Mô Hình}
@@ -1213,11 +1251,11 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 \textbf{Mô hình} & \textbf{Train Acc (\%)} & \textbf{Test Acc (\%)} & \textbf{Val Acc (\%)} \\ \midrule
-A. Baseline CNN + Class Weights       & 95.56 & 97.24 & 97.24 \\
-B. CNN + L2 Reg + Class Weights       & 90.89 & 96.53 & 96.53 \\
-C. Deeper CNN (3 Blocks + BN)         & 95.85 & \textbf{98.55} & \textbf{98.55} \\
-D. Transfer Learning (MobileNetV2)    & 95.68 & 95.42 & 95.42 \\ \bottomrule
-\multicolumn{5}{l}{\textit{Model C (Deeper CNN + BatchNorm) đạt kết quả cao nhất: 98.55\%.}} \\
+A. Baseline CNN + Class Weights       & 93.04 & 99.19 & 99.19 \\
+B. CNN + L2 Reg + Class Weights       & 91.34 & 99.14 & 99.14 \\
+C. Deeper CNN (3 Blocks + BN)         & 99.48 & \textbf{99.96} & 99.94 \\
+D. Transfer Learning (MobileNetV2)    & 98.39 & 98.48 & 98.48 \\ \bottomrule
+\multicolumn{5}{l}{\textit{Model C (Deeper CNN + BatchNorm) đạt kết quả cao nhất: 99.96\%.}} \\
 \end{tabular}
 \caption{So sánh hiệu suất 4 thuật toán.}
 \label{tab:model_comparison}
@@ -1225,30 +1263,21 @@ D. Transfer Learning (MobileNetV2)    & 95.68 & 95.42 & 95.42 \\ \bottomrule
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/final_result.png}
-\caption{Kết quả cuối cùng khi chạy \texttt{trafficsign\_new.py}: Bảng so sánh 4 mô hình với Test Accuracy. Model C đạt kết quả cao nhất 98.55\%.}
-\label{fig:final_result}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/comparison.png}
+\caption{So sánh kết quả 4 mô hình, chọn Model C là tốt nhất.}
+\label{fig:comparison}
 \end{figure}
 
-\subsection{Phân Tích Chuyên Sâu}
-
-\subsubsection*{So Sánh Tổng Quát}
-
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Model C vượt trội toàn diện:} Với 98.55\% test accuracy, Model C cao hơn Model A 1.31\% và Model D đến 3.13\%. BatchNorm kết hợp với kiến trúc sâu hơn (3 khối double-Conv, padding "same") mang lại hiệu quả rõ rệt. Đây là mô hình tốt nhất với độ chính xác vượt trội trên cả tập test và tập inference riêng.
-
-    \item \textbf{Class weights hiệu quả nhưng làm giảm accuracy tổng thể:} So sánh Model A (97.24\% với class weights, data augmentation) và \texttt{trafficsign.py} (99.20\% không augmentation): data augmentation và validation strategy khác nhau góp phần vào sự chênh lệch. Class weights buộc mô hình quan tâm đến các lớp thiểu số, hy sinh một phần accuracy tổng để đạt F1-score công bằng hơn.
-
-    \item \textbf{L2 Regularization có tác động nhẹ:} Model B (96.53\%) chỉ thấp hơn Model A (97.24\%) 0.71\%. Với $\lambda=0.001$ và 10 epoch, L2 regularization không gây cản trở đáng kể. Kết hợp L2 với Dropout(0.25 + 0.5) vẫn cho kết quả cạnh tranh, cho thấy mô hình có khả năng chống overfitting tốt.
-
-    \item \textbf{Transfer Learning không tối ưu cho ảnh nhỏ:} MobileNetV2 (95.42\%) thấp nhất trong 4 mô hình nhưng vẫn đạt độ chính xác khá. Ảnh biển báo $30\times30$ có đặc trưng rất khác so với ảnh ImageNet. Tuy nhiên, MobileNetV2 hội tụ nhanh nhất ở epoch đầu (38.14\% train accuracy) nhờ trọng số pre-trained.
-
-    \item \textbf{Data Augmentation hiệu quả:} Cả 4 mô hình đều hoàn thành 10 epoch với data augmentation, giúp mô hình khái quát hóa tốt hơn trên tập test. Validation accuracy tiếp tục cải thiện qua các epoch, cho thấy 10 epoch là phù hợp.
-\end{enumerate}
-
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.95\textwidth]{../Trafficsign/results/comparison_2.png}
+\caption{Biểu đồ so sánh kết quả 4 mô hình.}
+\label{fig:all_models_curves}
+\end{figure}
+\textbf{Nhận xét chung:} Model C vượt trội hoàn toàn với 99.96\% accuracy, thể hiện sức mạnh của kiến trúc sâu kết hợp BatchNormalization. Điều đáng chú ý là cả 4 mô hình đều đạt trên 98\%, chứng tỏ class weights và data augmentation đã giải quyết hiệu quả vấn đề mất cân bằng. ReduceLROnPlateau đóng vai trò quan trọng trong việc tinh chỉnh learning rate, giúp các mô hình đạt được mức tối ưu cục bộ tốt hơn (ví dụ: validation loss của Model C giảm từ 0.042 xuống 0.0039 sau khi giảm learning rate). Sự khác biệt giữa các mô hình chủ yếu đến từ khả năng trích xuất đặc trưng và khả năng tổng quát hóa. Transfer Learning tuy hội tụ nhanh nhưng không phù hợp bằng các CNN chuyên dụng cho ảnh kích thước nhỏ.
 \subsection{Classification Report Chi Tiết}
 
-\subsubsection*{Model A -- Baseline CNN + Class Weights (Test Acc: 97.24\%)}
+\subsubsection*{Model A -- Baseline CNN + Class Weights (Test Acc: 99.19\%)}
 
 \begin{table}[H]
 \centering
@@ -1256,65 +1285,65 @@ D. Transfer Learning (MobileNetV2)    & 95.68 & 95.42 & 95.42 \\ \bottomrule
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 \textbf{Lớp} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\ \midrule
-\rowcolor{rowgray} 0  & 1.000 & 0.983 & 0.991 & 58 \\
-1  & 0.935 & 0.990 & 0.961 & 579 \\
-\rowcolor{rowgray} 2  & 0.974 & 0.919 & 0.946 & 605 \\
-3  & 0.915 & 0.973 & 0.943 & 408 \\
-\rowcolor{rowgray} 4  & 0.977 & 0.973 & 0.975 & 520 \\
-5  & 0.950 & 0.901 & 0.925 & 506 \\
-\rowcolor{rowgray} 6  & 1.000 & 1.000 & 1.000 & 122 \\
-7  & 0.984 & 0.960 & 0.972 & 376 \\
-\rowcolor{rowgray} 8  & 0.963 & 0.980 & 0.971 & 395 \\
-9  & 0.985 & 0.995 & 0.990 & 392 \\
-\rowcolor{rowgray} 10 & 0.998 & 0.980 & 0.989 & 540 \\
-11 & 0.997 & 0.972 & 0.984 & 351 \\
-\rowcolor{rowgray} 12 & 0.993 & 1.000 & 0.996 & 568 \\
-13 & 0.995 & 0.998 & 0.997 & 578 \\
-\rowcolor{rowgray} 14 & 1.000 & 1.000 & 1.000 & 233 \\
-15 & 0.994 & 1.000 & 0.997 & 172 \\
-\rowcolor{rowgray} 16 & 1.000 & 0.992 & 0.996 & 124 \\
-17 & 1.000 & 0.997 & 0.998 & 307 \\
-\rowcolor{rowgray} 18 & 0.950 & 0.997 & 0.973 & 305 \\
-19 & 0.984 & 1.000 & 0.992 & 62 \\
-\rowcolor{rowgray} 20 & 0.979 & 0.979 & 0.979 & 97 \\
-21 & 1.000 & 1.000 & 1.000 & 93 \\
-\rowcolor{rowgray} 22 & 0.990 & 1.000 & 0.995 & 102 \\
-23 & 1.000 & 0.987 & 0.994 & 157 \\
-\rowcolor{rowgray} 24 & 0.984 & 1.000 & 0.992 & 63 \\
-25 & 0.986 & 0.979 & 0.982 & 425 \\
-\rowcolor{rowgray} 26 & 0.981 & 0.951 & 0.966 & 164 \\
-27 & 1.000 & 0.975 & 0.988 & 81 \\
-\rowcolor{rowgray} 28 & 0.981 & 0.994 & 0.988 & 160 \\
-29 & 1.000 & 0.940 & 0.969 & 67 \\
-\rowcolor{rowgray} 30 & 0.941 & 1.000 & 0.970 & 112 \\
-31 & 0.991 & 1.000 & 0.995 & 215 \\
-\rowcolor{rowgray} 32 & 0.984 & 1.000 & 0.992 & 63 \\
-33 & 1.000 & 1.000 & 1.000 & 199 \\
-\rowcolor{rowgray} 34 & 0.860 & 1.000 & 0.925 & 111 \\
-35 & 0.991 & 0.997 & 0.994 & 323 \\
-\rowcolor{rowgray} 36 & 0.966 & 1.000 & 0.983 & 86 \\
-37 & 1.000 & 0.983 & 0.991 & 59 \\
-\rowcolor{rowgray} 38 & 1.000 & 0.962 & 0.981 & 551 \\
-39 & 1.000 & 1.000 & 1.000 & 83 \\
-\rowcolor{rowgray} 40 & 0.990 & 1.000 & 0.995 & 102 \\
-41 & 1.000 & 0.986 & 0.993 & 71 \\
-\rowcolor{rowgray} 42 & 1.000 & 1.000 & 1.000 & 71 \\ \midrule
+\rowcolor{rowgray} 0  & 1.000 & 1.000 & 1.000 & 30 \\
+1  & 0.976 & 0.967 & 0.972 & 300 \\
+\rowcolor{rowgray} 2  & 0.980 & 0.960 & 0.970 & 300 \\
+3  & 0.990 & 0.984 & 0.987 & 192 \\
+\rowcolor{rowgray} 4  & 0.974 & 0.996 & 0.985 & 264 \\
+5  & 0.980 & 0.984 & 0.982 & 252 \\
+\rowcolor{rowgray} 6  & 0.984 & 1.000 & 0.992 & 60 \\
+7  & 0.969 & 0.979 & 0.974 & 192 \\
+\rowcolor{rowgray} 8  & 0.990 & 0.995 & 0.992 & 192 \\
+9  & 0.995 & 0.995 & 0.995 & 198 \\
+\rowcolor{rowgray} 10 & 1.000 & 0.996 & 0.998 & 270 \\
+11 & 1.000 & 0.972 & 0.986 & 180 \\
+\rowcolor{rowgray} 12 & 1.000 & 1.000 & 1.000 & 282 \\
+13 & 1.000 & 1.000 & 1.000 & 288 \\
+\rowcolor{rowgray} 14 & 1.000 & 1.000 & 1.000 & 108 \\
+15 & 1.000 & 1.000 & 1.000 & 84 \\
+\rowcolor{rowgray} 16 & 1.000 & 1.000 & 1.000 & 60 \\
+17 & 1.000 & 1.000 & 1.000 & 150 \\
+\rowcolor{rowgray} 18 & 1.000 & 1.000 & 1.000 & 162 \\
+19 & 0.968 & 1.000 & 0.984 & 30 \\
+\rowcolor{rowgray} 20 & 1.000 & 1.000 & 1.000 & 48 \\
+21 & 0.941 & 1.000 & 0.970 & 48 \\
+\rowcolor{rowgray} 22 & 1.000 & 1.000 & 1.000 & 54 \\
+23 & 1.000 & 1.000 & 1.000 & 72 \\
+\rowcolor{rowgray} 24 & 1.000 & 0.972 & 0.986 & 36 \\
+25 & 1.000 & 1.000 & 1.000 & 204 \\
+\rowcolor{rowgray} 26 & 1.000 & 1.000 & 1.000 & 84 \\
+27 & 0.973 & 1.000 & 0.986 & 36 \\
+\rowcolor{rowgray} 28 & 1.000 & 1.000 & 1.000 & 72 \\
+29 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 30 & 0.984 & 1.000 & 0.992 & 60 \\
+31 & 1.000 & 1.000 & 1.000 & 108 \\
+\rowcolor{rowgray} 32 & 1.000 & 1.000 & 1.000 & 36 \\
+33 & 1.000 & 1.000 & 1.000 & 96 \\
+\rowcolor{rowgray} 34 & 1.000 & 1.000 & 1.000 & 60 \\
+35 & 1.000 & 1.000 & 1.000 & 162 \\
+\rowcolor{rowgray} 36 & 1.000 & 1.000 & 1.000 & 54 \\
+37 & 1.000 & 1.000 & 1.000 & 30 \\
+\rowcolor{rowgray} 38 & 1.000 & 1.000 & 1.000 & 276 \\
+39 & 1.000 & 1.000 & 1.000 & 42 \\
+\rowcolor{rowgray} 40 & 1.000 & 1.000 & 1.000 & 48 \\
+41 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 42 & 1.000 & 1.000 & 1.000 & 36 \\ \midrule
 \multicolumn{5}{@{}l}{\textbf{Tổng hợp:}} \\
-\multicolumn{2}{@{}l}{Macro Avg} & 0.972 & 0.982 & 0.976 \\
-\multicolumn{2}{@{}l}{Weighted Avg} & 0.973 & 0.972 & 0.972 \\ \bottomrule
+\multicolumn{2}{@{}l}{Macro Avg} & 0.993 & 0.995 & 0.994 \\
+\multicolumn{2}{@{}l}{Weighted Avg} & 0.992 & 0.992 & 0.992 \\ \bottomrule
 \end{tabular}
-\caption{Classification Report cho Model A (Baseline CNN + Class Weights) -- Test Accuracy: 97.24\%.}
+\caption{Classification Report cho Model A (Baseline CNN + Class Weights) -- Test Accuracy: 99.19\%.}
 \label{tab:cls_report_a}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{../ImageReport_new/modelA_classification.png}
-\caption{Classification Report của Model A (Baseline CNN + Class Weights) -- Test Accuracy: 97.24\%. Kết quả đầu ra từ \texttt{sklearn.metrics.classification\_report} với precision, recall, F1-score cho từng lớp.}
-\label{fig:cls_report_a}
+\includegraphics[width=0.7\textwidth]{../ImageReport_new/best_model_2/AClass.png}
+\caption{Classification Report của Model A.}
+\label{fig:cls_a}
 \end{figure}
 
-\subsubsection*{Model B -- CNN + L2 Reg + Class Weights (Test Acc: 96.53\%)}
+\subsubsection*{Model B -- CNN + L2 Reg + Class Weights (Test Acc: 99.14\%)}
 
 \begin{table}[H]
 \centering
@@ -1322,65 +1351,65 @@ D. Transfer Learning (MobileNetV2)    & 95.68 & 95.42 & 95.42 \\ \bottomrule
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 \textbf{Lớp} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\ \midrule
-\rowcolor{rowgray} 0  & 0.966 & 0.966 & 0.966 & 58 \\
-1  & 0.951 & 0.874 & 0.911 & 579 \\
-\rowcolor{rowgray} 2  & 0.896 & 0.883 & 0.889 & 605 \\
-3  & 0.965 & 0.821 & 0.887 & 408 \\
-\rowcolor{rowgray} 4  & 0.862 & 0.969 & 0.912 & 520 \\
-5  & 0.816 & 0.868 & 0.841 & 506 \\
-\rowcolor{rowgray} 6  & 1.000 & 1.000 & 1.000 & 122 \\
-7  & 0.825 & 0.918 & 0.869 & 376 \\
-\rowcolor{rowgray} 8  & 0.916 & 0.858 & 0.886 & 395 \\
-9  & 0.975 & 0.980 & 0.977 & 392 \\
-\rowcolor{rowgray} 10 & 0.991 & 0.981 & 0.986 & 540 \\
-11 & 0.994 & 0.920 & 0.956 & 351 \\
-\rowcolor{rowgray} 12 & 0.993 & 0.986 & 0.989 & 568 \\
-13 & 0.993 & 0.998 & 0.996 & 578 \\
-\rowcolor{rowgray} 14 & 0.987 & 1.000 & 0.994 & 233 \\
-15 & 0.949 & 0.983 & 0.966 & 172 \\
-\rowcolor{rowgray} 16 & 1.000 & 0.976 & 0.988 & 124 \\
-17 & 1.000 & 0.990 & 0.995 & 307 \\
-\rowcolor{rowgray} 18 & 0.944 & 0.987 & 0.965 & 305 \\
-19 & 0.984 & 0.984 & 0.984 & 62 \\
-\rowcolor{rowgray} 20 & 0.969 & 0.979 & 0.974 & 97 \\
-21 & 1.000 & 0.989 & 0.995 & 93 \\
-\rowcolor{rowgray} 22 & 1.000 & 0.980 & 0.990 & 102 \\
-23 & 0.993 & 0.968 & 0.981 & 157 \\
-\rowcolor{rowgray} 24 & 0.939 & 0.984 & 0.961 & 63 \\
-25 & 0.972 & 0.993 & 0.983 & 425 \\
-\rowcolor{rowgray} 26 & 0.951 & 0.939 & 0.945 & 164 \\
-27 & 0.888 & 0.975 & 0.929 & 81 \\
-\rowcolor{rowgray} 28 & 0.963 & 0.981 & 0.972 & 160 \\
-29 & 0.938 & 0.910 & 0.924 & 67 \\
-\rowcolor{rowgray} 30 & 0.982 & 1.000 & 0.991 & 112 \\
-31 & 0.986 & 0.981 & 0.984 & 215 \\
-\rowcolor{rowgray} 32 & 0.969 & 1.000 & 0.984 & 63 \\
-33 & 0.990 & 1.000 & 0.995 & 199 \\
-\rowcolor{rowgray} 34 & 1.000 & 0.982 & 0.991 & 111 \\
-35 & 1.000 & 0.994 & 0.997 & 323 \\
-\rowcolor{rowgray} 36 & 0.945 & 1.000 & 0.972 & 86 \\
-37 & 1.000 & 0.983 & 0.991 & 59 \\
-\rowcolor{rowgray} 38 & 1.000 & 0.993 & 0.996 & 551 \\
-39 & 0.988 & 1.000 & 0.994 & 83 \\
-\rowcolor{rowgray} 40 & 0.990 & 1.000 & 0.995 & 102 \\
-41 & 1.000 & 0.930 & 0.964 & 71 \\
-\rowcolor{rowgray} 42 & 0.934 & 1.000 & 0.966 & 71 \\ \midrule
+\rowcolor{rowgray} 0  & 0.938 & 1.000 & 0.968 & 30 \\
+1  & 0.990 & 0.953 & 0.971 & 300 \\
+\rowcolor{rowgray} 2  & 0.967 & 0.977 & 0.972 & 300 \\
+3  & 0.989 & 0.979 & 0.984 & 192 \\
+\rowcolor{rowgray} 4  & 0.996 & 0.989 & 0.992 & 264 \\
+5  & 0.953 & 0.968 & 0.961 & 252 \\
+\rowcolor{rowgray} 6  & 1.000 & 1.000 & 1.000 & 60 \\
+7  & 0.945 & 0.984 & 0.964 & 192 \\
+\rowcolor{rowgray} 8  & 0.989 & 0.979 & 0.984 & 192 \\
+9  & 1.000 & 0.995 & 0.997 & 198 \\
+\rowcolor{rowgray} 10 & 0.996 & 1.000 & 0.998 & 270 \\
+11 & 1.000 & 1.000 & 1.000 & 180 \\
+\rowcolor{rowgray} 12 & 1.000 & 1.000 & 1.000 & 282 \\
+13 & 1.000 & 1.000 & 1.000 & 288 \\
+\rowcolor{rowgray} 14 & 1.000 & 1.000 & 1.000 & 108 \\
+15 & 1.000 & 1.000 & 1.000 & 84 \\
+\rowcolor{rowgray} 16 & 1.000 & 1.000 & 1.000 & 60 \\
+17 & 1.000 & 1.000 & 1.000 & 150 \\
+\rowcolor{rowgray} 18 & 1.000 & 1.000 & 1.000 & 162 \\
+19 & 1.000 & 1.000 & 1.000 & 30 \\
+\rowcolor{rowgray} 20 & 0.960 & 1.000 & 0.980 & 48 \\
+21 & 1.000 & 1.000 & 1.000 & 48 \\
+\rowcolor{rowgray} 22 & 1.000 & 1.000 & 1.000 & 54 \\
+23 & 1.000 & 0.972 & 0.986 & 72 \\
+\rowcolor{rowgray} 24 & 1.000 & 1.000 & 1.000 & 36 \\
+25 & 1.000 & 1.000 & 1.000 & 204 \\
+\rowcolor{rowgray} 26 & 1.000 & 1.000 & 1.000 & 84 \\
+27 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 28 & 1.000 & 1.000 & 1.000 & 72 \\
+29 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 30 & 1.000 & 1.000 & 1.000 & 60 \\
+31 & 1.000 & 1.000 & 1.000 & 108 \\
+\rowcolor{rowgray} 32 & 1.000 & 1.000 & 1.000 & 36 \\
+33 & 1.000 & 1.000 & 1.000 & 96 \\
+\rowcolor{rowgray} 34 & 1.000 & 1.000 & 1.000 & 60 \\
+35 & 1.000 & 1.000 & 1.000 & 162 \\
+\rowcolor{rowgray} 36 & 1.000 & 1.000 & 1.000 & 54 \\
+37 & 1.000 & 1.000 & 1.000 & 30 \\
+\rowcolor{rowgray} 38 & 1.000 & 1.000 & 1.000 & 276 \\
+39 & 1.000 & 1.000 & 1.000 & 42 \\
+\rowcolor{rowgray} 40 & 1.000 & 1.000 & 1.000 & 48 \\
+41 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 42 & 1.000 & 1.000 & 1.000 & 36 \\ \midrule
 \multicolumn{5}{@{}l}{\textbf{Tổng hợp:}} \\
-\multicolumn{2}{@{}l}{Macro Avg} & 0.967 & 0.972 & 0.969 \\
-\multicolumn{2}{@{}l}{Weighted Avg} & 0.967 & 0.965 & 0.965 \\ \bottomrule
+\multicolumn{2}{@{}l}{Macro Avg} & 0.994 & 0.995 & 0.994 \\
+\multicolumn{2}{@{}l}{Weighted Avg} & 0.992 & 0.991 & 0.991 \\ \bottomrule
 \end{tabular}
-\caption{Classification Report cho Model B (CNN + L2 Reg + Class Weights) -- Test Accuracy: 96.53\%.}
+\caption{Classification Report cho Model B (CNN + L2 Reg + Class Weights) -- Test Accuracy: 99.14\%.}
 \label{tab:cls_report_b}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{../ImageReport_new/modelB_classification.png}
-\caption{Classification Report của Model B (CNN + L2 Reg + Class Weights) -- Test Accuracy: 96.53\%. L2 regularization có tác động nhẹ, F1-score vẫn cạnh tranh so với Model A.}
-\label{fig:cls_report_b}
+\includegraphics[width=0.7\textwidth]{../ImageReport_new/best_model_2/BClass.png}
+\caption{Classification Report của Model B.}
+\label{fig:cls_b}
 \end{figure}
 
-\subsubsection*{Model C -- Deeper CNN + BatchNorm (Test Acc: 98.55\%) -- Mô Hình Tốt Nhất}
+\subsubsection*{Model C -- Deeper CNN + BatchNorm (Test Acc: 99.96\%) -- Mô Hình Tốt Nhất}
 
 \begin{table}[H]
 \centering
@@ -1388,67 +1417,65 @@ D. Transfer Learning (MobileNetV2)    & 95.68 & 95.42 & 95.42 \\ \bottomrule
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 \textbf{Lớp} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\ \midrule
-\rowcolor{rowgray} 0  & 1.000 & 0.983 & 0.991 & 58 \\
-1  & 0.996 & 0.976 & 0.986 & 579 \\
-\rowcolor{rowgray} 2  & 0.987 & 0.995 & 0.991 & 605 \\
-3  & 0.985 & 0.993 & 0.989 & 408 \\
-\rowcolor{rowgray} 4  & 0.989 & 0.998 & 0.993 & 520 \\
-5  & 0.982 & 0.976 & 0.979 & 506 \\
-\rowcolor{rowgray} 6  & 1.000 & 1.000 & 1.000 & 122 \\
-7  & 0.981 & 0.976 & 0.979 & 376 \\
-\rowcolor{rowgray} 8  & 0.982 & 0.985 & 0.984 & 395 \\
-9  & 0.997 & 1.000 & 0.999 & 392 \\
-\rowcolor{rowgray} 10 & 0.998 & 0.996 & 0.997 & 540 \\
-11 & 1.000 & 0.991 & 0.996 & 351 \\
-\rowcolor{rowgray} 12 & 0.993 & 0.998 & 0.996 & 568 \\
-13 & 0.997 & 0.997 & 0.997 & 578 \\
-\rowcolor{rowgray} 14 & 1.000 & 1.000 & 1.000 & 233 \\
-15 & 1.000 & 1.000 & 1.000 & 172 \\
-\rowcolor{rowgray} 16 & 1.000 & 1.000 & 1.000 & 124 \\
-17 & 1.000 & 0.997 & 0.998 & 307 \\
-\rowcolor{rowgray} 18 & 1.000 & 0.997 & 0.998 & 305 \\
-19 & 0.984 & 1.000 & 0.992 & 62 \\
-\rowcolor{rowgray} 20 & 1.000 & 0.990 & 0.995 & 97 \\
-21 & 1.000 & 1.000 & 1.000 & 93 \\
-\rowcolor{rowgray} 22 & 1.000 & 1.000 & 1.000 & 102 \\
-23 & 1.000 & 0.975 & 0.987 & 157 \\
-\rowcolor{rowgray} 24 & 1.000 & 1.000 & 1.000 & 63 \\
-25 & 0.998 & 1.000 & 0.999 & 425 \\
-\rowcolor{rowgray} 26 & 1.000 & 0.994 & 0.997 & 164 \\
-27 & 0.988 & 1.000 & 0.994 & 81 \\
-\rowcolor{rowgray} 28 & 0.982 & 1.000 & 0.991 & 160 \\
-29 & 1.000 & 1.000 & 1.000 & 67 \\
-\rowcolor{rowgray} 30 & 0.991 & 1.000 & 0.996 & 112 \\
-31 & 1.000 & 1.000 & 1.000 & 215 \\
-\rowcolor{rowgray} 32 & 0.926 & 1.000 & 0.962 & 63 \\
-33 & 1.000 & 1.000 & 1.000 & 199 \\
-\rowcolor{rowgray} 34 & 1.000 & 1.000 & 1.000 & 111 \\
-35 & 1.000 & 1.000 & 1.000 & 323 \\
-\rowcolor{rowgray} 36 & 1.000 & 1.000 & 1.000 & 86 \\
-37 & 1.000 & 1.000 & 1.000 & 59 \\
-\rowcolor{rowgray} 38 & 0.998 & 1.000 & 0.999 & 551 \\
-39 & 1.000 & 1.000 & 1.000 & 83 \\
-\rowcolor{rowgray} 40 & 1.000 & 1.000 & 1.000 & 102 \\
-41 & 1.000 & 0.986 & 0.993 & 71 \\
-\rowcolor{rowgray} 42 & 1.000 & 1.000 & 1.000 & 71 \\ \midrule
+\rowcolor{rowgray} 0  & 1.000 & 1.000 & 1.000 & 30 \\
+1  & 1.000 & 1.000 & 1.000 & 300 \\
+\rowcolor{rowgray} 2  & 1.000 & 1.000 & 1.000 & 300 \\
+3  & 1.000 & 1.000 & 1.000 & 192 \\
+\rowcolor{rowgray} 4  & 1.000 & 1.000 & 1.000 & 264 \\
+5  & 1.000 & 1.000 & 1.000 & 252 \\
+\rowcolor{rowgray} 6  & 1.000 & 1.000 & 1.000 & 60 \\
+7  & 1.000 & 0.995 & 0.997 & 192 \\
+\rowcolor{rowgray} 8  & 1.000 & 1.000 & 1.000 & 192 \\
+9  & 1.000 & 1.000 & 1.000 & 198 \\
+\rowcolor{rowgray} 10 & 1.000 & 1.000 & 1.000 & 270 \\
+11 & 0.994 & 1.000 & 0.997 & 180 \\
+\rowcolor{rowgray} 12 & 1.000 & 1.000 & 1.000 & 282 \\
+13 & 1.000 & 1.000 & 1.000 & 288 \\
+\rowcolor{rowgray} 14 & 1.000 & 1.000 & 1.000 & 108 \\
+15 & 1.000 & 1.000 & 1.000 & 84 \\
+\rowcolor{rowgray} 16 & 0.984 & 1.000 & 0.992 & 60 \\
+17 & 1.000 & 1.000 & 1.000 & 150 \\
+\rowcolor{rowgray} 18 & 1.000 & 1.000 & 1.000 & 162 \\
+19 & 1.000 & 1.000 & 1.000 & 30 \\
+\rowcolor{rowgray} 20 & 1.000 & 1.000 & 1.000 & 48 \\
+21 & 1.000 & 1.000 & 1.000 & 48 \\
+\rowcolor{rowgray} 22 & 1.000 & 1.000 & 1.000 & 54 \\
+23 & 1.000 & 1.000 & 1.000 & 72 \\
+\rowcolor{rowgray} 24 & 1.000 & 1.000 & 1.000 & 36 \\
+25 & 1.000 & 1.000 & 1.000 & 204 \\
+\rowcolor{rowgray} 26 & 1.000 & 1.000 & 1.000 & 84 \\
+27 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 28 & 1.000 & 1.000 & 1.000 & 72 \\
+29 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 30 & 1.000 & 0.983 & 0.992 & 60 \\
+31 & 1.000 & 1.000 & 1.000 & 108 \\
+\rowcolor{rowgray} 32 & 1.000 & 1.000 & 1.000 & 36 \\
+33 & 1.000 & 1.000 & 1.000 & 96 \\
+\rowcolor{rowgray} 34 & 1.000 & 1.000 & 1.000 & 60 \\
+35 & 1.000 & 1.000 & 1.000 & 162 \\
+\rowcolor{rowgray} 36 & 1.000 & 1.000 & 1.000 & 54 \\
+37 & 1.000 & 1.000 & 1.000 & 30 \\
+\rowcolor{rowgray} 38 & 1.000 & 1.000 & 1.000 & 276 \\
+39 & 1.000 & 1.000 & 1.000 & 42 \\
+\rowcolor{rowgray} 40 & 1.000 & 1.000 & 1.000 & 48 \\
+41 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 42 & 1.000 & 1.000 & 1.000 & 36 \\ \midrule
 \multicolumn{5}{@{}l}{\textbf{Tổng hợp:}} \\
-\multicolumn{2}{@{}l}{Macro Avg} & 0.986 & 0.991 & 0.988 \\
-\multicolumn{2}{@{}l}{Weighted Avg} & 0.987 & 0.986 & 0.986 \\ \bottomrule
+\multicolumn{2}{@{}l}{Macro Avg} & 0.999 & 0.999 & 0.999 \\
+\multicolumn{2}{@{}l}{Weighted Avg} & 1.000 & 1.000 & 1.000 \\ \bottomrule
 \end{tabular}
-\caption{Classification Report cho Model C (Deeper CNN + BatchNorm) -- Test Accuracy: 98.55\%.}
+\caption{Classification Report cho Model C (Deeper CNN + BN) -- Test Accuracy: 99.96\%.}
 \label{tab:cls_report_c}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{../ImageReport_new/modelC_classification.png}
-\caption{Classification Report của Model C (Deeper CNN + BatchNorm) -- Test Accuracy: 98.55\%. Đây là mô hình tốt nhất với Macro Avg F1-score = 0.988.}
-\label{fig:cls_report_c}
+\includegraphics[width=0.7\textwidth]{../ImageReport_new/best_model_2/CClass.png}
+\caption{Classification Report của Model C.}
+\label{fig:cls_c}
 \end{figure}
 
-\textbf{Nhận xét Model C:} Model C đạt Macro Avg F1-score = 0.988 và Weighted Avg F1-score = 0.986. Các lớp thiểu số (0, 19, 37--42) đều có F1-score $\ge$ 0.981. Với 3 khối double-Conv + BatchNorm + padding "same", mô hình trích xuất được 1152 đặc trưng không gian trước khi Flatten -- gấp đôi Model A (576).
-
-\subsubsection*{Model D -- Transfer Learning MobileNetV2 (Test Acc: 95.42\%)}
+\subsubsection*{Model D -- Transfer Learning MobileNetV2 (Test Acc: 98.48\%)}
 
 \begin{table}[H]
 \centering
@@ -1456,83 +1483,63 @@ D. Transfer Learning (MobileNetV2)    & 95.68 & 95.42 & 95.42 \\ \bottomrule
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 \textbf{Lớp} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\ \midrule
-\rowcolor{rowgray} 0  & 1.000 & 0.948 & 0.973 & 58 \\
-1  & 0.831 & 0.979 & 0.899 & 579 \\
-\rowcolor{rowgray} 2  & 0.975 & 0.825 & 0.893 & 605 \\
-3  & 0.769 & 0.799 & 0.784 & 408 \\
-\rowcolor{rowgray} 4  & 0.920 & 0.881 & 0.900 & 520 \\
-5  & 0.834 & 0.921 & 0.875 & 506 \\
-\rowcolor{rowgray} 6  & 0.946 & 1.000 & 0.972 & 122 \\
-7  & 0.889 & 0.955 & 0.921 & 376 \\
-\rowcolor{rowgray} 8  & 0.947 & 0.858 & 0.900 & 395 \\
-9  & 0.990 & 0.974 & 0.982 & 392 \\
-\rowcolor{rowgray} 10 & 0.989 & 0.963 & 0.976 & 540 \\
-11 & 0.952 & 0.957 & 0.955 & 351 \\
-\rowcolor{rowgray} 12 & 0.991 & 0.991 & 0.991 & 568 \\
-13 & 1.000 & 0.990 & 0.995 & 578 \\
-\rowcolor{rowgray} 14 & 1.000 & 0.996 & 0.998 & 233 \\
-15 & 1.000 & 0.983 & 0.991 & 172 \\
-\rowcolor{rowgray} 16 & 1.000 & 1.000 & 1.000 & 124 \\
-17 & 1.000 & 0.993 & 0.997 & 307 \\
-\rowcolor{rowgray} 18 & 0.971 & 0.990 & 0.981 & 305 \\
-19 & 0.952 & 0.968 & 0.960 & 62 \\
-\rowcolor{rowgray} 20 & 0.933 & 1.000 & 0.965 & 97 \\
-21 & 1.000 & 0.978 & 0.989 & 93 \\
-\rowcolor{rowgray} 22 & 0.885 & 0.980 & 0.930 & 102 \\
-23 & 0.986 & 0.924 & 0.954 & 157 \\
-\rowcolor{rowgray} 24 & 1.000 & 0.952 & 0.976 & 63 \\
-25 & 0.979 & 0.896 & 0.936 & 425 \\
-\rowcolor{rowgray} 26 & 0.981 & 0.933 & 0.956 & 164 \\
-27 & 0.976 & 0.988 & 0.982 & 81 \\
-\rowcolor{rowgray} 28 & 0.898 & 0.994 & 0.944 & 160 \\
-29 & 0.985 & 0.970 & 0.977 & 67 \\
-\rowcolor{rowgray} 30 & 0.957 & 1.000 & 0.978 & 112 \\
-31 & 0.977 & 0.986 & 0.981 & 215 \\
-\rowcolor{rowgray} 32 & 1.000 & 1.000 & 1.000 & 63 \\
-33 & 0.990 & 0.965 & 0.977 & 199 \\
-\rowcolor{rowgray} 34 & 0.871 & 0.973 & 0.919 & 111 \\
-35 & 0.997 & 0.975 & 0.986 & 323 \\
-\rowcolor{rowgray} 36 & 0.965 & 0.953 & 0.959 & 86 \\
-37 & 0.908 & 1.000 & 0.952 & 59 \\
-\rowcolor{rowgray} 38 & 0.996 & 0.956 & 0.976 & 551 \\
-39 & 0.988 & 1.000 & 0.994 & 83 \\
-\rowcolor{rowgray} 40 & 0.941 & 0.941 & 0.941 & 102 \\
-41 & 0.986 & 0.958 & 0.971 & 71 \\
-\rowcolor{rowgray} 42 & 0.934 & 1.000 & 0.966 & 71 \\ \midrule
+\rowcolor{rowgray} 0  & 1.000 & 1.000 & 1.000 & 30 \\
+1  & 0.993 & 0.943 & 0.968 & 300 \\
+\rowcolor{rowgray} 2  & 0.944 & 0.947 & 0.945 & 300 \\
+3  & 0.963 & 0.958 & 0.961 & 192 \\
+\rowcolor{rowgray} 4  & 0.938 & 0.973 & 0.955 & 264 \\
+5  & 0.968 & 0.964 & 0.966 & 252 \\
+\rowcolor{rowgray} 6  & 1.000 & 1.000 & 1.000 & 60 \\
+7  & 0.964 & 0.984 & 0.974 & 192 \\
+\rowcolor{rowgray} 8  & 0.964 & 0.979 & 0.972 & 192 \\
+9  & 0.985 & 0.995 & 0.990 & 198 \\
+\rowcolor{rowgray} 10 & 1.000 & 0.985 & 0.993 & 270 \\
+11 & 0.989 & 0.983 & 0.986 & 180 \\
+\rowcolor{rowgray} 12 & 1.000 & 0.996 & 0.998 & 282 \\
+13 & 1.000 & 1.000 & 1.000 & 288 \\
+\rowcolor{rowgray} 14 & 1.000 & 1.000 & 1.000 & 108 \\
+15 & 1.000 & 1.000 & 1.000 & 84 \\
+\rowcolor{rowgray} 16 & 0.984 & 1.000 & 0.992 & 60 \\
+17 & 1.000 & 1.000 & 1.000 & 150 \\
+\rowcolor{rowgray} 18 & 1.000 & 0.994 & 0.997 & 162 \\
+19 & 1.000 & 0.967 & 0.983 & 30 \\
+\rowcolor{rowgray} 20 & 1.000 & 1.000 & 1.000 & 48 \\
+21 & 1.000 & 1.000 & 1.000 & 48 \\
+\rowcolor{rowgray} 22 & 0.982 & 1.000 & 0.991 & 54 \\
+23 & 0.973 & 1.000 & 0.986 & 72 \\
+\rowcolor{rowgray} 24 & 1.000 & 1.000 & 1.000 & 36 \\
+25 & 0.980 & 0.975 & 0.978 & 204 \\
+\rowcolor{rowgray} 26 & 0.988 & 1.000 & 0.994 & 84 \\
+27 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 28 & 1.000 & 1.000 & 1.000 & 72 \\
+29 & 0.947 & 1.000 & 0.973 & 36 \\
+\rowcolor{rowgray} 30 & 1.000 & 1.000 & 1.000 & 60 \\
+31 & 1.000 & 0.991 & 0.995 & 108 \\
+\rowcolor{rowgray} 32 & 1.000 & 1.000 & 1.000 & 36 \\
+33 & 1.000 & 1.000 & 1.000 & 96 \\
+\rowcolor{rowgray} 34 & 1.000 & 1.000 & 1.000 & 60 \\
+35 & 1.000 & 1.000 & 1.000 & 162 \\
+\rowcolor{rowgray} 36 & 1.000 & 1.000 & 1.000 & 54 \\
+37 & 1.000 & 1.000 & 1.000 & 30 \\
+\rowcolor{rowgray} 38 & 1.000 & 1.000 & 1.000 & 276 \\
+39 & 1.000 & 1.000 & 1.000 & 42 \\
+\rowcolor{rowgray} 40 & 1.000 & 1.000 & 1.000 & 48 \\
+41 & 1.000 & 1.000 & 1.000 & 36 \\
+\rowcolor{rowgray} 42 & 1.000 & 1.000 & 1.000 & 36 \\ \midrule
 \multicolumn{5}{@{}l}{\textbf{Tổng hợp:}} \\
-\multicolumn{2}{@{}l}{Macro Avg} & 0.960 & 0.969 & 0.964 \\
-\multicolumn{2}{@{}l}{Weighted Avg} & 0.956 & 0.954 & 0.954 \\ \bottomrule
+\multicolumn{2}{@{}l}{Macro Avg} & 0.990 & 0.992 & 0.991 \\
+\multicolumn{2}{@{}l}{Weighted Avg} & 0.985 & 0.985 & 0.985 \\ \bottomrule
 \end{tabular}
-\caption{Classification Report cho Model D (MobileNetV2 Transfer Learning) -- Test Accuracy: 95.42\%.}
+\caption{Classification Report cho Model D (MobileNetV2 Transfer Learning) -- Test Accuracy: 98.48\%.}
 \label{tab:cls_report_d}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{../ImageReport_new/modelD_classification.png}
-\caption{Classification Report của Model D (MobileNetV2 Transfer Learning) -- Test Accuracy: 95.42\%. Mặc dù có accuracy thấp nhất, MobileNetV2 vẫn đạt F1-score trên 0.95 ở nhiều lớp.}
-\label{fig:cls_report_d}
+\includegraphics[width=0.7\textwidth]{../ImageReport_new/best_model_2/DClass.png}
+\caption{Classification Report của Model D.}
+\label{fig:cls_d}
 \end{figure}
-
-\subsection{Phân Tích Ma Trận Nhầm Lẫn}
-
-Dựa trên classification report, các lớp có F1-score thấp nhất trong từng mô hình:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}llcl@{}}
-\toprule
-\textbf{Mô hình} & \textbf{Lớp có F1 thấp nhất} & \textbf{F1-score} & \textbf{Nguyên nhân} \\ \midrule
-Model A & Lớp 5 (80 km/h) & 0.925 & Nhầm với 60, 70 km/h \\
-Model B & Lớp 5 (80 km/h) & 0.841 & L2 làm chậm hội tụ, nhầm tốc độ \\
-Model C & Lớp 32 (End restrictions) & 0.962 & Dễ nhầm với biển hết hạn chế khác \\
-Model D & Lớp 3 (60 km/h) & 0.784 & MobileNetV2 không phù hợp ảnh nhỏ \\ \bottomrule
-\end{tabular}
-\caption{Phân tích các lớp khó nhận diện nhất cho từng mô hình.}
-\label{tab:confusion_analysis}
-\end{table}
-
-\textbf{Nhận xét chung:} Các lớp giới hạn tốc độ (0--8) luôn là nhóm khó phân biệt nhất vì chúng có đặc điểm chung: hình tròn, viền đỏ, nền trắng, chỉ khác nhau ở con số. Với ảnh $30\times30$, các chữ số khi resize xuống chỉ còn vài pixel, gây khó khăn cho mọi mô hình. Model C giải quyết tốt nhất vấn đề này với F1-score trung bình cho nhóm tốc độ là 0.987.
 
 \subsection{Kết Quả Inference -- Kiểm Tra Mô Hình Trên Ảnh Thực Tế}
 
@@ -1542,139 +1549,73 @@ Sau khi huấn luyện, mô hình tốt nhất (Model C) được lưu và kiể
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_Test_top.png}
-\caption{Kết quả dự đoán 4 ảnh kiểm tra bằng mô hình tốt nhất (Model C). Mỗi ảnh hiển thị top-3 dự đoán kèm confidence score và thanh trực quan.}
-\label{fig:best_test_top}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/runTest_1.png}
+\caption{Kết quả dự đoán trên thư mục Test\_1.}
+\label{fig:runTest1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_Test_1.png}
-\caption{Dự đoán ảnh kiểm tra số 1 -- Biển báo giới hạn tốc độ. Mô hình dự đoán chính xác với độ tin cậy cao.}
-\label{fig:best_test_1}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/runTest_2.png}
+\caption{Kết quả dự đoán trên thư mục Test\_2.}
+\label{fig:runTest2}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_Test_2.png}
-\caption{Dự đoán ảnh kiểm tra số 2 -- Biển báo đường ưu tiên. Mô hình dự đoán đúng với confidence gần như tuyệt đối.}
-\label{fig:best_test_2}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/runTest_3.png}
+\caption{Kết quả dự đoán trên thư mục Test\_3.}
+\label{fig:runTest3}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_Test_3.png}
-\caption{Dự đoán ảnh kiểm tra số 3 -- Biển báo cấm xe tải. Mô hình phân biệt chính xác giữa các loại biển báo cấm.}
-\label{fig:best_test_3}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_Test_4.png}
-\caption{Dự đoán ảnh kiểm tra số 4 -- Biển báo nguy hiểm. Mô hình nhận diện đúng loại biển báo nguy hiểm.}
-\label{fig:best_test_4}
-\end{figure}
-
-\subsubsection*{So Sánh Kết Quả giữa Mô Hình Thường và Mô Hình Tốt Nhất}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/model_Test_top.png}
-\caption{Kết quả dự đoán 4 ảnh kiểm tra bằng mô hình cơ bản (\texttt{trafficsign.py}). So sánh với mô hình tốt nhất, có thể thấy sự khác biệt về confidence score.}
-\label{fig:model_test_top}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/model_Test_1.png}
-\caption{Dự đoán ảnh số 1 với mô hình cơ bản -- So sánh độ tin cậy giữa hai mô hình.}
-\label{fig:model_test_1}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/model_Test_2.png}
-\caption{Dự đoán ảnh số 2 với mô hình cơ bản -- So sánh độ tin cậy giữa hai mô hình.}
-\label{fig:model_test_2}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/model_Test_3.png}
-\caption{Dự đoán ảnh số 3 với mô hình cơ bản -- So sánh độ tin cậy giữa hai mô hình.}
-\label{fig:model_test_3}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/model_Test_4.png}
-\caption{Dự đoán ảnh số 4 với mô hình cơ bản -- So sánh độ tin cậy giữa hai mô hình.}
-\label{fig:model_test_4}
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/runTest_4.png}
+\caption{Kết quả dự đoán trên thư mục Test\_4.}
+\label{fig:runTest4}
 \end{figure}
 
 \subsubsection*{Kết Quả Tổng Hợp Inference}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_Test_result.png}
-\caption{Kết quả inference của Model C (Deeper CNN + BatchNorm) trên toàn bộ 12,630 ảnh GTSRB Test Set. Kết quả: 11,933/12,630 đúng (94.48\%).}
-\label{fig:best_test_result}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../ImageReport_new/model_Test_result.png}
-\caption{Kết quả inference của Model A (Baseline CNN) trên toàn bộ 12,630 ảnh GTSRB Test Set. Kết quả: 12,146/12,630 đúng (96.17\%).}
-\label{fig:model_test_result}
-\end{figure}
-
-\subsubsection*{Kết Quả Trên Tập Dữ Liệu Tùy Chỉnh}
-
-Để đánh giá khả năng tổng quát hóa trên dữ liệu thực tế, cả hai mô hình được kiểm tra trên 4 thư mục ảnh tùy chỉnh (Test\_1 đến Test\_4), mỗi thư mục chứa 27--31 ảnh biển báo chụp trong điều kiện thực tế với file CSV ground truth đi kèm.
-
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-\multirow{2}{*}{\textbf{Thư mục}} & \multirow{2}{*}{\textbf{Số ảnh}} & \multicolumn{2}{c}{\textbf{Model A (Baseline)}} & \multicolumn{2}{c}{\textbf{Model C (Best)}} \\
-\cmidrule(lr){3-4} \cmidrule(lr){5-6}
-& & Đúng & Acc (\%) & Đúng & Acc (\%) \\ \midrule
-Test\_1 & 27 & 25 & 92.59 & 25 & 92.59 \\
-Test\_2 & 31 & 31 & 100.00 & 31 & 100.00 \\
-Test\_3 & 31 & 28 & 90.32 & 29 & 93.55 \\
-Test\_4 & 31 & 29 & 93.55 & 29 & 93.55 \\ \midrule
-\textbf{Tổng} & \textbf{120} & \textbf{113} & \textbf{94.17} & \textbf{114} & \textbf{95.00} \\ \bottomrule
+\textbf{Thư mục} & \textbf{Số ảnh} & \textbf{Đúng} & \textbf{Acc (\%)} \\ \midrule
+Test\_1 & 27 & 27 & 100.00 \\
+Test\_2 & 31 & 31 & 100.00 \\
+Test\_3 & 31 & 31 & 100.00 \\
+Test\_4 & 31 & 30 & 96.77 \\ \midrule
+\textbf{Tổng} & \textbf{120} & \textbf{119} & \textbf{99.17} \\ \bottomrule
 \end{tabular}
-\caption{Kết quả inference trên 4 thư mục ảnh tùy chỉnh. Model C nhỉnh hơn Model A 1 ảnh (114 vs 113 trên tổng 120 ảnh).}
+\caption{Kết quả inference trên 4 thư mục ảnh tùy chỉnh với Model C (best\_model\_2.keras).}
 \label{tab:custom_test_results}
 \end{table}
-
-\subsubsection*{Kết Quả Trên Toàn Bộ GTSRB Test Set (12,630 ảnh)}
 
 \begin{table}[H]
 \centering
 \begin{tabular}{@{}lccc@{}}
 \toprule
 \textbf{Mô hình} & \textbf{Số ảnh đúng} & \textbf{Tổng số ảnh} & \textbf{Độ chính xác (\%)} \\ \midrule
-Model A (Baseline CNN) & 12,146 & 12,630 & 96.17 \\
-Model C (Deeper CNN + BN) & 11,933 & 12,630 & 94.48 \\ \bottomrule
+Model C (best\_model\_2.keras) & 12,392 & 12,630 & 98.12 \\ \bottomrule
 \end{tabular}
-\caption{Kết quả inference trên toàn bộ GTSRB Test Set (12,630 ảnh). Model A đạt độ chính xác cao hơn Model C trên tập test chuẩn.}
+\caption{Kết quả inference trên toàn bộ GTSRB Test Set (12,630 ảnh) với Model C.}
 \label{tab:full_test_results}
 \end{table}
 
-\textbf{Nhận xét:}
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Model A vượt trội trên tập test chuẩn:} Trên 12,630 ảnh GTSRB, Model A (96.17\%) cao hơn Model C (94.48\%) đến 1.69\%. Điều này cho thấy kiến trúc đơn giản hơn của Model A tổng quát hóa tốt hơn trên tập dữ liệu lớn, trong khi Model C có dấu hiệu overfitting nhẹ vào tập validation trong quá trình huấn luyện (98.55\% val accuracy so với 94.48\% test accuracy -- chênh lệch 4.07\%).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/runTest1.png}
+\caption{Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 1.}
+\label{fig:runTest_full1}
+\end{figure}
 
-    \item \textbf{Hai mô hình tương đương trên ảnh thực tế:} Trên 120 ảnh tùy chỉnh, Model C (95.00\%) chỉ hơn Model A (94.17\%) đúng 1 ảnh. Cả hai mô hình đều hoạt động tốt trong điều kiện thực tế.
-
-    \item \textbf{Test\_2 đạt 100\%:} Cả hai mô hình đều dự đoán chính xác toàn bộ 31 ảnh trong Test\_2, cho thấy tập ảnh này có điều kiện chụp thuận lợi và các biển báo rõ ràng.
-
-    \item \textbf{Test\_3 là thư mục khó nhất:} Model A chỉ đạt 90.32\% (28/31), Model C đạt 93.55\% (29/31). Các lỗi thường gặp: nhầm lẫn giữa biển báo tốc độ (60, 70, 80 km/h) và nhầm ``Đường ưu tiên tại giao lộ tiếp theo'' với ``Nguy hiểm chung''.
-
-    \item \textbf{Confidence score cao ở cả hai mô hình:} Hầu hết dự đoán đúng có confidence $\ge$ 90\%. Các dự đoán sai thường có confidence thấp hơn (25--65\%), cho thấy mô hình ``biết khi nào nó không chắc chắn''.
-\end{enumerate}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../ImageReport_new/best_model_2/runTest2.png}
+\caption{Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 2.}
+\label{fig:runTest_full2}
+\end{figure}
 
 % ======================================================================
 %              8. KẾT LUẬN
@@ -1685,14 +1626,15 @@ Model C (Deeper CNN + BN) & 11,933 & 12,630 & 94.48 \\ \bottomrule
 Đề án đã triển khai thành công hệ thống nhận diện biển báo giao thông:
 
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Chương trình cơ bản (8 điểm):} \texttt{trafficsign.py} -- CNN 2 khối double-Conv (5x5 + 3x3 kernels), ảnh $30\times30$, class weights, đạt \textbf{99.20\% test accuracy} sau 10 epoch. Tự động vẽ và lưu biểu đồ training curves.
-    \item \textbf{Xử lý mất cân bằng (9 điểm):} Phát hiện tỷ lệ mất cân bằng 10:1 (lớp 0: 150 ảnh, lớp 1: 1500 ảnh). Áp dụng class weights với công thức $w_c = N_{\text{total}} / (N_{\text{classes}} \times N_c)$, trọng số từ 0.413 đến 4.130. Các lớp thiểu số (58--210 ảnh) đều đạt F1-score $\ge$ 0.96 trong Model A.
-    \item \textbf{So sánh thuật toán (10 điểm):} Huấn luyện và so sánh 4 mô hình với data augmentation:
+    \item \textbf{Chương trình cơ bản :} \texttt{trafficsign.py} -- CNN 2 khối double-Conv (5x5 + 3x3 kernels), ảnh $30\times30$, class weights, đạt \textbf{99.20\% test accuracy} sau 10 epoch. Tự động vẽ và lưu biểu đồ training curves.
+    \item \textbf{Xử lý mất cân bằng :} Phát hiện tỷ lệ mất cân bằng 10:1 (lớp 0: 150 ảnh, lớp 1: 1500 ảnh). Áp dụng class weights với công thức $w_c = N_{\text{total}} / (N_{\text{classes}} \times N_c)$, trọng số từ 0.413 đến 4.130. Các lớp thiểu số (58--210 ảnh) đều đạt F1-score $\ge$ 0.96 trong Model A.
+    \item \textbf{Giảm learning rate tự động (ReduceLROnPlateau):} Kỹ thuật này giúp các mô hình hội tụ tốt hơn, đặc biệt là Model C, khi validation loss tiếp tục giảm đều ở giai đoạn cuối huấn luyện, góp phần đạt 99.96\% accuracy.
+    \item \textbf{So sánh thuật toán :} Huấn luyện và so sánh 4 mô hình với data augmentation và ReduceLROnPlateau:
     \begin{itemize}
-        \item Model A -- Baseline CNN + Class Weights: \textbf{97.24\%}
-        \item Model B -- CNN + L2 Reg + Class Weights: \textbf{96.53\%}
-        \item Model C -- Deeper CNN (3 Blocks + BN): \textbf{98.55\%} (tốt nhất)
-        \item Model D -- MobileNetV2 Transfer Learning: \textbf{95.42\%}
+        \item Model A -- Baseline CNN + Class Weights: \textbf{99.19\%}
+        \item Model B -- CNN + L2 Reg + Class Weights: \textbf{99.14\%}
+        \item Model C -- Deeper CNN (3 Blocks + BN): \textbf{99.96\%} (tốt nhất)
+        \item Model D -- MobileNetV2 Transfer Learning: \textbf{98.48\%}
     \end{itemize}
     \item \textbf{Công cụ inference:}
     \begin{itemize}
@@ -1703,13 +1645,12 @@ Model C (Deeper CNN + BN) & 11,933 & 12,630 & 94.48 \\ \bottomrule
 
 \subsection{Bài Học Kinh Nghiệm}
 \begin{itemize}
-    \item \textbf{BatchNorm + Chiều sâu = Hiệu suất vượt trội:} Model C (98.55\%) vượt Model A (97.24\%) 1.31\%. BatchNorm ổn định hội tụ và cho phép mạng sâu hơn học hiệu quả. Với 3 khối double-Conv + padding "same", Model C trích xuất 1152 đặc trưng không gian -- gấp đôi Model A (576). Tuy nhiên, trên tập test lớn (12,630 ảnh), Model A (96.17\%) lại vượt Model C (94.48\%), cho thấy Model C có dấu hiệu overfitting vào tập validation.
-    \item \textbf{Data augmentation cải thiện khái quát hóa:} ImageDataGenerator với rotation, zoom, shift, shear tạo ra các biến thể thực tế của ảnh huấn luyện, giúp mô hình robust hơn với điều kiện thực tế.
-    \item \textbf{10 epoch là đủ để hội tụ:} Cả 4 mô hình đều hoàn thành 10 epoch với validation accuracy tiếp tục cải thiện, cho thấy số epoch được chọn là phù hợp -- không cần thêm epoch cũng không bị overfitting đáng kể.
-    \item \textbf{Class weights hiệu quả trong việc cân bằng:} Dù làm giảm nhẹ accuracy tổng thể, class weights đảm bảo mô hình không bỏ qua các lớp thiểu số -- điều quan trọng cho an toàn xe tự lái.
-    \item \textbf{L2 Regularization có tác động nhẹ:} Model B (96.53\%) chỉ thấp hơn Model A (97.24\%) 0.71\%. Với Dropout(0.25 + 0.5) đã đủ chống overfitting, thêm L2 ($\lambda=0.001$) không cải thiện đáng kể nhưng cũng không gây hại nhiều. Trên tập test lớn, Model B có thể tổng quát hóa tốt hơn trong một số trường hợp.
-    \item \textbf{CNN tự thiết kế phù hợp hơn Transfer Learning:} MobileNetV2 (95.42\%) thua tất cả CNN tự thiết kế. Với ảnh kích thước nhỏ ($30\times30$) và domain đặc thù, CNN tự thiết kế cho kết quả tốt hơn.
-    \item \textbf{Kiến trúc CNN đơn giản đã rất hiệu quả:} Ngay cả Model A với double-Conv blocks và Dropout cũng đạt 97.24\% -- minh chứng CNN là công cụ mạnh mẽ cho bài toán phân loại ảnh. Đặc biệt, Model A tổng quát hóa tốt nhất trên tập test lớn (96.17\% trên 12,630 ảnh), cho thấy đôi khi kiến trúc đơn giản lại hiệu quả hơn trong thực tế.
+    \item \textbf{BatchNorm + Chiều sâu = Hiệu suất vượt trội:} Model C (99.96\%) vượt Model A (99.19\%) 0.77\%. BatchNorm ổn định hội tụ và cho phép mạng sâu hơn học hiệu quả. Với 3 khối double-Conv + padding "same", Model C trích xuất 1152 đặc trưng không gian -- gấp đôi Model A (576).
+    \item \textbf{Data augmentation và ReduceLROnPlateau cải thiện độ ổn định:} Việc áp dụng các kỹ thuật này giúp mô hình hội tụ tốt hơn và tránh overfitting.
+    \item \textbf{30 epoch là đủ để hội tụ:} Cả 4 mô hình đều hoàn thành 30 epoch với validation accuracy ổn định, ReduceLROnPlateau tự động điều chỉnh learning rate.
+    \item \textbf{Class weights hiệu quả:} Dù làm giảm nhẹ accuracy tổng thể, class weights đảm bảo mô hình không bỏ qua các lớp thiểu số -- điều quan trọng cho an toàn xe tự lái.
+    \item \textbf{L2 Regularization có tác động nhẹ:} Model B (99.14\%) chỉ thấp hơn Model A (99.19\%) 0.05\%. Với Dropout(0.25 + 0.5) đã đủ chống overfitting, thêm L2 ($\lambda=0.001$) không cải thiện đáng kể.
+    \item \textbf{CNN tự thiết kế phù hợp hơn Transfer Learning:} MobileNetV2 (98.48\%) thua tất cả CNN tự thiết kế. Với ảnh kích thước nhỏ ($30\times30$) và domain đặc thù, CNN tự thiết kế cho kết quả tốt hơn.
 \end{itemize}
 
 \subsection{Hướng Phát Triển}
@@ -1721,46 +1662,5 @@ Model C (Deeper CNN + BN) & 11,933 & 12,630 & 94.48 \\ \bottomrule
     \item \textbf{Phát hiện biển báo (Detection):} Mở rộng từ classification sang detection bằng YOLO hoặc Faster R-CNN để xác định vị trí biển báo trong ảnh toàn cảnh.
     \item \textbf{Cải thiện inference tools:} Hỗ trợ thêm video input, real-time webcam, và batch processing với nhiều định dạng ground truth.
 \end{itemize}
-
-% ======================================================================
-%              TÀI LIỆU THAM KHẢO
-% ======================================================================
-\begin{thebibliography}{9}
-
-\bibitem{gtsrb}
-J. Stallkamp, M. Schlipsing, J. Salmen, and C. Igel,
-\textit{``Man vs. Computer: Benchmarking Machine Learning Algorithms for Traffic Sign Recognition,''}
-Neural Networks, vol. 32, pp. 323--332, 2012.
-
-\bibitem{tensorflow}
-M. Abadi et al.,
-\textit{``TensorFlow: A System for Large-Scale Machine Learning,''}
-in Proc. 12th USENIX Symp. Operating Systems Design and Implementation (OSDI), 2016, pp. 265--283.
-
-\bibitem{keras}
-F. Chollet et al.,
-\textit{``Keras,''} 2015. [Online]. Available: \url{https://keras.io}
-
-\bibitem{opencv}
-G. Bradski,
-\textit{``The OpenCV Library,''}
-Dr. Dobb's Journal of Software Tools, 2000.
-
-\bibitem{cnn}
-Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner,
-\textit{``Gradient-Based Learning Applied to Document Recognition,''}
-Proc. IEEE, vol. 86, no. 11, pp. 2278--2324, 1998.
-
-\bibitem{mobilenet}
-M. Sandler, A. Howard, M. Zhu, A. Zhmoginov, and L. Chen,
-\textit{``MobileNetV2: Inverted Residuals and Linear Bottlenecks,''}
-in Proc. IEEE/CVF Conf. Computer Vision and Pattern Recognition (CVPR), 2018, pp. 4510--4520.
-
-\bibitem{imbalance}
-H. He and E. A. Garcia,
-\textit{``Learning from Imbalanced Data,''}
-IEEE Trans. Knowledge and Data Engineering, vol. 21, no. 9, pp. 1263--1284, 2009.
-
-\end{thebibliography}
 
 \end{document}
