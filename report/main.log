@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.10)  24 JUN 2026 14:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.10)  24 JUN 2026 17:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1121,7 +1121,7 @@ Package hyperref Info: Link coloring OFF on input line 120.
 \c@lstlisting=\count377
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<logo.png, id=198, 475.7775pt x 389.455pt>
+<logo.png, id=202, 475.7775pt x 389.455pt>
 File: logo.png Graphic file (type png)
 <use logo.png>
 Package pdftex.def Info: logo.png  used on input line 125.
@@ -1160,7 +1160,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 130.
  (C:\Users\Huy Huynh\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for T5+lmtt on input line 157.
+LaTeX Font Info:    Trying to load font information for T5+lmtt on input line 156.
  (C:\Users\Huy Huynh\AppData\Local\Programs\MiKTeX\tex/latex/lm\t5lmtt.fd
 File: t5lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1
@@ -1188,187 +1188,187 @@ Overfull \hbox (41.36296pt too wide) in paragraph at lines 15--15
 \openout7 = `main.lot'.
 
  [4{C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}] [5]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 238.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 239.
  (C:\Users\Huy Huynh\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [6{C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+) [6{C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [7]
 LaTeX Font Info:    Font shape `T5/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T5/lmtt/b/n' tried instead on input line 327.
- [7]
-Overfull \hbox (49.9538pt too wide) in paragraph at lines 342--343
+(Font)              Font shape `T5/lmtt/b/n' tried instead on input line 328.
+
+Overfull \hbox (49.9538pt too wide) in paragraph at lines 343--344
 []\T5/lmr/m/n/12 Chuyºn ^^_êi BGR (OpenCV) sang RGB: \T5/lmtt/m/n/12 cv2.cvtColor(img, cv2.COLOR_BGR2RGB)\T5/lmr/m/n/12 . 
  []
 
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 353.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 354.
 [8]
-Overfull \hbox (231.31413pt too wide) in paragraph at lines 397--398
+Overfull \hbox (231.31413pt too wide) in paragraph at lines 398--399
 \T5/lmr/m/n/12 C£ hai ch÷ìng tr¼nh \T5/lmtt/m/n/12 trafficsign.py \T5/lmr/m/n/12 v  \T5/lmtt/m/n/12 trafficsign_new.py \T5/lmr/m/n/12 ^^_·u sû döng \T5/lmtt/m/n/12 sklearn.utils.class_weight.compute_class_weight
  []
 
 [9]
-Overfull \hbox (0.45851pt too wide) in paragraph at lines 440--441
+Overfull \hbox (0.45851pt too wide) in paragraph at lines 441--442
 \T5/lmr/m/n/12 Chu©n hâa gi¡ trà pixel v· kho£ng $\OT1/lmr/m/n/12 [0\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1]$ \T5/lmr/m/n/12 ^^_÷ñc thüc hi»n trüc ti¸p trong h m \T5/lmtt/m/n/12 load_data()
  []
 
 [10] [11{C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-<../ImageReport_new/model_keras.png, id=511, 616.55344pt x 291.33844pt>
+<../ImageReport_new/model_keras.png, id=513, 616.55344pt x 291.33844pt>
 File: ../ImageReport_new/model_keras.png Graphic file (type png)
 <use ../ImageReport_new/model_keras.png>
-Package pdftex.def Info: ../ImageReport_new/model_keras.png  used on input line 557.
+Package pdftex.def Info: ../ImageReport_new/model_keras.png  used on input line 558.
 (pdftex.def)             Requested size: 374.86775pt x 177.13828pt.
 
-Underfull \hbox (badness 1708) in paragraph at lines 558--558
+Underfull \hbox (badness 1708) in paragraph at lines 559--559
 []\T5/lmr/m/n/12 H¼nh 2: |Sì ^^_ç ki¸n tróc mæ h¼nh CNN hiºn thà qua \T5/lmtt/m/n/12 model.summary() \T5/lmr/m/n/12 v 
  []
 
-[12 <../ImageReport_new/model_keras.png>] [13]
-Overfull \hbox (18.45853pt too wide) in paragraph at lines 643--645
+[12] [13 <../ImageReport_new/model_keras.png>]
+Overfull \hbox (18.45853pt too wide) in paragraph at lines 644--646
 \T5/lmr/m/n/12 Chuyºn vec-tor log-its $\OT1/lmr/bx/n/12 z$ \T5/lmr/m/n/12 th nh ph¥n phèi x¡c su§t tr¶n 43 lîp. Lîp dü ^^_o¡n = $[] [][] \OML/lmm/m/it/12 P\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 y \OT1/lmr/m/n/12 =
  []
 
 [14] [15] [16] [17] [18] [19] [20]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 963.
+(Font)              <10> on input line 964.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 963.
+(Font)              <7> on input line 964.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 963.
- [21] [22] [23]
-<../ImageReport_new/best_model_2/trainA1.png, id=775, 776.9025pt x 715.67375pt>
+(Font)              <5> on input line 964.
+ [21] [22] [23] [24]
+<../ImageReport_new/best_model_2/trainA1.png, id=786, 776.9025pt x 715.67375pt>
 File: ../ImageReport_new/best_model_2/trainA1.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainA1.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainA1.png  used on input line 1108.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainA1.png  used on input line 1109.
 (pdftex.def)             Requested size: 418.96548pt x 385.95573pt.
- [24]
-<../ImageReport_new/best_model_2/trainA2.png, id=781, 1498.59875pt x 430.60875pt>
+ [25]
+<../ImageReport_new/best_model_2/trainA2.png, id=793, 1498.59875pt x 430.60875pt>
 File: ../ImageReport_new/best_model_2/trainA2.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainA2.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainA2.png  used on input line 1115.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainA2.png  used on input line 1116.
 (pdftex.def)             Requested size: 418.96548pt x 120.38564pt.
- [25 <../ImageReport_new/best_model_2/trainA1.png> <../ImageReport_new/best_model_2/trainA2.png>]
-<../ImageReport_new/best_model_2/trainB1.png, id=790, 731.73375pt x 589.20125pt>
+ [26 <../ImageReport_new/best_model_2/trainA1.png> <../ImageReport_new/best_model_2/trainA2.png>]
+<../ImageReport_new/best_model_2/trainB1.png, id=801, 731.73375pt x 589.20125pt>
 File: ../ImageReport_new/best_model_2/trainB1.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainB1.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainB1.png  used on input line 1148.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainB1.png  used on input line 1149.
 (pdftex.def)             Requested size: 418.96548pt x 337.3586pt.
- [26]
-<../ImageReport_new/best_model_2/trainB2.png, id=796, 1187.43625pt x 363.3575pt>
+ [27]
+<../ImageReport_new/best_model_2/trainB2.png, id=807, 1187.43625pt x 363.3575pt>
 File: ../ImageReport_new/best_model_2/trainB2.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainB2.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainB2.png  used on input line 1155.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainB2.png  used on input line 1156.
 (pdftex.def)             Requested size: 418.96548pt x 128.20273pt.
- [27 <../ImageReport_new/best_model_2/trainB1.png> <../ImageReport_new/best_model_2/trainB2.png>]
-<../ImageReport_new/best_model_2/trainC1.png, id=804, 638.385pt x 991.705pt>
+ [28 <../ImageReport_new/best_model_2/trainB1.png> <../ImageReport_new/best_model_2/trainB2.png>]
+<../ImageReport_new/best_model_2/trainC1.png, id=815, 638.385pt x 991.705pt>
 File: ../ImageReport_new/best_model_2/trainC1.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainC1.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainC1.png  used on input line 1188.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainC1.png  used on input line 1189.
 (pdftex.def)             Requested size: 418.96548pt x 650.85022pt.
- [28]
-<../ImageReport_new/best_model_2/trainC2.png, id=810, 1488.56125pt x 485.815pt>
+ [29]
+<../ImageReport_new/best_model_2/trainC2.png, id=821, 1488.56125pt x 485.815pt>
 File: ../ImageReport_new/best_model_2/trainC2.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainC2.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainC2.png  used on input line 1195.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainC2.png  used on input line 1196.
 (pdftex.def)             Requested size: 418.96548pt x 136.73149pt.
- [29 <../ImageReport_new/best_model_2/trainC1.png>]
-<../ImageReport_new/best_model_2/trainD1.png, id=817, 905.3825pt x 563.10374pt>
+ [30 <../ImageReport_new/best_model_2/trainC1.png>]
+<../ImageReport_new/best_model_2/trainD1.png, id=828, 905.3825pt x 563.10374pt>
 File: ../ImageReport_new/best_model_2/trainD1.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainD1.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainD1.png  used on input line 1228.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainD1.png  used on input line 1229.
 (pdftex.def)             Requested size: 418.96548pt x 260.57747pt.
- [30 <../ImageReport_new/best_model_2/trainC2.png>]
-<../ImageReport_new/best_model_2/trainD2.png, id=824, 1492.57625pt x 309.155pt>
+ [31 <../ImageReport_new/best_model_2/trainC2.png>]
+<../ImageReport_new/best_model_2/trainD2.png, id=836, 1492.57625pt x 309.155pt>
 File: ../ImageReport_new/best_model_2/trainD2.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/trainD2.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/trainD2.png  used on input line 1235.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/trainD2.png  used on input line 1236.
 (pdftex.def)             Requested size: 418.96548pt x 86.7798pt.
-<../Trafficsign/results/all_models_curves_2.png, id=825, 1445.4pt x 578.16pt>
+<../Trafficsign/results/all_models_curves_2.png, id=837, 1445.4pt x 578.16pt>
 File: ../Trafficsign/results/all_models_curves_2.png Graphic file (type png)
 <use ../Trafficsign/results/all_models_curves_2.png>
-Package pdftex.def Info: ../Trafficsign/results/all_models_curves_2.png  used on input line 1242.
+Package pdftex.def Info: ../Trafficsign/results/all_models_curves_2.png  used on input line 1243.
 (pdftex.def)             Requested size: 418.96548pt x 167.5827pt.
- [31 <../ImageReport_new/best_model_2/trainD1.png> <../ImageReport_new/best_model_2/trainD2.png> <../Trafficsign/results/all_models_curves_2.png>]
-<../ImageReport_new/best_model_2/comparison.png, id=835, 495.8525pt x 218.8175pt>
+ [32 <../ImageReport_new/best_model_2/trainD1.png> <../ImageReport_new/best_model_2/trainD2.png> <../Trafficsign/results/all_models_curves_2.png>]
+<../ImageReport_new/best_model_2/comparison.png, id=846, 495.8525pt x 218.8175pt>
 File: ../ImageReport_new/best_model_2/comparison.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/comparison.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/comparison.png  used on input line 1266.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/comparison.png  used on input line 1267.
 (pdftex.def)             Requested size: 418.96548pt x 184.88724pt.
-<../Trafficsign/results/comparison_2.png, id=836, 722.7pt x 361.35pt>
+<../Trafficsign/results/comparison_2.png, id=847, 722.7pt x 361.35pt>
 File: ../Trafficsign/results/comparison_2.png Graphic file (type png)
 <use ../Trafficsign/results/comparison_2.png>
-Package pdftex.def Info: ../Trafficsign/results/comparison_2.png  used on input line 1273.
+Package pdftex.def Info: ../Trafficsign/results/comparison_2.png  used on input line 1274.
 (pdftex.def)             Requested size: 418.96548pt x 209.4839pt.
- [32 <../ImageReport_new/best_model_2/comparison.png> <../Trafficsign/results/comparison_2.png>] [33]
-<../ImageReport_new/best_model_2/AClass.png, id=850, 445.665pt x 927.465pt>
+ [33 <../ImageReport_new/best_model_2/comparison.png> <../Trafficsign/results/comparison_2.png>] [34]
+<../ImageReport_new/best_model_2/AClass.png, id=861, 445.665pt x 927.465pt>
 File: ../ImageReport_new/best_model_2/AClass.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/AClass.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/AClass.png  used on input line 1341.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/AClass.png  used on input line 1342.
 (pdftex.def)             Requested size: 308.71106pt x 642.45644pt.
- [34] [35 <../ImageReport_new/best_model_2/AClass.png>]
-<../ImageReport_new/best_model_2/BClass.png, id=863, 445.665pt x 927.465pt>
+ [35] [36 <../ImageReport_new/best_model_2/AClass.png>]
+<../ImageReport_new/best_model_2/BClass.png, id=874, 445.665pt x 927.465pt>
 File: ../ImageReport_new/best_model_2/BClass.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/BClass.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/BClass.png  used on input line 1407.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/BClass.png  used on input line 1408.
 (pdftex.def)             Requested size: 308.71106pt x 642.45644pt.
- [36] [37 <../ImageReport_new/best_model_2/BClass.png>]
-<../ImageReport_new/best_model_2/CClass.png, id=876, 445.665pt x 927.465pt>
+ [37] [38 <../ImageReport_new/best_model_2/BClass.png>]
+<../ImageReport_new/best_model_2/CClass.png, id=887, 445.665pt x 927.465pt>
 File: ../ImageReport_new/best_model_2/CClass.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/CClass.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/CClass.png  used on input line 1473.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/CClass.png  used on input line 1474.
 (pdftex.def)             Requested size: 308.71106pt x 642.45644pt.
- [38] [39 <../ImageReport_new/best_model_2/CClass.png>]
-<../ImageReport_new/best_model_2/DClass.png, id=888, 445.665pt x 927.465pt>
+ [39] [40 <../ImageReport_new/best_model_2/CClass.png>]
+<../ImageReport_new/best_model_2/DClass.png, id=899, 445.665pt x 927.465pt>
 File: ../ImageReport_new/best_model_2/DClass.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/DClass.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/DClass.png  used on input line 1539.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/DClass.png  used on input line 1540.
 (pdftex.def)             Requested size: 308.71106pt x 642.45644pt.
- [40]
-Overfull \hbox (11.30658pt too wide) in paragraph at lines 1546--1547
+ [41]
+Overfull \hbox (11.30658pt too wide) in paragraph at lines 1547--1548
 \T5/lmr/m/n/12 Sau khi hu§n luy»n, mæ h¼nh tèt nh§t (Model C) ^^_÷ñc l÷u v  kiºm tra vîi \T5/lmtt/m/n/12 test_models.py
  []
 
-[41 <../ImageReport_new/best_model_2/DClass.png>]
-<../ImageReport_new/best_model_2/runTest_1.png, id=900, 1326.9575pt x 861.2175pt>
+[42 <../ImageReport_new/best_model_2/DClass.png>]
+<../ImageReport_new/best_model_2/runTest_1.png, id=911, 1326.9575pt x 861.2175pt>
 File: ../ImageReport_new/best_model_2/runTest_1.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/runTest_1.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_1.png  used on input line 1552.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_1.png  used on input line 1553.
 (pdftex.def)             Requested size: 418.96548pt x 271.91571pt.
-<../ImageReport_new/best_model_2/runTest_2.png, id=901, 1059.96pt x 782.925pt>
+<../ImageReport_new/best_model_2/runTest_2.png, id=912, 1059.96pt x 782.925pt>
 File: ../ImageReport_new/best_model_2/runTest_2.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/runTest_2.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_2.png  used on input line 1559.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_2.png  used on input line 1560.
 (pdftex.def)             Requested size: 418.96548pt x 309.46104pt.
- [42 <../ImageReport_new/best_model_2/runTest_1.png>]
-<../ImageReport_new/best_model_2/runTest_3.png, id=908, 1058.95625pt x 779.91376pt>
+ [43 <../ImageReport_new/best_model_2/runTest_1.png>]
+<../ImageReport_new/best_model_2/runTest_3.png, id=920, 1058.95625pt x 779.91376pt>
 File: ../ImageReport_new/best_model_2/runTest_3.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/runTest_3.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_3.png  used on input line 1566.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_3.png  used on input line 1567.
 (pdftex.def)             Requested size: 418.96548pt x 308.56833pt.
-<../ImageReport_new/best_model_2/runTest_4.png, id=909, 1058.95625pt x 779.91376pt>
+<../ImageReport_new/best_model_2/runTest_4.png, id=921, 1058.95625pt x 779.91376pt>
 File: ../ImageReport_new/best_model_2/runTest_4.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/runTest_4.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_4.png  used on input line 1573.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest_4.png  used on input line 1574.
 (pdftex.def)             Requested size: 418.96548pt x 308.56833pt.
- [43 <../ImageReport_new/best_model_2/runTest_2.png> <../ImageReport_new/best_model_2/runTest_3.png>]
-Underfull \hbox (badness 2173) in paragraph at lines 1591--1591
+ [44 <../ImageReport_new/best_model_2/runTest_2.png> <../ImageReport_new/best_model_2/runTest_3.png>]
+Underfull \hbox (badness 2173) in paragraph at lines 1592--1592
 []\T5/lmr/m/n/12 B£ng 14: |K¸t qu£ in-fer-ence tr¶n 4 th÷ möc £nh tòy ch¿nh vîi Model C
  []
 
 
-Overfull \hbox (7.67137pt too wide) in paragraph at lines 1597--1602
+Overfull \hbox (7.67137pt too wide) in paragraph at lines 1598--1603
  [][] 
  []
 
-<../ImageReport_new/best_model_2/runTest1.png, id=918, 1302.8675pt x 114.4275pt>
+<../ImageReport_new/best_model_2/runTest1.png, id=929, 1302.8675pt x 114.4275pt>
 File: ../ImageReport_new/best_model_2/runTest1.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/runTest1.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest1.png  used on input line 1608.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest1.png  used on input line 1609.
 (pdftex.def)             Requested size: 418.96548pt x 36.79564pt.
-<../ImageReport_new/best_model_2/runTest2.png, id=919, 1083.04625pt x 319.1925pt>
+<../ImageReport_new/best_model_2/runTest2.png, id=930, 1083.04625pt x 319.1925pt>
 File: ../ImageReport_new/best_model_2/runTest2.png Graphic file (type png)
 <use ../ImageReport_new/best_model_2/runTest2.png>
-Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest2.png  used on input line 1615.
+Package pdftex.def Info: ../ImageReport_new/best_model_2/runTest2.png  used on input line 1616.
 (pdftex.def)             Requested size: 418.96548pt x 123.47638pt.
-[44 <../ImageReport_new/best_model_2/runTest_4.png> <../ImageReport_new/best_model_2/runTest1.png>] [45 <../ImageReport_new/best_model_2/runTest2.png>] [46] 
+[45 <../ImageReport_new/best_model_2/runTest_4.png> <../ImageReport_new/best_model_2/runTest1.png>] [46 <../ImageReport_new/best_model_2/runTest2.png>] [47] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (main.aux)
  ***********
@@ -1380,20 +1380,20 @@ L3 programming layer <2025-12-24>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C16AB0822830B70806532C1208D2C6F9;8241.
+(rerunfilecheck)             Checksum: DE95B7492989B4C09B050AF9A48C593C;8378.
  ) 
 Here is how much of TeX's memory you used:
- 43836 strings out of 467871
- 1017770 string characters out of 5416404
- 2019199 words of memory out of 5000000
- 71567 multiletter control sequences out of 15000+600000
+ 43840 strings out of 467871
+ 1017824 string characters out of 5416404
+ 2090199 words of memory out of 5000000
+ 71569 multiletter control sequences out of 15000+600000
  736222 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,19n,104p,1182b,2303s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (46 pages, 2466270 bytes).
+Output written on main.pdf (47 pages, 2468494 bytes).
 PDF statistics:
- 1122 PDF objects out of 1200 (max. 8388607)
- 437 named destinations out of 1000 (max. 500000)
- 584 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1134 PDF objects out of 1200 (max. 8388607)
+ 439 named destinations out of 1000 (max. 500000)
+ 592 words of extra memory for PDF output out of 10000 (max. 10000000)
 

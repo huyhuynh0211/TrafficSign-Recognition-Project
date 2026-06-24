@@ -342,17 +342,17 @@ Main experimental results:
 | Model | Test Accuracy |
 |---|---:|
 | `trafficsign.py` - Baseline CNN | 99.20% |
-| Model A - Baseline CNN + Class Weights | 97.24% |
-| Model B - CNN + L2 Regularization | 96.53% |
-| Model C - Deeper CNN + BatchNorm | 98.55% |
-| Model D - MobileNetV2 Transfer Learning | 95.42% |
+| Model A - Baseline CNN + Class Weights | 99.19% |
+| Model B - CNN + L2 Regularization | 99.14% |
+| Model C - Deeper CNN + BatchNorm | 99.96% |
+| Model D - MobileNetV2 Transfer Learning | 98.48% |
 
 Inference results on the full GTSRB standard test set of 12,630 images:
 
 | Model | Correct Images | Total Images | Accuracy |
 |---|---:|---:|---:|
-| Model A - Baseline CNN | 12,146 | 12,630 | 96.17% |
-| Model C - Deeper CNN + BatchNorm | 11,933 | 12,630 | 94.48% |
+| `trafficsign.py` - Baseline CNN | 12,146 | 12,630 | 96.17% |
+| Model C - Deeper CNN + BatchNorm | 12,392 | 12,630 | 98.12% |
 
 Observations:
 
@@ -471,3 +471,4 @@ If you must upload large models or datasets, use **Git LFS**.
 - TensorFlow / Keras Documentation
 - OpenCV Documentation
 - Scikit-learn Documentation
+

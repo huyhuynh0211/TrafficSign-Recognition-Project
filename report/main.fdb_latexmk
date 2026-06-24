@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782286724.05713 "c:/Users/Huy Huynh/Documents/nam2ky2/ai/TrafficSign-Recognition-Project/report/main.tex" "main.pdf" "main" 1782286731.36443 0
+["pdflatex"] 1782297145.28119 "c:/Users/Huy Huynh/Documents/nam2ky2/ai/TrafficSign-Recognition-Project/report/main.tex" "main.pdf" "main" 1782297152.92776 0
   "../ImageReport_new/best_model_2/AClass.png" 1782272608 46827 ff831b51f1d50b7330e89fbd11943a95 ""
   "../ImageReport_new/best_model_2/BClass.png" 1782272629 45320 3e412e3ca9f6d457ac9408fadc1a9acd ""
   "../ImageReport_new/best_model_2/CClass.png" 1782272646 44102 6d9b890d6ff816bf6d798c590300cfdf ""
@@ -313,14 +313,14 @@
   "C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/tex/latex/vntex/t5enc.def" 1368738347 21986 ccb3b8f7cc27fbd61b3daabbbb82ad3f ""
   "C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/tex/latex/vntex/t5enc.dfu" 1368738347 13949 387dd4fa58aea5f873839c93430fffed ""
   "C:/Users/Huy Huynh/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/Huy Huynh/Documents/nam2ky2/ai/TrafficSign-Recognition-Project/report/main.tex" 1782286715 85014 1fa2085c436dac209fd9a445e74c8dea ""
+  "c:/Users/Huy Huynh/Documents/nam2ky2/ai/TrafficSign-Recognition-Project/report/main.tex" 1782297144 85013 e1c66e7137d807129ee683ad82ff480f ""
   "logo.png" 1782218429 25431 b69f4f381ae8e9389dd19fc1b2f2fb49 ""
-  "main.aux" 1782286730 21445 0870136ce9a14d92c0eae0beec0058b7 "pdflatex"
-  "main.lof" 1782286730 3588 0ec10d04720849d6de32bd704199c754 "pdflatex"
-  "main.lot" 1782286730 2325 cbcae1c827f78938e180aa04bf88ac3c "pdflatex"
-  "main.out" 1782286730 8241 c16ab0822830b70806532c1208d2c6f9 "pdflatex"
-  "main.tex" 1782286715 85014 1fa2085c436dac209fd9a445e74c8dea ""
-  "main.toc" 1782286730 3874 3f8331d83f2d1d4e01da2a9aec3d492a "pdflatex"
+  "main.aux" 1782297152 21567 cffcd9c457ca737ab57ff5d89cd83bc1 "pdflatex"
+  "main.lof" 1782297152 3588 849e7ed26b11fa28a0d484b5f28ce3e5 "pdflatex"
+  "main.lot" 1782297152 2325 fb909cf32b9898590bc2dd129b833906 "pdflatex"
+  "main.out" 1782297152 8378 de95b7492989b4c09b050af9a48c593c "pdflatex"
+  "main.tex" 1782297144 85013 e1c66e7137d807129ee683ad82ff480f ""
+  "main.toc" 1782297152 3953 1ce7fba0384774e57d2a76ca13c56683 "pdflatex"
   (generated)
   "main.aux"
   "main.lof"

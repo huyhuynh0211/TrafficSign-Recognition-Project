@@ -145,7 +145,6 @@
     {\large\textbf{Nhóm: 10}}\\[2cm]
 \end{center}
 
-% Lưu ý: Bạn cần thêm dòng \usepackage{booktabs} vào phần preamble (trước \begin{document}) nhé!
 
 \begin{table}[h!]
     \centering
@@ -185,7 +184,7 @@ Nhận diện biển báo giao thông là một thành phần quan trọng trong
 
 Bài toán này gặp nhiều thách thức do sự thay đổi về điều kiện ánh sáng, vật che khuất, mờ chuyển động và thời tiết khác nhau. Các phương pháp truyền thống như trích xuất đặc trưng thủ công (HOG, SIFT) kết hợp SVM gặp khó khăn khi xử lý 43 loại biển báo khác nhau với chất lượng ảnh không đồng nhất.
 
-\subsection{Mục Tiêu Đề Án}
+\subsection{Mục Tiêu}
 Đề án này xây dựng một hệ thống nhận diện biển báo giao thông sử dụng Convolutional Neural Network (CNN) với TensorFlow/Keras trên bộ dữ liệu German Traffic Sign Recognition Benchmark (GTSRB). Mô hình phải xác định chính xác mỗi ảnh đầu vào thuộc 1 trong 43 loại biển báo.
 
 Các mục tiêu cụ thể:
@@ -196,6 +195,8 @@ Các mục tiêu cụ thể:
     \item Đánh giá chi tiết bằng classification report (precision, recall, F1-score).
     \item Xây dựng công cụ inference cho ảnh đơn và thư mục ảnh.
 \end{enumerate}
+
+\subsection{Link Github source code} \url{https://github.com/huyhuynh0211/TrafficSign-Recognition-Project.git}
 
 \subsection{Phương Pháp Tiếp Cận}
 Em đã áp dụng phương pháp học sâu có giám sát (Supervised learning) theo quy trình 8 bước:
@@ -1545,7 +1546,7 @@ D. Transfer Learning (MobileNetV2)    & 98.39 & 98.48 & 98.48 \\ \bottomrule
 
 Sau khi huấn luyện, mô hình tốt nhất (Model C) được lưu và kiểm tra với \texttt{test\_models.py} trên các ảnh đơn lẻ và \texttt{test\_model\_folder.py} trên thư mục ảnh.
 
-\subsubsection*{Dự Đoán Ảnh Đơn với \texttt{test\_models.py}}
+\subsubsection*{Dự Đoán folder ảnh với \texttt{test\_model\_folder.py}}
 
 \begin{figure}[H]
 \centering
