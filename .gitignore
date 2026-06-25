@@ -1,1 +1,5 @@
 Trafficsign/venv/
+Traficsign/gtsdb/
+Traficsign/gtsdb_yolo/
+Traficsign/detector_train/
+runs/
