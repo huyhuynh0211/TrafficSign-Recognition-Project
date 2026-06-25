@@ -1,5 +1,26 @@
 Trafficsign/venv/
-Traficsign/gtsdb/
-Traficsign/gtsdb_yolo/
-Traficsign/detector_train/
+Trafficsign/gtsdb/
+Trafficsign/gtsdb_yolo/
+Trafficsign/detector_train/
+Trafficsign/results/
 runs/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Model weights (lớn, không cần commit)
+*.onnx
+
+# Keras models (comment dòng này nếu muốn commit model)
+# *.keras
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
