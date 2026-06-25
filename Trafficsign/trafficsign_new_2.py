@@ -30,18 +30,12 @@ def main():
     if len(sys.argv) not in [2, 3]:
         sys.exit("Usage: python trafficsign_improved.py data_directory [model.h5]")
 
-    # ============================================================
-    # 1. LOAD DATA
-    # ============================================================
     print("=" * 60)
     print("LOADING DATA...")
     images, labels = load_data(sys.argv[1])
     labels_int = np.array(labels)
     print(f"Loaded {len(images)} images across {NUM_CATEGORIES} classes.")
 
-    # ============================================================
-    # 2. ANALYZE CLASS DISTRIBUTION
-    # ============================================================
     print("\n" + "=" * 60)
     print("CLASS DISTRIBUTION ANALYSIS")
     class_counts = {i: int(np.sum(labels_int == i)) for i in range(NUM_CATEGORIES)}
@@ -51,9 +45,6 @@ def main():
     print(f"  Max class {max_class}: {class_counts[max_class]} images")
     print(f"  Imbalance ratio: {class_counts[max_class] / class_counts[min_class]:.1f}:1")
 
-    # ============================================================
-    # 3. COMPUTE CLASS WEIGHTS
-    # ============================================================
     print("\n" + "=" * 60)
     print("COMPUTING CLASS WEIGHTS FOR IMBALANCED DATA")
     class_weights_array = class_weight.compute_class_weight(
@@ -64,30 +55,22 @@ def main():
     class_weight_dict = {i: class_weights_array[i] for i in range(NUM_CATEGORIES)}
     print(f"  Weight range: {min(class_weights_array):.3f} - {max(class_weights_array):.3f}")
 
-    # ============================================================
-    # 4. PREPARE DATA
-    # ============================================================
     print("\n" + "=" * 60)
     print("PREPARING DATA")
 
     x_data = np.array(images, dtype=np.float32)
     labels_cat = tf.keras.utils.to_categorical(labels_int, NUM_CATEGORIES)
 
-    # [FIX #3] Add stratify to preserve class distribution in each split
     x_train, x_test, y_train, y_test = train_test_split(
         x_data, labels_cat,
         test_size=TEST_SIZE,
         random_state=42,
-        stratify=labels_int           # ← ADDED: ensures balanced class ratio
+        stratify=labels_int
     )
     y_test_int = np.argmax(y_test, axis=1)
 
     print(f"  Train: {x_train.shape[0]} | Test: {x_test.shape[0]}")
     print(f"  Input shape: {x_train.shape[1:]}")
-
-    # ============================================================
-    # 5. TRAIN MODELS
-    # ============================================================
     results = {}
 
     def _train(name, model, use_cw=True):
@@ -108,12 +91,11 @@ def main():
 
         early_stop = tf.keras.callbacks.EarlyStopping(
             monitor='val_accuracy',
-            patience=7,               # tăng patience một chút
+            patience=7,
             restore_best_weights=True,
             verbose=1
         )
 
-        # [NEW] Giảm LR x0.5 khi val_accuracy không tăng sau 3 epochs
         reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(
             monitor='val_accuracy',
             factor=0.5,
@@ -122,14 +104,12 @@ def main():
             verbose=1
         )
 
-        # [FIX #1 — CRITICAL] Truyền class_weight vào model.fit()
-        # Trước đây: class_weight_dict được tính nhưng KHÔNG BAO GIỜ được dùng!
         history = model.fit(
             datagen.flow(x_train, y_train, batch_size=BATCH_SIZE),
             epochs=EPOCHS,
             validation_data=(x_test, y_test),
             callbacks=[early_stop, reduce_lr],
-            class_weight=class_weight_dict if use_cw else None,  # ← FIXED
+            class_weight=class_weight_dict if use_cw else None, 
             verbose=1
         )
 
@@ -142,9 +122,6 @@ def main():
     _train("Deeper CNN (3 Blocks + BN)",      build_deeper_cnn())
     _train("Transfer Learning (MobileNetV2)", build_transfer_learning_model())
 
-    # ============================================================
-    # 6. COMPARE RESULTS
-    # ============================================================
     print("\n" + "=" * 60)
     print("CLASSIFICATION REPORTS")
     for name, data in results.items():
@@ -157,7 +134,6 @@ def main():
     print("=" * 60)
     print(f"{'Model':<42} {'Test Acc':>10}")
     print("-" * 54)
-    # [NEW] Sort descending by test accuracy
     for name, data in sorted(results.items(), key=lambda kv: kv[1]["test_acc"], reverse=True):
         print(f"{name:<42} {data['test_acc']*100:>9.2f}%")
     print("-" * 54)
@@ -165,26 +141,19 @@ def main():
     best_name = max(results, key=lambda k: results[k]["test_acc"])
     print(f"\nBEST MODEL: {best_name} — {results[best_name]['test_acc']*100:.2f}%")
 
-    # ============================================================
-    # 7. VISUALIZATION
-    # ============================================================
-    plot_all_histories(results)       # [FIX #2] now shows val curves too
-    plot_comparison(results)          # [NEW] sorted bars
+    plot_all_histories(results)
+    plot_comparison(results)
     y_pred_best = np.argmax(results[best_name]["model"].predict(x_test, verbose=0), axis=1)
     plot_confusion_matrix(y_test_int, y_pred_best, best_name)  # [NEW]
 
-    # ============================================================
-    # 8. SAVE BEST MODEL
-    # ============================================================
+    # 8. save best model
     if len(sys.argv) == 3:
         filename = sys.argv[2]
         results[best_name]["model"].save(filename)
         print(f"\nBest model ({best_name}) saved to {filename}.")
 
 
-# ================================================================
-# DATA LOADING
-# ================================================================
+# load data
 def load_data(data_dir):
     """
     Load images từ `data_dir/<category>/` cho categories 0..NUM_CATEGORIES-1.
@@ -213,7 +182,7 @@ def load_data(data_dir):
 
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
-            img = img.astype(np.float32) / 255.0  # Chuẩn hoá về [0, 1] — chỉ làm 1 lần
+            img = img.astype(np.float32) / 255.0  
 
             images.append(img)
             labels.append(category)
@@ -224,9 +193,7 @@ def load_data(data_dir):
     return images, labels
 
 
-# ================================================================
-# MODEL A: BASELINE CNN
-# ================================================================
+# model A
 def build_baseline_cnn():
     model = tf.keras.models.Sequential([
         tf.keras.layers.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
@@ -252,9 +219,7 @@ def build_baseline_cnn():
     return model
 
 
-# ================================================================
-# MODEL B: CNN WITH L2 REGULARIZATION
-# ================================================================
+# model B
 def build_cnn_with_l2():
     from tensorflow.keras import regularizers
     l2 = regularizers.l2(0.001)
@@ -281,10 +246,7 @@ def build_cnn_with_l2():
     return model
 
 
-# ================================================================
-# MODEL C: DEEPER CNN (3 Double-Conv Blocks + BatchNorm + per-block Dropout)
-# Spatial flow với input 30x30: 30 -> 15 -> 7 -> 3 (3x3x128 = 1152 features)
-# ================================================================
+# model C
 def build_deeper_cnn():
     model = tf.keras.models.Sequential([
         tf.keras.layers.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
@@ -323,10 +285,7 @@ def build_deeper_cnn():
     return model
 
 
-# ================================================================
-# MODEL D: TRANSFER LEARNING WITH MobileNetV2
-# [FIX #4] Thay Lambda bằng Rescaling layer — tránh lỗi serialization
-# ================================================================
+# model D
 def build_transfer_learning_model():
     base_model = tf.keras.applications.MobileNetV2(
         input_shape=(96, 96, 3),
@@ -335,23 +294,15 @@ def build_transfer_learning_model():
     )
     base_model.trainable = False
 
-    # Unfreeze 20 layers cuối để fine-tune
     for layer in base_model.layers[-20:]:
         layer.trainable = True
 
     inputs = tf.keras.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3))
 
-    # Resize 30x30 -> 96x96 (minimum size của MobileNetV2)
     x = tf.keras.layers.Resizing(96, 96)(inputs)
 
-    # [FIX #4] MobileNetV2 cần input trong [-1, 1].
-    # Images của chúng ta đang ở [0, 1].
-    # Rescaling(scale=2.0, offset=-1.0): x*2.0 - 1.0 maps [0,1] -> [-1,1]
-    # Dùng Rescaling thay Lambda vì Lambda không serializable tốt
-    x = tf.keras.layers.Rescaling(scale=2.0, offset=-1.0)(x)
+   x = tf . keras . layers . Lambda ( lambda t : mv2_preprocess ( t * 255.0) ) (x)
 
-    # training=False: giữ frozen BatchNorm ở inference mode,
-    # tránh cập nhật statistics gây mất ổn định khi training
     x = base_model(x, training=False)
     x = tf.keras.layers.GlobalAveragePooling2D()(x)
     x = tf.keras.layers.Dense(256, activation="relu")(x)
@@ -367,9 +318,7 @@ def build_transfer_learning_model():
     return model
 
 
-# ================================================================
-# VISUALIZATION
-# ================================================================
+# plot block
 def plot_all_histories(results):
     """
     [FIX #2] Plot cả Training VÀ Validation curves — bản gốc chỉ có train!
@@ -391,7 +340,7 @@ def plot_all_histories(results):
         axes[0, col].plot(epochs_range, hist["accuracy"],
                           marker="o", label="Train Acc")
         axes[0, col].plot(epochs_range, hist["val_accuracy"],
-                          marker="s", linestyle="--", label="Val Acc")   # ← [FIX #2] ADDED
+                          marker="s", linestyle="--", label="Val Acc")   
         axes[0, col].set_title(f"{name}\nAccuracy")
         axes[0, col].set_xlabel("Epoch")
         axes[0, col].set_ylabel("Accuracy")
@@ -402,7 +351,7 @@ def plot_all_histories(results):
         axes[1, col].plot(epochs_range, hist["loss"],
                           marker="o", color="orange", label="Train Loss")
         axes[1, col].plot(epochs_range, hist["val_loss"],
-                          marker="s", linestyle="--", color="red", label="Val Loss")  # ← [FIX #2] ADDED
+                          marker="s", linestyle="--", color="red", label="Val Loss")
         axes[1, col].set_title(f"{name}\nLoss")
         axes[1, col].set_xlabel("Epoch")
         axes[1, col].set_ylabel("Loss")
@@ -423,7 +372,6 @@ def plot_comparison(results):
     """
     os.makedirs("results", exist_ok=True)
 
-    # [NEW] Sort by accuracy descending
     sorted_items = sorted(results.items(), key=lambda kv: kv[1]["test_acc"], reverse=True)
     names  = [k for k, _ in sorted_items]
     accs   = [v["test_acc"] * 100 for _, v in sorted_items]
@@ -467,7 +415,6 @@ def plot_confusion_matrix(y_true, y_pred, model_name):
     plt.xlabel("Predicted Label", fontsize=11)
     plt.ylabel("True Label", fontsize=11)
 
-    # Thêm tick labels
     ticks = np.arange(NUM_CATEGORIES)
     plt.xticks(ticks, ticks, fontsize=7, rotation=90)
     plt.yticks(ticks, ticks, fontsize=7)

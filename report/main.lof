@@ -1,25 +1,39 @@
 \babel@toc {vietnamese}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Biểu đồ phân phối số lượng ảnh trên 43 lớp của GTSRB. Đường đỏ thể hiện mức trung bình 619 ảnh/lớp. Các lớp 0, 19, 37--42 có ít hơn 200 ảnh, trong khi lớp 1 có đến 1500 ảnh.}}{7}{figure.caption.3}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Sơ đồ kiến trúc mô hình CNN hiển thị qua \texttt {model.summary()} và \texttt {tf.keras.utils.plot\_model()}. Các tầng Conv2D, MaxPooling2D, Dropout, Flatten, Dense được hiển thị với kích thước đầu ra và số tham số.}}{13}{figure.caption.6}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Quy trình hoạt động đầy đủ của \texttt {trafficsign\_new.py}.}}{22}{figure.caption.7}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Quá trình training của Model A -- Phần 1 (Accuracy và Loss).}}{26}{figure.caption.10}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Quá trình training của Model A -- Phần 2 (chi tiết validation).}}{26}{figure.caption.11}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Quá trình training của Model B -- Phần 1.}}{28}{figure.caption.13}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Quá trình training của Model B -- Phần 2.}}{28}{figure.caption.14}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Quá trình training của Model C -- Phần 1.}}{30}{figure.caption.16}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Quá trình training của Model C -- Phần 2.}}{31}{figure.caption.17}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Quá trình training của Model D -- Phần 1.}}{32}{figure.caption.19}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Quá trình training của Model D -- Phần 2.}}{32}{figure.caption.20}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Biểu đồ so sánh training curves 4 mô hình.}}{32}{figure.caption.21}%
-\contentsline {figure}{\numberline {13}{\ignorespaces So sánh kết quả 4 mô hình, chọn Model C là tốt nhất.}}{33}{figure.caption.23}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Biểu đồ so sánh kết quả 4 mô hình.}}{33}{figure.caption.24}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Classification Report của Model A.}}{36}{figure.caption.26}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Classification Report của Model B.}}{38}{figure.caption.28}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Classification Report của Model C.}}{40}{figure.caption.30}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Classification Report của Model D.}}{42}{figure.caption.32}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Kết quả dự đoán trên thư mục Test\_1.}}{43}{figure.caption.33}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Kết quả dự đoán trên thư mục Test\_2.}}{44}{figure.caption.34}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Kết quả dự đoán trên thư mục Test\_3.}}{44}{figure.caption.35}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Kết quả dự đoán trên thư mục Test\_4.}}{45}{figure.caption.36}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 1.}}{45}{figure.caption.39}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 2.}}{46}{figure.caption.40}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Biểu đồ phân phối số lượng ảnh trên 43 lớp của GTSRB. Đường đỏ thể hiện mức trung bình 619 ảnh/lớp. Các lớp 0, 19, 37--42 có ít hơn 200 ảnh, trong khi lớp 1 có đến 1500 ảnh.}}{8}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Sơ đồ kiến trúc mô hình CNN hiển thị qua \texttt {model.summary()} và \texttt {tf.keras.utils.plot\_model()}. Các tầng Conv2D, MaxPooling2D, Dropout, Flatten, Dense được hiển thị với kích thước đầu ra và số tham số.}}{14}{figure.caption.6}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Quy trình hoạt động đầy đủ của \texttt {trafficsign\_new.py}.}}{23}{figure.caption.7}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Quá trình training của Model A -- Phần 1 (Accuracy và Loss).}}{27}{figure.caption.10}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Quá trình training của Model A -- Phần 2 (chi tiết validation).}}{27}{figure.caption.11}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Quá trình training của Model B -- Phần 1.}}{29}{figure.caption.13}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Quá trình training của Model B -- Phần 2.}}{29}{figure.caption.14}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Quá trình training của Model C -- Phần 1.}}{31}{figure.caption.16}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Quá trình training của Model C -- Phần 2.}}{32}{figure.caption.17}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Quá trình training của Model D -- Phần 1.}}{33}{figure.caption.19}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Quá trình training của Model D -- Phần 2.}}{33}{figure.caption.20}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Biểu đồ so sánh training curves 4 mô hình.}}{33}{figure.caption.21}%
+\contentsline {figure}{\numberline {13}{\ignorespaces So sánh kết quả 4 mô hình, chọn Model C là tốt nhất.}}{34}{figure.caption.23}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Biểu đồ so sánh kết quả 4 mô hình.}}{34}{figure.caption.24}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Classification Report của Model A.}}{37}{figure.caption.26}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Classification Report của Model B.}}{39}{figure.caption.28}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Classification Report của Model C.}}{41}{figure.caption.30}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Classification Report của Model D.}}{43}{figure.caption.32}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Kết quả dự đoán trên thư mục Test\_1.}}{44}{figure.caption.33}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Kết quả dự đoán trên thư mục Test\_2.}}{45}{figure.caption.34}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Kết quả dự đoán trên thư mục Test\_3.}}{45}{figure.caption.35}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Kết quả dự đoán trên thư mục Test\_4.}}{46}{figure.caption.36}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 1.}}{46}{figure.caption.39}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Kết quả chạy test trên thư mục Test (12.630 ảnh) -- Phần 2.}}{47}{figure.caption.40}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 1.}}{47}{figure.caption.41}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 2.}}{47}{figure.caption.42}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 3.}}{48}{figure.caption.43}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 4.}}{48}{figure.caption.44}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 5.}}{48}{figure.caption.45}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 6.}}{49}{figure.caption.46}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 7.}}{49}{figure.caption.47}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 7.}}{49}{figure.caption.48}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 8.}}{50}{figure.caption.49}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Kết quả dự đoán trên ảnh thực tế --- 9.}}{50}{figure.caption.50}%
+\contentsline {figure}{\numberline {35}{\ignorespaces Ví dụ ở khung cảnh xa,rộng và nhiều biển báo.}}{51}{figure.caption.51}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Kết quả dự đoán trên ảnh thực tế khung cảnh rộng --- 1.}}{53}{figure.caption.52}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Kết quả dự đoán trên ảnh thực tế khung cảnh rộng --- 2.}}{53}{figure.caption.53}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Kết quả dự đoán trên ảnh thực tế khung cảnh rộng --- 3.}}{54}{figure.caption.54}%

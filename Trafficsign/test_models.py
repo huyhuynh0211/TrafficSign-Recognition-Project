@@ -58,10 +58,7 @@ SIGNS = {
     42: "Hết cấm vượt đối với xe trên 3.5 tấn",
 }
 
-DEFAULT_SIZE = 30  # fallback if model has dynamic input shape
-
-# Tất cả model trong trafficsign_new.py đều được train với input đã normalize [0,1]
-# Vì vậy LUÔN normalize khi inference (trừ khi user tắt bằng --no-normalize)
+DEFAULT_SIZE = 30
 DEFAULT_NORMALIZE = True
 
 
@@ -69,8 +66,6 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Traffic sign classifier")
     parser.add_argument("model", help="Path to .h5 or .keras model file")
     parser.add_argument("image", help="Path to image file")
-    # FIX: mặc định LUÔN normalize vì tất cả model train với input [0,1]
-    # Dùng --no-normalize nếu model được train với pixel [0,255]
     normalize_group = parser.add_mutually_exclusive_group()
     normalize_group.add_argument(
         "--normalize",
@@ -91,7 +86,7 @@ def parse_args():
 def get_input_size(model, fallback=DEFAULT_SIZE):
     """Return (height, width) from model input shape, with fallback for dynamic dims."""
     try:
-        shape = model.input.shape  # preferred in TF2/Keras3
+        shape = model.input.shape
     except AttributeError:
         shape = model.input_shape
 
@@ -114,7 +109,6 @@ def get_input_size(model, fallback=DEFAULT_SIZE):
 def main():
     args = parse_args()
 
-    # Load model
     try:
         model = tf.keras.models.load_model(args.model)
     except Exception as e:
@@ -122,10 +116,8 @@ def main():
 
     h, w = get_input_size(model)
 
-    # FIX: dùng trực tiếp flag từ argparse (default=True)
     normalize = args.normalize
 
-    # Load and preprocess image
     img = cv2.imread(args.image)
     if img is None:
         sys.exit(f"Error: Could not read image '{args.image}'.")
@@ -137,11 +129,9 @@ def main():
         img /= 255.0
     img = np.expand_dims(img, axis=0)
 
-    # Predict
     pred = model.predict(img, verbose=0)
     scores = pred[0]
 
-    # Display results
     print(f"Model     : {args.model}")
     print(f"Input size: {h}x{w}  |  Normalize: {normalize}")
     print(f"Image     : {args.image}")

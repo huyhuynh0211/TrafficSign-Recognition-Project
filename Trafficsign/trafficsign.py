@@ -30,9 +30,7 @@ def main():
 
     images, labels = load_data(sys.argv[1])
 
-    # ============================================================
-    # COMPUTE CLASS WEIGHTS (handle class imbalance)
-    # ============================================================
+    # class weight
     labels_int = np.array(labels)
     class_weights_arr = cw_utils.compute_class_weight(
         class_weight="balanced",
@@ -42,14 +40,12 @@ def main():
     class_weight_dict = {i: class_weights_arr[i] for i in range(NUM_CATEGORIES)}
 
     labels_cat = tf.keras.utils.to_categorical(labels, NUM_CATEGORIES)
-    # FIX 4: added random_state for reproducibility
     x_train, x_test, y_train, y_test = train_test_split(
         np.array(images), labels_cat, test_size=TEST_SIZE, random_state=42
     )
 
     model = get_model()
 
-    # Save history to plot training curves later
     history = model.fit(
         x_train, y_train,
         epochs=EPOCHS,
@@ -58,9 +54,7 @@ def main():
 
     model.evaluate(x_test, y_test, verbose=2)
 
-    # ============================================================
-    # PLOT ACCURACY AND LOSS CURVES
-    # ============================================================
+
     plot_history(history, title="Baseline CNN")
 
     if len(sys.argv) == 3:
@@ -90,17 +84,14 @@ def load_data(data_dir):
             img_path = os.path.join(category_path, filename)
             img = cv2.imread(img_path)
 
-            # Skip corrupt or unreadable files instead of crashing
             if img is None:
                 print(f"Warning: could not read {img_path}, skipping.", file=sys.stderr)
                 skipped += 1
                 continue
 
-            # Convert BGR (OpenCV default) to RGB to match inference pipeline
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
 
-            # Normalise pixels to [0, 1] — done exactly once here
             img = img.astype(np.float32) / 255.0
 
             images.append(img)

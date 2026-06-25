@@ -62,7 +62,7 @@ SIGNS = {
     42: "Hết cấm vượt đối với xe trên 3.5 tấn",
 }
 
-DEFAULT_SIZE = 30  # fallback if model has dynamic input shape
+DEFAULT_SIZE = 30
 
 
 def parse_args():
@@ -95,7 +95,6 @@ def load_ground_truth(csv_path):
     with open(csv_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            # Try to get filename, sometimes it's under 'file' or 'Path'
             filename = row.get('file', row.get('Path', '')).split('/')[-1].split('\\')[-1]
             class_id = row.get('ClassId', row.get('ClassId'))
             if filename and class_id is not None:
@@ -109,11 +108,9 @@ def main():
     if not os.path.isdir(args.folder):
         sys.exit(f"Error: '{args.folder}' is not a valid directory.")
 
-    # Determine CSV path
     csv_path = args.csv if args.csv else os.path.join(args.folder, "labels.csv")
     ground_truth = load_ground_truth(csv_path)
 
-    # Load model
     try:
         model = tf.keras.models.load_model(args.model)
     except Exception as e:
@@ -133,7 +130,6 @@ def main():
     filenames = []
     images = []
 
-    # Read all images from the folder
     for filename in sorted(os.listdir(args.folder)):
         if not filename.lower().endswith((".png", ".jpg", ".jpeg", ".ppm", ".bmp")):
             continue
@@ -145,10 +141,9 @@ def main():
             print(f"Warning: Could not read image '{filename}'. Skipping.")
             continue
 
-        # Preprocess
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = cv2.resize(img, (w, h))
-        img = img.astype(np.float32) / 255.0  # Normalize
+        img = img.astype(np.float32) / 255.0
         
         images.append(img)
         filenames.append(filename)
@@ -157,13 +152,10 @@ def main():
         print("No valid images found in the directory.")
         return
 
-    # Convert to batch numpy array
     images_batch = np.array(images)
 
-    # Predict all at once
     predictions = model.predict(images_batch, verbose=0)
 
-    # Display results
     correct_count = 0
     total_evaluated = 0
 
@@ -194,14 +186,12 @@ def main():
                 else:
                     result_str = "FAIL"
                 
-                # Truncate strings for neat columns
                 f_str = fname_full if len(fname_full) <= 20 else fname_full[:17] + "..."
                 p_str = pred_label if len(pred_label) <= 30 else pred_label[:27] + "..."
                 g_str = gt_label if len(gt_label) <= 30 else gt_label[:27] + "..."
                 
                 print(f"{f_str:<20} | {p_str:<30} | {g_str:<30} | {result_str:<6} | {confidence:>5.1f}%")
             else:
-                # File exists but no ground truth
                 f_str = fname_full if len(fname_full) <= 20 else fname_full[:17] + "..."
                 p_str = pred_label if len(pred_label) <= 30 else pred_label[:27] + "..."
                 print(f"{f_str:<20} | {p_str:<30} | {'N/A':<30} | {'N/A':<6} | {confidence:>5.1f}%")

@@ -1618,9 +1618,274 @@ Model C (best\_model\_2.keras) & 12,392 & 12,630 & 98.12 \\ \bottomrule
 \label{fig:runTest_full2}
 \end{figure}
 
-% ======================================================================
-%              8. KẾT LUẬN
-% ======================================================================
+\subsection*{Kết quả dự đoán trên ảnh thực tế}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test3.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test3.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 1.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test3v2.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test3v2.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 2.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test5.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test5.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 3.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test5v2.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test5v2.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 4.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test6.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test6.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 5.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test6v2.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test6v2.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 6.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test7.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test7.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 7.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test7v2.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test7v2.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 7.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test7v3.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test7v3.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 8.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.7\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test7v4.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../Trafficsign/Test_5/test7v4.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế --- 9.}
+\end{figure}
+
+
+\subsection{Mở rộng với tích hợp YOLO và tiền xử lý HSV}
+
+Mặc dù Model C đạt độ chính xác rất cao (99.96\%) trên tập ảnh đã được cắt (crop) sẵn, nhưng khi áp dụng vào ảnh thực tế chụp toàn cảnh đường phố, mô hình không thể xử lý vì đầu vào yêu cầu ảnh chứa đúng một biển báo. Do đó, cần có một bộ phát hiện (detector) để xác định vị trí các biển báo trong ảnh, sau đó cắt từng vùng và đưa vào Model C để phân loại.
+\\ Ví dụ như ảnh này ta chỉ dùng dự đoán bằng model thông thường thì không thể ra được kết quả như ta mong muốn được vì có nhiều biển báo và các biển báo ở xa, nhỏ, bị che khuất, hoặc bị ánh sáng chiếu vào.
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.8\textwidth]{../Trafficsign/Test_5/test8.png}
+\caption{Ví dụ ở khung cảnh xa,rộng và nhiều biển báo.}
+\label{fig:yolo_result}
+\end{figure}
+\subsubsection*{Cơ chế phát hiện vật thể của YOLO}
+
+\begin{enumerate}
+    \item \textbf{Chia ảnh thành lưới ô vuông:} Ảnh đầu vào được chia thành lưới $S \times S$ ô vuông (ví dụ $7 \times 7$). Mỗi ô chịu trách nhiệm dự đoán vật thể nếu trung tâm của vật thể nằm trong ô đó.
+    
+    \item \textbf{Dự đoán bounding box:} Mỗi ô dự đoán $B$ bounding box (thường $B=2$). Mỗi bounding box được biểu diễn bởi 5 giá trị: $(t_x, t_y, t_w, t_h, \text{confidence})$.
+    \begin{itemize}
+        \item $(t_x, t_y)$ là tọa độ tương đối của tâm box so với ô lưới.
+        \item $(t_w, t_h)$ là chiều rộng và chiều cao tương đối so với toàn bộ ảnh.
+        \item \textbf{Confidence score} được định nghĩa là xác suất box chứa vật thể nhân với độ chính xác vị trí (IoU):
+        \[
+            \text{Confidence} = \Pr(\text{Object}) \times \text{IoU}_{\text{pred}}^{\text{truth}}
+        \]
+        Trong đó $\text{IoU}_{\text{pred}}^{\text{truth}}$ là \textbf{Intersection over Union} giữa box dự đoán và box thực tế, được tính bằng:
+        \[
+            \text{IoU} = \frac{\text{Diện tích phần chung}}{\text{Diện tích phần hợp}}
+        \]
+    \end{itemize}
+    
+    \item \textbf{Dự đoán nhãn:} Đồng thời, mỗi ô cũng dự đoán xác suất có điều kiện của từng lớp $\Pr(\text{class}_i \mid \text{Object})$. Kết hợp với confidence score, ta có độ tin cậy cuối cùng cho mỗi lớp:
+    \[
+        \Pr(\text{class}_i) \times \text{Confidence}
+    \]
+    
+    \item \textbf{Non-Maximum Suppression (NMS):} Sau bước dự đoán, có rất nhiều box chồng lấn lên nhau. \textbf{NMS} được áp dụng để loại bỏ các box trùng lặp: box nào có confidence cao nhất được giữ lại, các box còn lại có IoU với box này vượt ngưỡng (ví dụ 0.45) sẽ bị xóa. Quá trình này lặp lại cho đến khi không còn box nào bị loại bỏ.
+\end{enumerate}
+
+Trong dự án, em đã sử dụng YOLOv8 (nhẹ nhất) được fine-tune trên tập GTSDB (German Traffic Sign Detection Benchmark) để phát hiện biển báo.
+
+\subsubsection*{Pipeline tích hợp và tiền xử lý}
+
+Quy trình xử lý một ảnh đầu vào được thực hiện bởi hai script chính: \texttt{yolo\_worker.py} (thực thi phát hiện) và \texttt{test\_single\_yolo.py} (điều phối và phân loại).
+
+Các bước trong pipeline bao gồm:
+
+\begin{enumerate}
+    \item \textbf{Phát hiện:} YOLO quét toàn bộ ảnh và trả về danh sách các bounding box kèm confidence.
+    \item \textbf{Cắt vùng (Crop):} Với mỗi box, thực hiện cắt vùng ảnh tương ứng.
+    \item \textbf{Square Padding:} Vì Model C được huấn luyện trên ảnh vuông $30 \times 30$, nếu crop từ ảnh chữ nhật về vuông trực tiếp sẽ làm biến dạng biển báo (ví dụ biển tròn thành oval). Do đó, em thực hiện \textbf{square padding}: xác định cạnh lớn nhất của bounding box, tạo một vùng vuông có cạnh bằng kích thước này (cộng thêm viền 15\%), sau đó đặt crop vào trung tâm. Các vùng trống được lấp đầy bằng màu đen hoặc pixel trung bình, đảm bảo tỷ lệ khung hình của biển báo được bảo toàn.
+    \item \textbf{Phân loại:} Ảnh sau padding được resize về $30 \times 30$, chuẩn hóa về $[0,1]$ và đưa vào Model C để dự đoán nhãn.
+    \item \textbf{Hiển thị:} Vẽ bounding box, nhãn dự đoán và độ tin cậy lên ảnh gốc.
+\end{enumerate}
+
+\subsubsection*{Các tầng dự phòng (Fallback) để tăng độ ổn định}
+
+Trong thực tế, ảnh đầu vào rất đa dạng: có thể là ảnh toàn cảnh đường phố, hoặc ảnh đã được crop sẵn từ trước. Để đảm bảo chương trình không bị lỗi và vẫn đưa ra dự đoán, pipeline được thiết kế với 4 tầng fallback như sau:
+
+\begin{enumerate}
+    \item \textbf{YOLO với ngưỡng chính (conf = 0.28):} Sử dụng mô hình đã train trên GTSDB. Hoạt động tốt với ảnh toàn cảnh có nhiều biển báo ở xa.
+    \item \textbf{YOLO với ngưỡng thấp (conf = 0.15):} Nếu tầng 1 không tìm thấy box nào, giảm ngưỡng confidence để bắt các biển báo nhỏ hoặc mờ.
+    \item \textbf{Phát hiện dựa trên màu sắc (HSV):} Nếu YOLO vẫn không phát hiện được (thường gặp ở ảnh đã crop sẵn, không có bối cảnh đường phố), pipeline chuyển sang phương pháp truyền thống dựa trên không gian màu HSV. Biển báo giao thông có màu sắc đặc trưng (đỏ, xanh dương, vàng). Hệ thống tạo mặt nạ cho các khoảng màu này, sau đó áp dụng phép toán hình thái (morphological operations) để làm mượt vùng, tìm contour và ước lượng bounding box. Phương pháp này không yêu cầu huấn luyện trước và hoạt động ổn định với ảnh crop.
+    \item \textbf{Fallback toàn ảnh:} Nếu tất cả các phương pháp trên đều thất bại, pipeline sẽ coi toàn bộ ảnh đầu vào là một biển báo và đưa trực tiếp vào Model C. Điều này đảm bảo chương trình không bị gián đoạn, dù kết quả có thể không chính xác.
+\end{enumerate}
+
+\subsubsection*{Kết quả và thảo luận}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.6\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test8_1.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.39\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test8.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế khung cảnh rộng --- 1.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.6\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test9_1.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.39\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test9.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế khung cảnh rộng --- 2.}
+\end{figure}
+
+\textit{\textbf{Nhận xét:}} Kết quả cho thấy rằng việc tích hợp YOLO vào đã giúp ta có thể phát hiện và bounding box cho các biển báo trong ảnh thực tế, kể cả những biển báo nhỏ, ở xa hoặc bị che khuất. Sau khi cắt và square padding, Model C có thể phân loại chính xác từng biển báo. Tuy nhiên, mô hình đã dự đoán sai một số biển báo vì không thuộc các class được train. Chung quy, mô hình đã hoàn thành xuất sắc nhiệm vụ của mình.
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.6\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test6_2.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.39\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{../ImageReport_new/best_model_2/test6_2_1.png}
+\end{minipage}
+\caption{Kết quả dự đoán trên ảnh thực tế khung cảnh rộng --- 3.}
+\end{figure}
+\textit{\textbf{Nhận xét:}} Với ảnh trên thì ta có thể thấy nó không được tính là quá xa,rộng như 2 ảnh kia nên là YOLO không detect được vì thế lúc này pipeline sẽ fallback sang HSV để detect và crop ra biển báo, sau đó Model C sẽ phân loại chính xác.
+
+\textbf{Ưu điểm:}
+\begin{itemize}
+    \item Pipeline kết hợp đã giải quyết được bài toán end-to-end: từ ảnh thô chụp đường phố đến kết quả phân loại từng biển báo.
+    \item YOLO hoạt động hiệu quả với các biển báo ở xa vì tập GTSDB chứa nhiều ảnh toàn cảnh.
+    \item Square padding giữ đúng tỷ lệ biển báo, giúp Model C (vốn nhạy cảm với hình dạng) duy trì độ chính xác cao.
+    \item HSV fallback là một giải pháp nhẹ và hiệu quả để xử lý các ảnh crop sẵn (thường dùng trong kiểm thử nhanh), tránh việc phải cài đặt lại YOLO.
+\end{itemize}
+
+\textbf{Hạn chế và hướng phát triển:}
+\begin{itemize}
+    \item YOLO được train trên GTSDB với ảnh toàn cảnh, do đó rất nhạy với biển báo nhỏ trong khung cảnh rộng. Tuy nhiên, với ảnh chỉ chụp cận cảnh biển báo (không có bối cảnh), YOLO thường không phát hiện được, buộc phải dùng HSV fallback.
+    \item HSV fallback dựa trên màu sắc có thể bị nhiễu bởi các vật thể khác có màu tương tự (đèn đỏ, áo quần, biển quảng cáo).
+    \item Trong tương lai, có thể fine-tune YOLO trên cả hai loại ảnh (toàn cảnh và crop) để cải thiện độ nhạy. Ngoài ra, có thể thay thế HSV fallback bằng một mô hình phát hiện nhẹ khác (ví dụ EfficientDet) hoặc sử dụng kỹ thuật ensemble để tăng độ chính xác và độ phủ (recall).
+\end{itemize}
+
+% Kết luận
 \section{Kết Luận}
 
 \subsection{Tóm Tắt Kết Quả}

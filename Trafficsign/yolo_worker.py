@@ -1,10 +1,6 @@
 import sys, json, os
 os.environ['YOLO_VERBOSE'] = 'False'
 
-
-# ──────────────────────────────────────────────────────────────────
-#  NMS helper — loại bỏ box trùng lặp (IoU-based)
-# ──────────────────────────────────────────────────────────────────
 def _iou(a, b):
     """Tính IoU giữa 2 boxes (x1,y1,x2,y2)."""
     ix1 = max(a[0], b[0]); iy1 = max(a[1], b[1])
@@ -18,11 +14,6 @@ def _iou(a, b):
 
 
 def _nms(boxes, iou_thresh=0.45):
-    """
-    Non-Maximum Suppression đơn giản theo confidence (yolo_conf).
-    boxes: list of dict với keys x1,y1,x2,y2,yolo_conf,...
-    Trả về list đã lọc.
-    """
     if not boxes:
         return []
     boxes = sorted(boxes, key=lambda b: b["yolo_conf"], reverse=True)
@@ -41,11 +32,6 @@ def _nms(boxes, iou_thresh=0.45):
                 suppressed[j] = True
     return keep
 
-
-# ──────────────────────────────────────────────────────────────────
-#  HSV color-based fallback detector
-#  Chỉ dùng khi YOLO hoàn toàn không tìm được box nào.
-# ──────────────────────────────────────────────────────────────────
 def hsv_detect_signs(img_bgr):
     import cv2, numpy as np
     ih, iw = img_bgr.shape[:2]
@@ -67,9 +53,8 @@ def hsv_detect_signs(img_bgr):
 
     contours, _ = cv2.findContours(mask_all, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Giới hạn kích thước hợp lý: biển báo chiếm 0.08%–15% diện tích ảnh
     MIN_AREA = (iw * ih) * 0.0008
-    MAX_AREA = (iw * ih) * 0.15     # ← giảm từ 0.50 xuống 0.15, loại vùng quá lớn
+    MAX_AREA = (iw * ih) * 0.15
     boxes = []
     for cnt in contours:
         area = cv2.contourArea(cnt)
@@ -77,7 +62,7 @@ def hsv_detect_signs(img_bgr):
             continue
         x, y, w, h = cv2.boundingRect(cnt)
         ratio = w / max(h, 1)
-        if ratio < 0.3 or ratio > 3.5:   # tỷ lệ hợp lý hơn cho biển báo
+        if ratio < 0.3 or ratio > 3.5:
             continue
         pad = int(max(w, h) * 0.10)
         x1 = max(0, x - pad);  y1 = max(0, y - pad)
@@ -106,11 +91,10 @@ def main():
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     ih, iw  = img_bgr.shape[:2]
 
-    # ── 1. Custom YOLO ───────────────────────────────────────
     script_dir   = os.path.dirname(os.path.abspath(__file__))
     custom_model = args.yolo_model or os.path.join(script_dir, "traffic_sign_detector.pt")
-    print(f"[DEBUG] custom_model path: {custom_model}", file=sys.stderr)
-    print(f"[DEBUG] file exists: {os.path.isfile(custom_model)}", file=sys.stderr)
+    print(f"custom_model path: {custom_model}", file=sys.stderr)
+    print(f"file exists: {os.path.isfile(custom_model)}", file=sys.stderr)
 
     yolo_boxes = []
     if os.path.isfile(custom_model):
@@ -133,22 +117,19 @@ def main():
                     "fallback": False,
                 })
         except Exception as e:
-            print(f"[DEBUG] Custom YOLO exception: {e}", file=sys.stderr)
+            print(f"Custom YOLO exception: {e}", file=sys.stderr)
 
-    # ── 2. Nếu YOLO tìm được → dùng ngay, NMS nội bộ ───────
     if yolo_boxes:
         out = _nms(yolo_boxes, iou_thresh=args.iou)
-        print(f"[DEBUG] Sau NMS: {len(out)} YOLO boxes", file=sys.stderr)
+        print(f"Sau NMS: {len(out)} YOLO boxes", file=sys.stderr)
         print(json.dumps(out))
         return
-
-    # ── 3. YOLO không tìm được → thử lại với conf thấp hơn ─
-    #    (Dành cho ảnh khó: điều kiện ánh sáng kém, biển báo nhỏ)
+        
     LOW_CONF = 0.15
     if os.path.isfile(custom_model):
         try:
             from ultralytics import YOLO
-            print(f"[DEBUG] YOLO retry với conf={LOW_CONF}", file=sys.stderr)
+            print(f"YOLO retry với conf={LOW_CONF}", file=sys.stderr)
             yolo    = YOLO(custom_model)
             results = yolo(img_rgb, conf=LOW_CONF, iou=args.iou, verbose=False)
             for b in results[0].boxes:
@@ -163,18 +144,18 @@ def main():
                     "method": "custom_yolo_lowconf",
                     "fallback": False,
                 })
-            print(f"[DEBUG] YOLO retry: {len(yolo_boxes)} boxes", file=sys.stderr)
+            print(f"YOLO retry: {len(yolo_boxes)} boxes", file=sys.stderr)
         except Exception as e:
-            print(f"[DEBUG] YOLO retry exception: {e}", file=sys.stderr)
+            print(f"YOLO retry exception: {e}", file=sys.stderr)
 
     if yolo_boxes:
         out = _nms(yolo_boxes, iou_thresh=args.iou)
-        print(f"[DEBUG] Sau NMS (low-conf retry): {len(out)} boxes", file=sys.stderr)
+        print(f"Sau NMS (low-conf retry): {len(out)} boxes", file=sys.stderr)
         print(json.dumps(out))
         return
 
-    # ── 4. HSV fallback — chỉ khi YOLO thực sự trắng tay ───
-    print("[DEBUG] Không có YOLO box → dùng HSV", file=sys.stderr)
+    # HSV fallback
+    print("No YOLO box → HSV", file=sys.stderr)
     hsv_results = hsv_detect_signs(img_bgr)
     if hsv_results:
         out = []
@@ -185,12 +166,12 @@ def main():
                 "method": "hsv_color",
                 "fallback": False,
             })
-        print(f"[DEBUG] HSV detect: {len(out)} boxes", file=sys.stderr)
+        print(f"HSV detect: {len(out)} boxes", file=sys.stderr)
         print(json.dumps(out))
         return
 
-    # ── 5. Fallback toàn ảnh ────────────────────────────────
-    print("[DEBUG] HSV cũng trắng tay → fallback toàn ảnh", file=sys.stderr)
+    # Fallback
+    print("HSV no detect → fallback toàn ảnh", file=sys.stderr)
     out = [{
         "x1": 0, "y1": 0, "x2": iw, "y2": ih,
         "yolo_conf": 0.0,

@@ -1,7 +1,3 @@
-# ============================================================
-#  test_single_yolo.py (Bản Chuẩn - Square Padding, Top-3 & Show Image)
-# ============================================================
-
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
@@ -20,21 +16,49 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 SIGNS = {
-    0: "Giới hạn tốc độ 20 km/h", 1: "Giới hạn tốc độ 30 km/h", 2: "Giới hạn tốc độ 50 km/h",
-    3: "Giới hạn tốc độ 60 km/h", 4: "Giới hạn tốc độ 70 km/h", 5: "Giới hạn tốc độ 80 km/h",
-    6: "Hết giới hạn tốc độ 80 km/h", 7: "Giới hạn tốc độ 100 km/h", 8: "Giới hạn tốc độ 120 km/h",
-    9: "Cấm vượt", 10: "Cấm xe trên 3.5 tấn vượt", 11: "Đường ưu tiên tại giao lộ tiếp theo",
-    12: "Đường ưu tiên", 13: "Nhường đường", 14: "Dừng lại", 15: "Cấm xe",
-    16: "Cấm xe trên 3.5 tấn", 17: "Cấm đi vào", 18: "Nguy hiểm chung",
-    19: "Đường cong nguy hiểm bên trái", 20: "Đường cong nguy hiểm bên phải",
-    21: "Đường cong liên tiếp", 22: "Đường gồ ghề", 23: "Đường trơn trượt",
-    24: "Đường hẹp bên phải", 25: "Công trường", 26: "Đèn giao thông",
-    27: "Người đi bộ", 28: "Trẻ em qua đường", 29: "Xe đạp băng qua",
-    30: "Cẩn thận băng/tuyết", 31: "Động vật hoang dã băng qua",
-    32: "Hết tất cả giới hạn tốc độ và cấm vượt", 33: "Rẽ phải phía trước",
-    34: "Rẽ trái phía trước", 35: "Chỉ được đi thẳng", 36: "Đi thẳng hoặc rẽ phải",
-    37: "Đi thẳng hoặc rẽ trái", 38: "Đi bên phải", 39: "Đi bên trái",
-    40: "Bắt buộc đi vòng xuyến", 41: "Hết cấm vượt", 42: "Hết cấm vượt đối với xe trên 3.5 tấn",
+    0:  "Gioi han toc do 20 km/h",
+    1:  "Gioi han toc do 30 km/h",
+    2:  "Gioi han toc do 50 km/h",
+    3:  "Gioi han toc do 60 km/h",
+    4:  "Gioi han toc do 70 km/h",
+    5:  "Gioi han toc do 80 km/h",
+    6:  "Het gioi han toc do 80 km/h",
+    7:  "Gioi han toc do 100 km/h",
+    8:  "Gioi han toc do 120 km/h",
+    9:  "Cam vuot",
+    10: "Cam xe tren 3.5 tan vuot",
+    11: "Duong uu tien tai giao lo tiep theo",
+    12: "Duong uu tien",
+    13: "Nhuong duong",
+    14: "Dung lai",
+    15: "Cam xe",
+    16: "Cam xe tren 3.5 tan",
+    17: "Cam di vao",
+    18: "Nguy hiem chung",
+    19: "Duong cong nguy hiem ben trai",
+    20: "Duong cong nguy hiem ben phai",
+    21: "Duong cong lien tiep",
+    22: "Duong go ghe",
+    23: "Duong tron truot",
+    24: "Duong hep ben phai",
+    25: "Cong truong",
+    26: "Den giao thong",
+    27: "Nguoi di bo",
+    28: "Tre em qua duong",
+    29: "Xe dap bang qua",
+    30: "Can than bang/tuyet",
+    31: "Dong vat hoang da bang qua",
+    32: "Het tat ca gioi han toc do va cam vuot",
+    33: "Re phai phia truoc",
+    34: "Re trai phia truoc",
+    35: "Chi duoc di thang",
+    36: "Di thang hoac re phai",
+    37: "Di thang hoac re trai",
+    38: "Di ben phai",
+    39: "Di ben trai",
+    40: "Bat buoc di vong xuyen",
+    41: "Het cam vuot",
+    42: "Het cam vuot doi voi xe tren 3.5 tan",
 }
 
 DEFAULT_SIZE = 30
@@ -52,7 +76,6 @@ def _has_display():
         return True
     if platform.system() == "Darwin":
         return True
-    # Linux: kiểm tra DISPLAY (X11) hoặc WAYLAND_DISPLAY
     return bool(os.environ.get("DISPLAY")) or bool(os.environ.get("WAYLAND_DISPLAY"))
 
 
@@ -65,7 +88,6 @@ def parse_args():
     parser.add_argument("--save",   action="store_true")
     parser.add_argument("--out",    default="output_single.jpg")
 
-    # [FIX] Thêm flag --no-gui: buộc tắt cửa sổ hiển thị dù đang có GUI
     parser.add_argument("--no-gui", action="store_true",
                         help="Tắt cửa sổ popup ảnh (hữu ích khi chạy SSH/server)")
 
@@ -97,7 +119,6 @@ def run_yolo_worker(image_path, conf, iou):
     if res.returncode != 0:
         sys.exit(f"[Lỗi] yolo_worker thất bại:\n{res.stderr.strip()}")
 
-    # Lấy dòng JSON cuối cùng trong stdout (bỏ qua DEBUG lines)
     for line in reversed(res.stdout.strip().splitlines()):
         stripped = line.strip()
         if stripped.startswith("[") or stripped.startswith("{"):
@@ -129,18 +150,16 @@ def main():
     print(f"[YOLO] Đang detect … (conf={args.conf}, iou={args.iou})")
     detections = run_yolo_worker(args.image, args.conf, args.iou)
 
-    # Phân loại theo method để hiển thị rõ nguồn gốc
     n_yolo = sum(1 for d in detections if d.get("method","").startswith("custom_yolo"))
     n_hsv  = sum(1 for d in detections if d.get("method","") == "hsv_color")
     n_fb   = sum(1 for d in detections if d["fallback"])
 
     if n_yolo:
-        print(f"[YOLO] ✅ YOLO detect: {n_yolo} biển báo.")
+        print(f"[YOLO] YOLO detect: {n_yolo} biển báo.")
     elif n_hsv:
-        print(f"[YOLO] ⚠️  YOLO không detect được → HSV fallback: {n_hsv} vùng màu.")
-        print(f"[YOLO]    (Ảnh có thể đã được crop sẵn, không phải cảnh đường phố.)")
+        print(f"[YOLO] YOLO không detect được → HSV fallback: {n_hsv} vùng màu.")
     else:
-        print(f"[YOLO] ⚠️  Dùng toàn bộ ảnh (fallback).")    
+        print(f"[YOLO] Fallback.")    
 
     print(f"\n[Model] Đang tải: {args.model} …")
     clf_model = tf.keras.models.load_model(args.model)
@@ -160,12 +179,11 @@ def main():
         yolo_conf = det["yolo_conf"]
         fallback  = det["fallback"]
 
-        # ── Square padding crop ──────────────────────────────
         if not fallback:
             bw, bh = x2 - x1, y2 - y1
             cx, cy = x1 + bw // 2, y1 + bh // 2
             size   = max(bw, bh)
-            margin = int(size * 0.15)   # nới rộng 15% viền
+            margin = int(size * 0.15)
             new_size = size + margin * 2
 
             nx1 = max(0, cx - new_size // 2)
@@ -176,7 +194,6 @@ def main():
             nx1, ny1, nx2, ny2 = x1, y1, x2, y2
 
         crop_rgb = img_rgb[ny1:ny2, nx1:nx2]
-        # ────────────────────────────────────────────────────
 
         crop_resized = cv2.resize(crop_rgb, (w, h)).astype(np.float32)
         if args.normalize:
@@ -210,32 +227,22 @@ def main():
 
         draw_result(res_img, x1, y1, x2, y2, cls_id, conf, yolo_conf, label, fallback)
 
-    # ── Lưu / hiển thị ──────────────────────────────────────
     if args.save:
         cv2.imwrite(args.out, res_img)
         print(f"\n[Saved] → {args.out}")
-    else:
-        print("\n(Thêm cờ --save để lưu lại ảnh kết quả vào máy)")
-
-    # [FIX] Kiểm tra môi trường trước khi mở cửa sổ GUI
-    # Tránh cv2.waitKey(0) treo vô tận khi chạy SSH/server không có display
     show_gui = (not args.no_gui) and _has_display()
 
     if show_gui:
         try:
-            cv2.imshow("Ket qua Nhan dien", res_img)
+            cv2.imshow("Ket qua", res_img)
             print("\n[INFO] Đang hiển thị ảnh. Bấm phím bất kỳ trên cửa sổ ảnh để thoát...")
             cv2.waitKey(0)
             cv2.destroyAllWindows()
         except Exception as e:
-            print(f"\n[Cảnh báo] Không thể hiển thị cửa sổ ảnh: {e}")
-            if not args.save:
-                print("[Gợi ý] Chạy lại với --save để lưu kết quả ra file ảnh.")
+            print(f"\nKhông thể hiển thị cửa sổ ảnh: {e}")
     else:
         reason = "flag --no-gui được bật" if args.no_gui else "không tìm thấy DISPLAY/WAYLAND"
         print(f"\n[INFO] Bỏ qua hiển thị GUI ({reason}).")
-        if not args.save:
-            print("[Gợi ý] Thêm --save để lưu ảnh kết quả.")
 
 
 if __name__ == "__main__":

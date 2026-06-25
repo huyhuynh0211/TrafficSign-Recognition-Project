@@ -9,7 +9,7 @@ import os
 import sys
 import tensorflow as tf
 import matplotlib
-matplotlib.use('Agg')  # An toan khi khong co GUI
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
@@ -32,18 +32,14 @@ def main():
     if len(sys.argv) not in [2, 3]:
         sys.exit("Usage: python trafficsign_new.py data_directory [model.h5]")
 
-    # ============================================================
-    # 1. LOAD DATA
-    # ============================================================
+    # load data
     print("=" * 60)
     print("LOADING DATA...")
     images, labels = load_data(sys.argv[1])
     labels_int = np.array(labels)
     print(f"Loaded {len(images)} images across {NUM_CATEGORIES} classes.")
 
-    # ============================================================
-    # 2. ANALYZE CLASS DISTRIBUTION
-    # ============================================================
+
     print("\n" + "=" * 60)
     print("CLASS DISTRIBUTION ANALYSIS")
     class_counts = {i: int(np.sum(labels_int == i)) for i in range(NUM_CATEGORIES)}
@@ -53,9 +49,7 @@ def main():
     print(f"  Max class {max_class}: {class_counts[max_class]} images")
     print(f"  Imbalance ratio: {class_counts[max_class] / class_counts[min_class]:.1f}:1")
 
-    # ============================================================
-    # 3. COMPUTE CLASS WEIGHTS
-    # ============================================================
+    # class weight
     print("\n" + "=" * 60)
     print("COMPUTING CLASS WEIGHTS FOR IMBALANCED DATA")
     class_weights_array = class_weight.compute_class_weight(
@@ -66,47 +60,38 @@ def main():
     class_weight_dict = {i: class_weights_array[i] for i in range(NUM_CATEGORIES)}
     print(f"  Weight range: {min(class_weights_array):.3f} - {max(class_weights_array):.3f}")
 
-    # ============================================================
-    # 4. PREPARE DATA
-    # ============================================================
+
     print("\n" + "=" * 60)
     print("PREPARING DATA")
 
-    # Images are already normalised in load_data() — do NOT divide by 255 again
     x_data = np.array(images, dtype=np.float32)
     labels_cat = tf.keras.utils.to_categorical(labels_int, NUM_CATEGORIES)
 
     x_train, x_test, y_train, y_test = train_test_split(
         x_data, labels_cat, test_size=TEST_SIZE, random_state=42
     )
-    # Derive integer class indices for classification_report
     y_test_int = np.argmax(y_test, axis=1)
 
     print(f"  Train: {x_train.shape[0]} | Test: {x_test.shape[0]}")
     print(f"  Input shape: {x_train.shape[1:]}")
 
-    # ============================================================
-    # 5. TRAIN MODELS
-    # ============================================================
-    # Store (model_object, history, test_acc) tuples keyed by a plain string
+    # train
     results = {}
 
     def _train(name, model):
         print(f"\n{'=' * 60}")
         print(f"TRAINING: {name}")
         model.summary()
-        # Define data augmentation
         datagen = ImageDataGenerator(
             rotation_range=10,
             zoom_range=0.15,
             width_shift_range=0.1,
             height_shift_range=0.1,
             shear_range=0.1,
-            horizontal_flip=False, # Traffic signs are not horizontally symmetric
+            horizontal_flip=False, 
             fill_mode="nearest"
         )
 
-        # Tối ưu hóa thời gian train: Tự động dừng nếu test_acc không tăng sau 5 epochs
         early_stop = tf.keras.callbacks.EarlyStopping(
             monitor='val_accuracy',
             patience=5,
@@ -130,9 +115,6 @@ def main():
     _train("Deeper CNN (3 Blocks + BN)",         build_deeper_cnn())
     _train("Transfer Learning (MobileNetV2)",    build_transfer_learning_model())
 
-    # ============================================================
-    # 6. COMPARE RESULTS
-    # ============================================================
     print("\n" + "=" * 60)
     print("CLASSIFICATION REPORTS")
     for name, data in results.items():
@@ -152,24 +134,18 @@ def main():
     best_name = max(results, key=lambda k: results[k]["test_acc"])
     print(f"\nBEST MODEL: {best_name} — {results[best_name]['test_acc']*100:.2f}%")
 
-    # ============================================================
-    # 7. PLOT BIEU DO
-    # ============================================================
+    # plot
     plot_all_histories(results)
     plot_comparison(results)
 
-    # ============================================================
-    # 8. SAVE BEST MODEL
-    # ============================================================
+    # save best model
     if len(sys.argv) == 3:
         filename = sys.argv[2]
         results[best_name]["model"].save(filename)
         print(f"\nBest model ({best_name}) saved to {filename}.")
 
 
-# ================================================================
-# DATA LOADING
-# ================================================================
+# load data
 def load_data(data_dir):
     """
     Load images from `data_dir/<category>/` for categories 0..NUM_CATEGORIES-1.
@@ -186,24 +162,20 @@ def load_data(data_dir):
             continue
 
         for filename in os.listdir(category_path):
-            # Only process image files; skip CSVs and other non-image files
             if not filename.lower().endswith((".png", ".jpg", ".jpeg", ".ppm", ".bmp")):
                 continue
 
             img_path = os.path.join(category_path, filename)
             img = cv2.imread(img_path)
 
-            # Skip corrupt or unreadable files instead of crashing
             if img is None:
                 print(f"Warning: could not read {img_path}, skipping.", file=sys.stderr)
                 skipped += 1
                 continue
 
-            # Convert BGR (OpenCV default) to RGB to match inference pipeline
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
 
-            # Normalise pixels to [0, 1] — done exactly once here
             img = img.astype(np.float32) / 255.0
 
             images.append(img)
@@ -215,9 +187,7 @@ def load_data(data_dir):
     return images, labels
 
 
-# ================================================================
-# MODEL A: BASELINE CNN
-# ================================================================
+# model A
 def build_baseline_cnn():
     model = tf.keras.models.Sequential([
         tf.keras.layers.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
@@ -248,9 +218,7 @@ def build_baseline_cnn():
     return model
 
 
-# ================================================================
-# MODEL B: CNN WITH L2 REGULARIZATION
-# ================================================================
+# model B
 def build_cnn_with_l2():
     from tensorflow.keras import regularizers
     l2 = regularizers.l2(0.001)
@@ -284,12 +252,7 @@ def build_cnn_with_l2():
     return model
 
 
-# ================================================================
-# MODEL C: DEEPER CNN (3 Double-Conv Blocks + BatchNorm + per-block Dropout)
-# Each block has 2 Conv layers (VGG-style) + BN + Dropout — unlike Baseline CNN
-# which has only 1 Conv per block and no BN.
-# Spatial flow with 30x30 input: 30 -> 15 -> 7 -> 3 (3x3x128 = 1152 features)
-# ================================================================
+# model C
 def build_deeper_cnn():
     model = tf.keras.models.Sequential([
         tf.keras.layers.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
@@ -329,9 +292,7 @@ def build_deeper_cnn():
     return model
 
 
-# ================================================================
-# MODEL D: TRANSFER LEARNING WITH MobileNetV2
-# ================================================================
+# model D
 def build_transfer_learning_model():
     base_model = tf.keras.applications.MobileNetV2(
         input_shape=(96, 96, 3),
@@ -340,18 +301,13 @@ def build_transfer_learning_model():
     )
     base_model.trainable = False
 
-    # Unfreeze the last 20 layers for fine-tuning
     for layer in base_model.layers[-20:]:
         layer.trainable = True
 
     inputs = tf.keras.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3))
     x = tf.keras.layers.Resizing(96, 96)(inputs)
-    # MobileNetV2 expects input in [-1, 1]; preprocess_input rescales from [0,255]
-    # Our images are already in [0,1], so multiply back to [0,255] before preprocessing
     x = tf.keras.layers.Lambda(lambda t: mv2_preprocess(t * 255.0))(x)
-    # training=False keeps frozen BatchNorm layers in inference mode,
-    # preventing them from updating statistics and destabilising training
-    x = base_model(x, training=False)
+      x = base_model(x, training=False)
     x = tf.keras.layers.GlobalAveragePooling2D()(x)
     x = tf.keras.layers.Dense(256, activation="relu")(x)
     x = tf.keras.layers.Dropout(0.5)(x)
@@ -366,9 +322,6 @@ def build_transfer_learning_model():
     return model
 
 
-# ================================================================
-# VISUALIZATION
-# ================================================================
 def plot_all_histories(results):
     """
     Plot training accuracy and loss per epoch for every model.
