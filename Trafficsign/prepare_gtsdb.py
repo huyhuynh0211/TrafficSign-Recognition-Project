@@ -106,10 +106,7 @@ def main():
     n_val_out   = sum(1 for v in split_map.values() if v == "val")
     n_test_out  = sum(1 for v in split_map.values() if v == "test")
 
-    print(f"[OK] Đã convert: {ok} ảnh  "
-          f"(train={n_train_out}, val={n_val_out}, test={n_test_out}), skip={skip}")
-    print(f"[OK] Dataset YOLO → '{OUTPUT_DIR}/'")
-    print(f"[OK] dataset.yaml → '{yaml_path}'")
+    print(f"Done. Dataset YOLO → '{OUTPUT_DIR}/'")
 
 
 if __name__ == "__main__":

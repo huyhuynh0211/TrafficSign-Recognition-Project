@@ -1763,13 +1763,17 @@ Model C (best\_model\_2.keras) & 12,392 & 12,630 & 98.12 \\ \bottomrule
 \subsection{Mở rộng với tích hợp YOLO và tiền xử lý HSV}
 
 Mặc dù Model C đạt độ chính xác rất cao (99.96\%) trên tập ảnh đã được cắt (crop) sẵn, nhưng khi áp dụng vào ảnh thực tế chụp toàn cảnh đường phố, mô hình không thể xử lý vì đầu vào yêu cầu ảnh chứa đúng một biển báo. Do đó, cần có một bộ phát hiện (detector) để xác định vị trí các biển báo trong ảnh, sau đó cắt từng vùng và đưa vào Model C để phân loại.
+\\ \textbf{Nên để ra được kết quả tốt nhất em có train thêm một mô hình YOLOv8 (YOLOv8n nhẹ nhất) để phát hiện biển báo dựa trên GTSDB dataset (German Traffic Sign Recognition Benchmark) $\rightarrow$ em thu được file \texttt{traffic\_sign\_detector.pt} được đưa vào \texttt{test\_single\_yolo.py} để chạy test (được train với 30 epochs và tỉ lệ train/val/test là \textbf{0.75/0.15/0.1}).}
 \\ Ví dụ như ảnh này ta chỉ dùng dự đoán bằng model thông thường thì không thể ra được kết quả như ta mong muốn được vì có nhiều biển báo và các biển báo ở xa, nhỏ, bị che khuất, hoặc bị ánh sáng chiếu vào.
+
 \begin{figure}[H]
 \centering 
 \includegraphics[width=0.8\textwidth]{../Trafficsign/Test_5/test8.png}
 \caption{Ví dụ ở khung cảnh xa,rộng và nhiều biển báo.}
 \label{fig:yolo_result}
 \end{figure}
+
+
 \subsubsection*{Cơ chế phát hiện vật thể của YOLO}
 
 \begin{enumerate}

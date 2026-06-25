@@ -68,10 +68,6 @@ COLOR_LOW    = (0, 0, 220)
 
 
 def _has_display():
-    """
-    Kiểm tra môi trường có GUI display không.
-    Tránh cv2.waitKey(0) treo vô tận khi chạy trên server / SSH không có GUI.
-    """
     if platform.system() == "Windows":
         return True
     if platform.system() == "Darwin":
@@ -89,7 +85,7 @@ def parse_args():
     parser.add_argument("--out",    default="output_single.jpg")
 
     parser.add_argument("--no-gui", action="store_true",
-                        help="Tắt cửa sổ popup ảnh (hữu ích khi chạy SSH/server)")
+                        help="Tắt cửa sổ popup")
 
     normalize_group = parser.add_mutually_exclusive_group()
     normalize_group.add_argument("--normalize",    dest="normalize", action="store_true", default=True)
@@ -110,20 +106,20 @@ def get_input_size(model, fallback=DEFAULT_SIZE):
 def run_yolo_worker(image_path, conf, iou):
     worker = os.path.join(os.path.dirname(os.path.abspath(__file__)), "yolo_worker.py")
     if not os.path.isfile(worker):
-        sys.exit(f"[Lỗi] Không tìm thấy {worker}")
+        sys.exit(f"Err not found {worker}")
     cmd = [sys.executable, worker,
            "--image", image_path,
            "--conf",  str(conf),
            "--iou",   str(iou)]
     res = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if res.returncode != 0:
-        sys.exit(f"[Lỗi] yolo_worker thất bại:\n{res.stderr.strip()}")
+        sys.exit(f"Err yolo_worker failed:\n{res.stderr.strip()}")
 
     for line in reversed(res.stdout.strip().splitlines()):
         stripped = line.strip()
         if stripped.startswith("[") or stripped.startswith("{"):
             return json.loads(stripped)
-    sys.exit("[Lỗi] Không lấy được JSON từ YOLO.")
+    sys.exit(f"Err Không lấy được JSON từ YOLO.")
 
 
 def draw_result(img_bgr, x1, y1, x2, y2, cls_id, conf_cls, yolo_conf, label, fallback=False):
@@ -145,7 +141,7 @@ def draw_result(img_bgr, x1, y1, x2, y2, cls_id, conf_cls, yolo_conf, label, fal
 def main():
     args = parse_args()
     if not os.path.isfile(args.image):
-        sys.exit(f"[Lỗi] Không tìm thấy ảnh: {args.image}")
+        sys.exit(f"Err not found: {args.image}")
 
     print(f"[YOLO] Đang detect … (conf={args.conf}, iou={args.iou})")
     detections = run_yolo_worker(args.image, args.conf, args.iou)

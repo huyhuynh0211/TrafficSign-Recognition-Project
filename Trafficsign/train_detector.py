@@ -9,7 +9,7 @@ def parse_args():
     p.add_argument("--workers",      type=int,   default=8)
     p.add_argument("--out",          default="traffic_sign_detector.pt")
     p.add_argument("--no-amp",       action="store_true",
-                   help="Tắt Automatic Mixed Precision (dùng khi có lỗi fp16)")
+                   help="Tắt Automatic Mixed Precision")
     p.add_argument("--no-cache",     action="store_true",
                    help="Tắt cache dataset vào RAM")
     return p.parse_args()
@@ -88,7 +88,6 @@ def main():
         shutil.copy(best_path, args.out)
         print(f"\n[Done] Model đã lưu → {args.out}")
         print(f"       (Nguồn: {best_path})")
-        print(f"       yolo_worker.py sẽ tự dùng nó thay vì yolov8n.pt")
     else:
         found = []
         for root, _, files in os.walk("detector_train"):
