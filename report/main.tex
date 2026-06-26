@@ -1240,7 +1240,7 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.95\textwidth]{../Trafficsign/results/all_models_curves_2.png}
+\includegraphics[width=1.1\textwidth]{../Trafficsign/results/all_models_curves_2.png}
 \caption{Biểu đồ so sánh training curves 4 mô hình.}
 \label{fig:all_models_curves}
 \end{figure}
@@ -1249,14 +1249,14 @@ Chương trình nâng cao \texttt{trafficsign\_new.py} huấn luyện 4 mô hìn
 
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}l c c c@{}}
 \toprule
 \textbf{Mô hình} & \textbf{Train Acc (\%)} & \textbf{Test Acc (\%)} & \textbf{Val Acc (\%)} \\ \midrule
 A. Baseline CNN + Class Weights       & 93.04 & 99.19 & 99.19 \\
 B. CNN + L2 Reg + Class Weights       & 91.34 & 99.14 & 99.14 \\
 C. Deeper CNN (3 Blocks + BN)         & 99.48 & \textbf{99.96} & 99.94 \\
 D. Transfer Learning (MobileNetV2)    & 98.39 & 98.48 & 98.48 \\ \bottomrule
-\multicolumn{5}{l}{\textit{Model C (Deeper CNN + BatchNorm) đạt kết quả cao nhất: 99.96\%.}} \\
+\multicolumn{4}{l}{\textit{Model C (Deeper CNN + BatchNorm) đạt kết quả cao nhất: 99.96\%.}} \\
 \end{tabular}
 \caption{So sánh hiệu suất 4 thuật toán.}
 \label{tab:model_comparison}
@@ -1759,6 +1759,13 @@ Model C (best\_model\_2.keras) & 12,392 & 12,630 & 98.12 \\ \bottomrule
 \caption{Kết quả dự đoán trên ảnh thực tế --- 9.}
 \end{figure}
 
+\textbf{Nhận xét:} Qua các kết quả thực nghiệm, có thể thấy một số hạn chế của mô hình khi áp dụng vào các ảnh thực tế chụp toàn cảnh. 
+
+Trước hết, ở trường hợp ảnh thực tế 1 và 2, mô hình không dự đoán được biển báo giới hạn tốc độ 40 km/h. Nguyên nhân cơ bản là do trong tập dữ liệu huấn luyện không có lớp biển báo này. Điều này cho thấy để xây dựng một mô hình có khả năng nhận diện đầy đủ các loại biển báo để rồi có thể áp dụng thực tế thì cần mở rộng và đa dạng hóa tập dữ liệu huấn luyện.
+
+Đối với các trường hợp ảnh thực tế còn lại, có thể nhận thấy nhược điểm chính của mô hình hiện tại là đây chỉ là mô hình phân loại ảnh (classification), tức là chỉ dự đoán loại biển báo dựa trên toàn bộ ảnh đầu vào. Mô hình không có khả năng xác định vị trí xuất hiện của biển báo trong ảnh. Vì vậy, khi đưa vào một ảnh nguyên vẹn chứa cả biển báo và các thành phần nền, mô hình sẽ sử dụng toàn bộ thông tin trong ảnh để đưa ra dự đoán, thay vì chỉ tập trung vào vùng chứa biển báo. Điều này làm giảm độ chính xác và dẫn đến việc dự đoán sai trong hầu hết các trường hợp có toàn cảnh.
+
+Và qua kết quả thử nghiệm cho thấy mô hình chỉ dự đoán đúng khi ảnh được cắt sao cho chỉ còn lại phần chứa biển báo. Từ đó dẫn đến nhóm em cải tiến bằng cách kết hợp YOLO để thực hiện bước phát hiện (detection) và xác định vị trí biển báo trước, sau đó tự động cắt vùng chứa biển báo và đưa vào mô hình phân loại để nhận diện. Cách tiếp cận này giúp mở rộng chức năng của hệ thống từ việc chỉ trả lời “ảnh này là biển báo gì” sang “biển báo nằm ở đâu trong ảnh và đó là biển báo nào”, từ đó nâng cao khả năng ứng dụng trong các tình huống thực tế.
 
 \subsection{Mở rộng với tích hợp YOLO và tiền xử lý HSV}
 
